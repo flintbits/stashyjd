@@ -1,11 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { check } from "@tauri-apps/plugin-updater";
 import { relaunch } from "@tauri-apps/plugin-process";
+import { getVersion } from "@tauri-apps/api/app";
 
 function App() {
   const [status, setStatus] = useState("");
   const [updateObj, setUpdateObj] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [version, setVersion] = useState("");
+
+  useEffect(() => {
+    loadVersion();
+  }, []);
+
+  async function loadVersion() {
+    const v = await getVersion();
+    setVersion(v);
+  }
 
   async function checkUpdate() {
     setStatus("Checking...");
@@ -49,6 +60,8 @@ function App() {
       <h1>StashyJD</h1>
 
       <button onClick={checkUpdate}>Check for Updates</button>
+
+      <p>Current Version: {version}</p>
 
       <p>{status}</p>
 
