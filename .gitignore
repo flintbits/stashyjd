@@ -25,3 +25,7 @@ dist-ssr
 
 #keys
 .tauri/
+
+
+#env
+.env.local
