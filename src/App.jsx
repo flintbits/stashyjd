@@ -1,24 +1,47 @@
 import { useState } from "react";
 import { check } from "@tauri-apps/plugin-updater";
+import { relaunch } from "@tauri-apps/plugin-process";
 
 function App() {
   const [status, setStatus] = useState("");
+  const [updateObj, setUpdateObj] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   async function checkUpdate() {
     setStatus("Checking...");
+    setUpdateObj(null);
 
     try {
       const update = await check();
 
       if (update?.available) {
+        setUpdateObj(update);
         setStatus(`Update available: ${update.version}`);
       } else {
         setStatus("No updates available");
       }
     } catch (err) {
-      console.error("Updater error:", err);
-      setStatus(String(err));
+      console.error(err);
+      setStatus("Update check failed");
     }
+  }
+
+  async function installUpdate() {
+    if (!updateObj) return;
+
+    setLoading(true);
+    setStatus("Downloading update...");
+
+    try {
+      await updateObj.downloadAndInstall();
+      setStatus("Installed. Restarting...");
+      await relaunch();
+    } catch (err) {
+      console.error(err);
+      setStatus("Install failed");
+    }
+
+    setLoading(false);
   }
 
   return (
@@ -28,6 +51,12 @@ function App() {
       <button onClick={checkUpdate}>Check for Updates</button>
 
       <p>{status}</p>
+
+      {updateObj && (
+        <button onClick={installUpdate} disabled={loading}>
+          {loading ? "Installing..." : "Install Update"}
+        </button>
+      )}
     </div>
   );
 }
