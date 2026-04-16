@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "stashyjd",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "identifier": "com.stashyjd.app",
   "build": {
     "beforeDevCommand": "npm run dev",
@@ -24,6 +24,7 @@
   "plugins": {
     "updater": {
       "active": true,
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEE5MzhENDkxQzlCN0ZEQjkKUldTNS9iZkprZFE0cVlBSjNoSlJ2VGJvQ245Zk84aEtkSEEyTkQ3aWF2a2Z3L3lRSGhzZGFTMHAK",
       "endpoints": [
         "https://github.com/flintbits/stashyjd/releases/latest/download/latest.json"
       ]
