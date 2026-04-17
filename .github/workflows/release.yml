@@ -22,16 +22,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Node + npm cache
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
 
+      # Rust toolchain
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
 
+      # Rust crate + target cache
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@v2
+
       - name: Install frontend dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build and Release Tauri App
         uses: tauri-apps/tauri-action@v0
@@ -50,6 +57,6 @@ jobs:
 # tauri.conf.json - "version": "0.1.0" -> "version": "0.1.1"
 # git add .
 # git commit -m "Bump version to 0.1.1"
-# git tag v0.1.12
+# git tag v0.1.10
 # git push
-# git push origin v0.1.12
+# git push origin v0.1.10
