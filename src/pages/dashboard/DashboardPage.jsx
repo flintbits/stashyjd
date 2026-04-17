@@ -1,9 +1,14 @@
-import { useEffect, useState } from "react";
+import { getVersion } from "@tauri-apps/api/app";
 import { check } from "@tauri-apps/plugin-updater";
 import { relaunch } from "@tauri-apps/plugin-process";
-import { getVersion } from "@tauri-apps/api/app";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function App() {
+export default function DashboardPage() {
+  //router test
+  const navigate = useNavigate();
+
+  //test download
   const [status, setStatus] = useState("");
   const [updateObj, setUpdateObj] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -56,22 +61,28 @@ function App() {
   }
 
   return (
-    <div style={{ padding: 30 }}>
-      <h1>StashyJD</h1>
+    <div>
+      <h1>Dashboard Page</h1>
+      <button onClick={() => navigate("/")}>Go to Dashboard</button>
+      <button onClick={() => navigate("/applications")}>
+        Go to Applications
+      </button>
 
-      <button onClick={checkUpdate}>Check for Updates</button>
+      <div>
+        <h1>StashyJD</h1>
 
-      <p>Current Version: {version}</p>
+        <button onClick={checkUpdate}>Check for Updates</button>
 
-      <p>{status}</p>
+        <p>Current Version: {version}</p>
 
-      {updateObj && (
-        <button onClick={installUpdate} disabled={loading}>
-          {loading ? "Installing..." : "Install Update"}
-        </button>
-      )}
+        <p>{status}</p>
+
+        {updateObj && (
+          <button onClick={installUpdate} disabled={loading}>
+            {loading ? "Installing..." : "Install Update"}
+          </button>
+        )}
+      </div>
     </div>
   );
 }
-
-export default App;
