@@ -3,4 +3,9 @@
 
   --color-surface-base: #131313;
   --color-surface-raised: #1b1b1b;
+  --color-surface-hover: #1f1f1f;
+
+  /* text */
+  --color-text-primary: #8e8e8e;
+  --color-text-highlighted: #bdc2ff;
 }
