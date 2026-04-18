@@ -56,7 +56,7 @@ jobs:
 # package.json - "version": "0.1.0" -> "version": "0.1.1"
 # tauri.conf.json - "version": "0.1.0" -> "version": "0.1.1"
 # git add .
-# git commit -m "Bump version to 0.1.15"
+# git commit -m "Bump version to 0.1.16"
 # git tag v0.1.15
 # git push
 # git push origin v0.1.15
