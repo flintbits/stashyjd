@@ -1,22 +1,16 @@
-import { getVersion } from "@tauri-apps/api/app";
-import { check } from "@tauri-apps/plugin-updater";
-import { relaunch } from "@tauri-apps/plugin-process";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import "./SidebarFooter.css";
+import SecondaryButton from "../../widgets/Secondary Button/SecondaryButton";
 
-export default function DashboardPage() {
-  //router test
-  const navigate = useNavigate();
-
-  //test download
+export default function SidebarFooter() {
   const [status, setStatus] = useState("");
   const [updateObj, setUpdateObj] = useState(null);
   const [loading, setLoading] = useState(false);
   const [version, setVersion] = useState("");
 
   useEffect(() => {
-    loadVersion();
     checkUpdate();
+    loadVersion();
   }, []);
 
   async function loadVersion() {
@@ -62,28 +56,17 @@ export default function DashboardPage() {
   }
 
   return (
-    <div>
-      <h1>Dashboard Page</h1>
-      <button onClick={() => navigate("/")}>Go to Dashboard</button>
-      <button onClick={() => navigate("/applications")}>
-        Go to Applications
-      </button>
-
-      <div>
-        <h1>StashyJD</h1>
-
-        <button onClick={checkUpdate}>Check for Updates</button>
-
-        <p>Current Version: {version}</p>
-
-        <p>{status}</p>
-
-        {updateObj && (
-          <button onClick={installUpdate} disabled={loading}>
-            {loading ? "Installing..." : "Install Update"}
-          </button>
-        )}
-      </div>
-    </div>
+    <section className="sidebar-footer">
+      {updateObj && (
+        <SecondaryButton
+          text="Download Available"
+          style={{ width: "100%" }}
+          onClick={installUpdate}
+        />
+      )}
+      <p className="sidebar-footer-version-text">
+        Current version : {version || "0.00.00"}
+      </p>
+    </section>
   );
 }

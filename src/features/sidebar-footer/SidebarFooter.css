@@ -1,0 +1,13 @@
+.sidebar-footer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.sidebar-footer-version-text {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-secondary);
+}

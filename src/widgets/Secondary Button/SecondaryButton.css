@@ -1,0 +1,13 @@
+.secondary-button {
+  padding: 6px 18px;
+  height: 32px;
+  border-radius: 2px;
+  background-color: var(--color-tertiary);
+  color: var(--color-primary);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: none;
+  white-space: nowrap;
+}

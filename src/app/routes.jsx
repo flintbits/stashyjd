@@ -7,6 +7,10 @@ const ApplicationsPage = lazy(
   () => import("../pages/applications/ApplicationsPage.jsx"),
 );
 
+const CreateApplication = lazy(
+  () => import("../pages/createApplication/CreateApplication.jsx"),
+);
+
 export const routes = [
   {
     path: "/",
@@ -17,5 +21,10 @@ export const routes = [
     path: "/applications",
     label: "Applications",
     element: <ApplicationsPage />,
+  },
+  {
+    path: "/create-application",
+    label: "CreateApplication",
+    element: <CreateApplication />,
   },
 ];
