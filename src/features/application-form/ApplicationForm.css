@@ -1,0 +1,27 @@
+.form-section {
+  padding: 24px;
+  background-color: #eff4ff;
+  border-radius: 8px;
+}
+
+.form-section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.form-section-icon {
+  color: var(--color-gradient-primary);
+}
+
+.form-section-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.form-section-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}

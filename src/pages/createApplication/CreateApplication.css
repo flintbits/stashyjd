@@ -28,8 +28,14 @@
 }
 
 .application-main {
+  display: flex;
+  gap: 20px;
   padding: 32px;
 }
 
 .application-form-container {
+  width: 60%;
+}
+.application-side-panel {
+  width: 40%;
 }

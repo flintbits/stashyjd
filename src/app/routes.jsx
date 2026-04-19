@@ -1,4 +1,6 @@
 import React, { lazy } from "react";
+import SettingsPage from "../pages/settings/SettingsPage.jsx";
+import CalendarPage from "../pages/calendar/CalendarPage.jsx";
 
 const DashboardPage = lazy(
   () => import("../pages/dashboard/DashboardPage.jsx"),
@@ -26,5 +28,17 @@ export const routes = [
     path: "/create-application",
     label: "CreateApplication",
     element: <CreateApplication />,
+  },
+
+  {
+    path: "/calendar",
+    label: "Calendar",
+    element: <CalendarPage />,
+  },
+
+  {
+    path: "/settings",
+    label: "Settings",
+    element: <SettingsPage />,
   },
 ];

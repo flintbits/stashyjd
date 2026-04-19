@@ -1,3 +1,5 @@
-export const SettingsPage = () => {
-  return <h1>Settings Page</h1>;
-};
+import React from "react";
+
+export default function SettingsPage() {
+  return <div>SettingsPage</div>;
+}

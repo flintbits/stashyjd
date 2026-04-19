@@ -6,9 +6,8 @@ import {
   DashboardIcon,
   SettingsIcon,
 } from "../../assets/icons/icon";
-import GradientButton from "../../widgets/Gradient Button/GradientButton";
-import SecondaryButton from "../../widgets/Secondary Button/SecondaryButton";
 import SidebarFooter from "../../features/sidebar-footer/SidebarFooter";
+import GradientButton from "../../widgets/gradient-button/GradientButton";
 
 export default function Sidebar() {
   const navigate = useNavigate();
@@ -33,19 +32,25 @@ export default function Sidebar() {
           <ul>
             <li>
               <NavLink to="/" className="sidebar-link">
-                <DashboardIcon size={18} />
+                <DashboardIcon size={14} />
                 Dashboard
               </NavLink>
             </li>
             <li>
               <NavLink to="/applications" className="sidebar-link">
-                <ApplicationIcon size={18} />
+                <ApplicationIcon size={14} />
                 Applications
               </NavLink>
             </li>
             <li>
-              <NavLink to="/text" className="sidebar-link">
-                <SettingsIcon size={18} />
+              <NavLink to="/calendar" className="sidebar-link">
+                <SettingsIcon size={14} />
+                Calendar
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/settings" className="sidebar-link">
+                <SettingsIcon size={14} />
                 Settings
               </NavLink>
             </li>

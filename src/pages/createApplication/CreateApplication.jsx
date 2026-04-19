@@ -1,8 +1,8 @@
 import React from "react";
 import "./CreateApplication.css";
-import SecondaryButton from "../../widgets/Secondary Button/SecondaryButton";
-import GradientButton from "../../widgets/Gradient Button/GradientButton";
-import ApplicationForm from "../../features/applicationForm/ApplicationForm";
+import SecondaryButton from "../../widgets/secondary-button/SecondaryButton";
+import GradientButton from "../../widgets/gradient-button/GradientButton";
+import ApplicationForm from "../../features/application-form/ApplicationForm";
 
 export default function CreateApplication() {
   return (
@@ -24,9 +24,12 @@ export default function CreateApplication() {
 
       <section className="application-main">
         <section className="application-form-container">
+          {/* <div style={{ height: "20px", background: "red" }}></div> */}
           <ApplicationForm />
         </section>
-        <section className="application-side-panel"></section>
+        <section className="application-side-panel">
+          {/* <div style={{ height: "20px", background: "red" }}></div> */}
+        </section>
       </section>
     </div>
   );
