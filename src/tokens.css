@@ -19,16 +19,15 @@
   /* font */
   --font-sans: "Inter", sans-serif;
   --font-mono: "Berkeley Mono", ui-monospace, monospace;
-}
 
-/*
-Thin	100
-Extra Light	200
-Light	300
-Regular	400
-Medium	500
-Semi Bold / Demi Bold	600
-Bold	700
-Extra Bold	800
-Black / Heavy	900
-*/
+  /*font weight*/
+  --fw-thin: 100;
+  --fw-extra-light: 200;
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semi-bold: 600;
+  --fw-bold: 700;
+  --fw-extra-bold: 800;
+  --fw-black: 900;
+}

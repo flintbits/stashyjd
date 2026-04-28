@@ -3,11 +3,12 @@ import { NavLink, useNavigate } from "react-router-dom";
 import "./Sidebar.css";
 import {
   ApplicationIcon,
+  CircleAddIcon,
   DashboardIcon,
   SettingsIcon,
 } from "../../assets/icons/icon";
-import SidebarFooter from "../../features/sidebar-footer/SidebarFooter";
 import GradientButton from "../../widgets/gradient-button/GradientButton";
+import SidebarFooter from "./sidebar-footer/SidebarFooter";
 
 export default function Sidebar() {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ export default function Sidebar() {
           <GradientButton
             text="New Application"
             onClick={handleNewApplication}
+            leftIcon={CircleAddIcon}
           />
         </section>
 

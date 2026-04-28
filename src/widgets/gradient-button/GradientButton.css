@@ -1,15 +1,16 @@
 .gradient-button {
   position: relative;
+  overflow: hidden;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 18px;
 
   padding: 8px 16px;
-
   width: 100%;
   height: 32px;
 
+  border: none;
   border-radius: 2px;
 
   background: linear-gradient(
@@ -26,4 +27,74 @@
 
   cursor: pointer;
   box-shadow: none;
+
+  transition:
+    transform 0.12s ease,
+    filter 0.2s ease,
+    opacity 0.2s ease;
+}
+
+/* Keeps button size stable */
+.gradient-button .button-content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.gradient-button .button-content.hidden {
+  visibility: hidden;
+}
+
+.gradient-button:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.gradient-button:active:not(:disabled) {
+  transform: scale(0.97);
+  filter: brightness(0.92);
+}
+
+.gradient-button:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+.gradient-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+
+.gradient-button .spinner-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gradient-button .spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+.gradient-button .icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gradient-button .icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

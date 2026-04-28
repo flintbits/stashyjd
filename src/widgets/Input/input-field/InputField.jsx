@@ -3,6 +3,7 @@ import React from "react";
 import "./InputField.css";
 
 const InputField = ({
+  id,
   label,
   required = false,
   placeholder,
@@ -10,7 +11,6 @@ const InputField = ({
   onChange,
   error = "",
   Icon,
-  name,
   type = "text",
 }) => {
   return (
@@ -25,8 +25,8 @@ const InputField = ({
         {Icon && <Icon className="input-icon" size={14} />}
 
         <input
-          id={name}
-          name={name}
+          id={id}
+          name={label}
           type={type}
           value={value}
           onChange={onChange}

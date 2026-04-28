@@ -3,7 +3,7 @@ import "./SidebarFooter.css";
 import { getVersion } from "@tauri-apps/api/app";
 import { check } from "@tauri-apps/plugin-updater";
 import { relaunch } from "@tauri-apps/plugin-process";
-import SecondaryButton from "../../widgets/secondary-button/SecondaryButton";
+import SecondaryButton from "../../../widgets/secondary-button/SecondaryButton";
 
 export default function SidebarFooter() {
   const [status, setStatus] = useState("");
