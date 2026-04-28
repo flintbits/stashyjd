@@ -1,0 +1,25 @@
+.document-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+}
+
+.document-modal-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.document-modal-header-title {
+  font-size: 16px;
+  font-weight: var(--fw-bold);
+  margin-left: 10px;
+}
+
+.document-modal-body {
+  display: flex;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+}
