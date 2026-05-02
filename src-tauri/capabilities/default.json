@@ -7,6 +7,9 @@
     "core:default",
     "opener:default",
     "updater:default",
-    "process:default"
+    "process:default",
+    "fs:allow-appdata-write",
+    "fs:allow-appdata-write-recursive",
+    "fs:allow-mkdir"
   ]
 }

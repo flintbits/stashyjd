@@ -5,9 +5,11 @@ import GradientButton from "../../widgets/gradient-button/GradientButton";
 import ApplicationForm from "./application-form/ApplicationForm";
 import { api } from "./services/createApplicationService";
 import { subscribeApiState } from "../../lib/api";
+import { useToast } from "../../app/context/ToastProvider";
 
 export default function CreateApplication() {
   const [loading, setLoading] = useState(false);
+  const { addToast } = useToast();
 
   useEffect(() => {
     return subscribeApiState((state) => {
@@ -25,7 +27,19 @@ export default function CreateApplication() {
       });
     } catch (err) {
       alert(err.message);
+      addToast({
+        title: "Unable to create application",
+        message: err.message,
+        type: "error",
+      });
     }
+  };
+
+  const handleClick = () => {
+    addToast({ title: "Saved", message: "Saved!", type: "success" });
+    addToast({ title: "Error", message: "Something failed", type: "error" });
+    addToast({ title: "Warning", message: "Warning!", type: "warning" });
+    addToast({ title: "Info", message: "Information!", type: "info" });
   };
 
   return (
@@ -39,7 +53,7 @@ export default function CreateApplication() {
         </div>
 
         <div className="application-header-actions">
-          <SecondaryButton text="Cancel" />
+          <SecondaryButton text="Cancel" onClick={handleClick} />
           <SecondaryButton text="Save Draft" />
           <GradientButton
             text="Create Application"

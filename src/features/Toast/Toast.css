@@ -1,0 +1,131 @@
+/* Container (centered top) */
+.toast-container {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  z-index: 9999;
+}
+
+.toast {
+  min-width: 320px;
+  max-width: 470px;
+  padding: 12px;
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  background: #f9fafb;
+  color: #111827;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+
+  animation:
+    toast-in 0.3s ease,
+    toast-out 0.3s ease 3s;
+}
+
+/* Left content */
+.toast-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.toast-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.toast-title {
+  font-weight: var(--fw-bold);
+  font-size: 11px;
+}
+
+.toast-desc {
+  font-weight: var(--fw-regular);
+  font-size: 10px;
+  color: var(--color-secondary);
+}
+
+.toast-icon {
+  font-size: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.toast-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toast-action {
+  border: none;
+  background: #e5e7eb;
+  color: #111827;
+
+  padding: 6px 12px;
+  border-radius: 8px;
+
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.toast-action:hover {
+  background: #d1d5db;
+}
+
+.toast-close {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  color: #ccc3d8;
+}
+
+.toast--success .toast-icon {
+  color: var(--icon-success-color);
+}
+
+.toast--error .toast-icon {
+  color: var(--icon-error-color);
+}
+
+.toast--warning .toast-icon {
+  color: var(--icon-warning-color);
+}
+
+.toast--info .toast-icon {
+  color: var(--icon-info-color);
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes toast-out {
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
