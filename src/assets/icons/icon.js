@@ -15,3 +15,11 @@ export const UploadIcon = ICONS.UploadIcon;
 export const AddIcon = ICONS.AddIcon;
 
 export const CircleAddIcon = ICONS.CircleAddIcon;
+
+export const SuccessIcon = ICONS.SuccessIcon;
+
+export const ErrorIcon = ICONS.ErrorIcon;
+
+export const WaringIcon = ICONS.WaringIcon;
+
+export const InfoIcon = ICONS.InfoIcon;

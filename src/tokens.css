@@ -1,10 +1,7 @@
 :root {
-  /* background colors */
-
   --color-surface-base: #f8f9ff;
   --color-surface-raised: #f1f5f9;
 
-  /* text */
   --color-primary: #0d1c2e;
   --color-secondary: #475569;
   --color-tertiary: #d5e3fc;
@@ -12,15 +9,12 @@
   --color-accent-secondary: #8468bb;
   --color-accent-secondary-rgb: 132 104 187;
 
-  /*gradient*/
   --color-gradient-primary: #630ed4;
   --color-gradient-secondary: #7c3aed;
 
-  /* font */
   --font-sans: "Inter", sans-serif;
   --font-mono: "Berkeley Mono", ui-monospace, monospace;
 
-  /*font weight*/
   --fw-thin: 100;
   --fw-extra-light: 200;
   --fw-light: 300;
@@ -30,4 +24,9 @@
   --fw-bold: 700;
   --fw-extra-bold: 800;
   --fw-black: 900;
+
+  --icon-success-color: #059669;
+  --icon-error-color: #ba1a1a;
+  --icon-warning-color: #f59e0b;
+  --icon-info-color: var(--color-accent-primary);
 }

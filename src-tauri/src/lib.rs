@@ -4,6 +4,7 @@ pub mod db;
 pub mod models;
 pub mod repositories;
 pub mod services;
+pub mod utils;
 
 use app_state::AppState;
 use db::connections::create_pool;
@@ -22,11 +23,9 @@ pub fn run() {
         .setup(|app| {
             tauri::async_runtime::block_on(async {
                 let pool = create_pool(app.handle()).await;
-
                 apply(&pool).await;
 
                 let state = AppState { db: pool };
-
                 app.manage(state);
             });
 
@@ -34,15 +33,17 @@ pub fn run() {
         })
         .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_updater::Builder::new().build())
+        .plugin(tauri_plugin_fs::init())
         .invoke_handler(tauri::generate_handler![
             greet,
-            commands::applications::create_application
+            commands::applications::create_application,
+            commands::document::create_document
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
 
 //sqlx migrate add create_users
-//$env:DATABASE_URL="sqlite:app.db"
+//$env:DATABASE_URL="sqlite:///C:/Users/Victus/AppData/Roaming/StashyJD/app.db"
 //sqlx migrate run
 //sqlx migrate revert
