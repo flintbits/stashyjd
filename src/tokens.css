@@ -1,4 +1,4 @@
-:root {
+/* :root {
   --color-surface-base: #f8f9ff;
   --color-surface-raised: #f1f5f9;
 
@@ -29,4 +29,152 @@
   --icon-error-color: #ba1a1a;
   --icon-warning-color: #f59e0b;
   --icon-info-color: var(--color-accent-primary);
+} */
+
+/* colors*/
+:root {
+  --brand-primary: #7c3aed;
+  --brand-primary-hover: #6d28d9;
+  --brand-primary-soft: #f3e8ff;
+
+  --brand-accent: #10b981;
+  --brand-accent-soft: #ecfdf5;
+}
+
+:root {
+  /* Backgrounds */
+  --bg-app: #f6f7fb;
+  --bg-surface: #ffffff;
+  --bg-muted: #f1f3f9;
+  --bg-elevated: #ffffff;
+
+  /* Borders */
+  --border-subtle: #d9d9d9;
+  --border-default: #9b9b9b;
+  --border-strong: #585858;
+
+  /* Text */
+  --text-primary: #0d1c2e;
+  --text-secondary: #262626;
+  --text-tertiary: #4f576a;
+  --text-inverse: #ffffff;
+
+  /* Icon */
+  --icon-default: #404657;
+  --icon-muted: #676767;
+}
+
+:root {
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --info: #3b82f6;
+
+  --success-bg: #ecfdf5;
+  --warning-bg: #fffbeb;
+  --error-bg: #fef2f2;
+  --info-bg: #eff6ff;
+}
+
+:root {
+  --chip-purple-bg: #f3e8ff;
+  --chip-purple-text: #6d28d9;
+
+  --chip-blue-bg: #eff6ff;
+  --chip-blue-text: #2563eb;
+
+  --chip-green-bg: #ecfdf5;
+  --chip-green-text: #059669;
+
+  --chip-gray-bg: #f1f5f9;
+  --chip-gray-text: #475569;
+}
+
+:root {
+  --shadow-xs: 0 1px 2px rgba(16, 24, 40, 0.04);
+  --shadow-sm: 0 2px 6px rgba(16, 24, 40, 0.06);
+  --shadow-md: 0 6px 20px rgba(16, 24, 40, 0.08);
+  --shadow-lg: 0 12px 32px rgba(16, 24, 40, 0.1);
+}
+
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+}
+
+:root {
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-base: 14px;
+  --text-md: 16px;
+  --text-lg: 18px;
+  --text-xl: 22px;
+  --text-2xl: 28px;
+
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-extra-bold: 800;
+}
+
+:root {
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-pill: 999px;
+}
+
+:root {
+  --btn-primary-bg: var(--brand-primary);
+  --btn-primary-hover: var(--brand-primary-hover);
+  --btn-primary-text: white;
+
+  --btn-secondary-bg: #f1f3f9;
+  --btn-secondary-text: #0f172a;
+
+  --btn-ghost-bg: transparent;
+}
+
+:root {
+  --input-bg: #ffffff;
+  --input-border: #e2e8f0;
+  --input-border-focus: #7c3aed;
+  --input-text: #0f172a;
+  --input-placeholder: #94a3b8;
+}
+
+:root {
+  --card-bg: #ffffff;
+  --card-border: #e6e8f0;
+}
+
+:root {
+  --sidebar-bg: #ffffff;
+  --sidebar-item-hover: #f3f4f6;
+  --sidebar-active-bg: #f3e8ff;
+  --sidebar-active-text: #6d28d9;
+}
+
+:root {
+  --chart-purple: #7c3aed;
+  --chart-blue: #3b82f6;
+  --chart-green: #10b981;
+  --chart-orange: #f59e0b;
+  --chart-red: #ef4444;
+}
+
+:root {
+  --transition-fast: 120ms ease;
+  --transition-normal: 200ms ease;
 }

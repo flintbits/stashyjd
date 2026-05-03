@@ -46,14 +46,14 @@
 }
 
 .toast-title {
-  font-weight: var(--fw-bold);
+  font-weight: var(--font-semibold);
   font-size: 11px;
 }
 
 .toast-desc {
-  font-weight: var(--fw-regular);
+  font-weight: var(--font-regular);
   font-size: 10px;
-  color: var(--color-secondary);
+  color: var(--text-secondary);
 }
 
 .toast-icon {
@@ -97,19 +97,19 @@
 }
 
 .toast--success .toast-icon {
-  color: var(--icon-success-color);
+  color: var(--success);
 }
 
 .toast--error .toast-icon {
-  color: var(--icon-error-color);
+  color: var(--error);
 }
 
 .toast--warning .toast-icon {
-  color: var(--icon-warning-color);
+  color: var(--warning);
 }
 
 .toast--info .toast-icon {
-  color: var(--icon-info-color);
+  color: var(--info);
 }
 
 @keyframes toast-in {

@@ -12,8 +12,8 @@
 }
 
 .document-modal-header-title {
-  font-size: 16px;
-  font-weight: var(--fw-bold);
+  font-size: var(--text-md);
+  font-weight: var(--font-semibold);
   margin-left: 10px;
 }
 

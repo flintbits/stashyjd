@@ -1,59 +1,51 @@
 import React from "react";
-import InputField from "../../../widgets/Input/input-field/InputField";
-import { ApplicationIcon } from "../../../assets/icons/icon";
 import "./ApplicationForm.css";
-import { CREATE_APPLICATION_FROM_SCHEMA } from "./schema/applicationFormSchema";
+import { CREATE_APPLICATION_FORM_SCHEMA } from "./schema/applicationFormSchema";
 import useFormValidation from "../../../features/form-validation/hooks/useFormValidation";
+import DynamicFormBlock from "../components/DynamicFormBlock";
+import JobDescriptionBlock from "../components/JobDescriptionBlock";
+import DocumentsMatchingBlock from "../components/document-picker-block/DocumentsPickerBlock";
+import OrganizationNotesBlock from "../components/OrganizationNotesBlock";
+import DocumentsPickerBlock from "../components/document-picker-block/DocumentsPickerBlock";
 
 export default function ApplicationForm() {
   const { fieldValues, onChange } = useFormValidation();
+
+  const renderSectionContent = (section) => {
+    switch (section.type) {
+      case "dynamic":
+        return (
+          <DynamicFormBlock
+            section={section}
+            values={fieldValues}
+            onChange={onChange}
+          />
+        );
+      case "custom_job_description":
+        return <JobDescriptionBlock values={fieldValues} onChange={onChange} />;
+      case "custom_documents_matching":
+        return (
+          <DocumentsPickerBlock values={fieldValues} onChange={onChange} />
+        );
+      case "custom_organization_notes":
+        return (
+          <OrganizationNotesBlock values={fieldValues} onChange={onChange} />
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="application-form-wrapper">
-      {CREATE_APPLICATION_FROM_SCHEMA.map((block, blockIndex) => (
-        <section className="form-section" key={blockIndex}>
+      {CREATE_APPLICATION_FORM_SCHEMA.map((section, index) => (
+        <section className="form-section" key={section.id || index}>
           <div className="form-section-header">
-            <ApplicationIcon size={18} className="form-section-icon" />
-            <h2 className="form-section-title">{block.blockName}</h2>
+            <h2 className="form-section-title">{section.title}</h2>
           </div>
 
-          <div className="form-section-content">
-            {block.blockContent.map((content, rowIndex) => (
-              <div key={rowIndex}>
-                {content.layout === "split" ? (
-                  <div className="field-split">
-                    {content.fields.map((field, fieldIndex) => (
-                      <div className="field-item" key={fieldIndex}>
-                        <InputField
-                          id={field.id}
-                          label={field.label}
-                          value={onChange[field.id]}
-                          placeholder={field.placeholder}
-                          onChange={onChange}
-                          required
-                          Icon={ApplicationIcon}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="field-single">
-                    {content.fields.map((field, fieldIndex) => (
-                      <div className="field-item" key={fieldIndex}>
-                        <InputField
-                          id={field.id}
-                          label={field.label}
-                          value={onChange[field.id]}
-                          placeholder={field.placeholder}
-                          onChange={onChange}
-                          required
-                          Icon={ApplicationIcon}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
+          <div className="form-section-body">
+            {renderSectionContent(section)}
           </div>
         </section>
       ))}

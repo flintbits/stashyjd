@@ -13,20 +13,25 @@ pub async fn create_document(
     file_path: String,
     document_type: String,
 ) -> Result<ApiResponse<()>, String> {
-    // Compute file data
+    // Compute file hash and size
     let (file_hash, file_size) = utils::document::file::compute_file_data(Path::new(&file_path))
         .await
-        .map_err(|_| "Failed to read file or compute metadata".to_string())?;
+        .map_err(|e| format!("Failed to compute metadata: {}", e))?;
 
-    // Detect mime
+    // Detect MIME type from file path
     let mime_type = mime_guess::from_path(&file_path)
         .first_or_octet_stream()
         .to_string();
 
-    //TODO: Async processing
+    // Process document (extract text, compute text hash, etc.)
+    // TODO: move to spawn_blocking if CPU-intensive
     let processed = process_document(&file_path, &mime_type).map_err(|e| e.to_string())?;
 
-    // dedup check before insert
+    // let processed = tokio::task::spawn_blocking(move || process_document(&file_path, &mime_type))
+    //     .await
+    //     .map_err(|_| "Processing failed")??;
+
+    // // Check for duplicate document using text hash
     if document_repository::exists_by_text_hash(db, &processed.text_hash)
         .await
         .map_err(|e| e.to_string())?
@@ -35,7 +40,7 @@ pub async fn create_document(
         return Ok(ApiResponse::duplicate("Duplicate document detected", None));
     }
 
-    // Build domain model
+    // Build document model for insertion
     let doc = NewDocument {
         public_id: Uuid::new_v4().to_string(),
         document_type,
@@ -50,11 +55,21 @@ pub async fn create_document(
         text_hash: processed.text_hash,
     };
 
-    // Call repository
-    document_repository::create_document(db, doc)
-        .await
-        .map_err(|e| format!("Database error while saving document: {}", e))?;
+    // Insert document into database
+    let insert_result = document_repository::insert_document(db, doc).await;
 
+    // Handle insert result and unique constraint
+    match insert_result {
+        Ok(_) => {}
+        Err(sqlx::Error::Database(e)) if e.is_unique_violation() => {
+            return Ok(ApiResponse::duplicate("Duplicate document detected", None));
+        }
+        Err(e) => {
+            return Err(format!("Database error while saving document: {}", e));
+        }
+    }
+
+    // Return success response
     Ok(ApiResponse::success(
         "Document uploaded and stored successfully",
         None,

@@ -1,10 +1,10 @@
 .secondary-button {
   padding: 6px 18px;
   height: 32px;
-  border-radius: 2px;
-  background-color: var(--color-tertiary);
-  color: var(--color-primary);
-  font-size: 12px;
+  border-radius: var(--radius-sm);
+  background-color: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+  font-size: var(--text-xs);
   font-weight: 500;
   line-height: 1;
   cursor: pointer;

@@ -11,9 +11,10 @@ body,
 #root {
   width: 100%;
   height: 100%;
-  background-color: var(--color-surface-base);
+  background-color: var(--bg-app);
   font-family: var(--font-sans);
-  color: var(--color-primary);
+  color: var(--text-primary);
+  font-size: var(--text-base);
 }
 
 body {

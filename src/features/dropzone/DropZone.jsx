@@ -1,4 +1,4 @@
-import { UploadCloud } from "lucide-react";
+import { LuCloudUpload } from "react-icons/lu";
 import React from "react";
 import "./DropZone.css";
 import { appDataDir, join } from "@tauri-apps/api/path";
@@ -99,7 +99,7 @@ export default function DropZone({ type = "resume" }) {
     <div className="file-upload-box">
       <label htmlFor="resume-upload" className="upload-dropzone">
         <span className="upload-icon-wrapper">
-          <UploadCloud className="upload-icon" />
+          <LuCloudUpload className="upload-icon" size={24} />
         </span>
 
         <p className="upload-title">Drag & drop a new resume here</p>

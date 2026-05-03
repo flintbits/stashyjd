@@ -1,6 +1,7 @@
 import React, { lazy } from "react";
 import SettingsPage from "../pages/settings/SettingsPage.jsx";
 import CalendarPage from "../pages/calendar/CalendarPage.jsx";
+import AppLayout from "../layouts/AppLayout.jsx";
 
 const DashboardPage = lazy(
   () => import("../pages/dashboard/DashboardPage.jsx"),
@@ -14,6 +15,15 @@ const CreateApplication = lazy(
 );
 
 export const routes = [
+  // {
+  //   path: "/",
+  //   element: <AppLayout />,
+  //   children: [
+  //     { index: true, element: <DashboardPage /> },
+  //     { path: "applications", element: <ApplicationsPage /> },
+  //     { path: "create-application", element: <CreateApplication /> },
+  //   ],
+  // },
   {
     path: "/",
     label: "Dashboard",
