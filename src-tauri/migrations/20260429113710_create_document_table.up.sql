@@ -16,8 +16,8 @@ CREATE TABLE IF NOT EXISTS documents (
 
     raw_text TEXT,
 
-    file_hash TEXT NOT NULL,
-    text_hash TEXT NOT NULL,
+    file_hash TEXT NOT NULL UNIQUE,
+    text_hash TEXT NOT NULL UNIQUE,
 
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP

@@ -1,6 +1,6 @@
 use crate::models::document::NewDocument;
 
-pub async fn create_document(db: &sqlx::SqlitePool, doc: NewDocument) -> Result<(), sqlx::Error> {
+pub async fn insert_document(db: &sqlx::SqlitePool, doc: NewDocument) -> Result<(), sqlx::Error> {
     let result = sqlx::query(
         r#"
         INSERT INTO documents (
@@ -25,6 +25,7 @@ pub async fn create_document(db: &sqlx::SqlitePool, doc: NewDocument) -> Result<
     .execute(db)
     .await?;
 
+    //TODO: poternatially redudant
     if result.rows_affected() == 0 {
         return Err(sqlx::Error::RowNotFound);
     }
@@ -36,10 +37,11 @@ pub async fn exists_by_text_hash(
     db: &sqlx::SqlitePool,
     text_hash: &str,
 ) -> Result<bool, sqlx::Error> {
-    let rec = sqlx::query_scalar::<_, i64>("SELECT COUNT(1) FROM documents WHERE text_hash = ?")
-        .bind(text_hash)
-        .fetch_one(db)
-        .await?;
+    let exists =
+        sqlx::query_scalar::<_, i64>("SELECT EXISTS(SELECT 1 FROM documents WHERE text_hash = ?)")
+            .bind(text_hash)
+            .fetch_one(db)
+            .await?;
 
-    Ok(rec > 0)
+    Ok(exists == 1)
 }

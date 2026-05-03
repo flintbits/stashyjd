@@ -1,17 +1,17 @@
 .library-sidebar {
   width: 220px;
   min-width: 220px;
-  border-right: 1px solid #e7e7e7;
+  border-right: 1px solid var(--border-subtle);
   padding: 12px 16px;
   display: flex;
   flex-direction: column;
-  background: #f8f9fc;
+  background: var(--bg-app);
 }
 
 .library-label {
-  font-size: 11px;
-  font-weight: var(--fw-semi-bold);
-  color: #7c7c7c;
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  color: var(--text-tertiary);
   letter-spacing: 0.08em;
   margin-bottom: 14px;
 }
@@ -21,30 +21,30 @@
   background: transparent;
   width: 100%;
   padding: 8px 12px;
-  border-radius: 2px;
+  border-radius: var(--radius-sm);
   margin-bottom: 4px;
   height: 36px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  font-size: 12px;
-  font-weight: var(--fw-regular);
+  font-size: var(--text-xs);
+  font-weight: var(--font-regular);
 }
 
 .library-nav:hover {
-  background: #ececff;
+  background: var(--sidebar-item-hover);
 }
 
 .library-nav.active {
-  background: #ece8ff;
-  color: #6d42ff;
+  background: var(--sidebar-active-bg);
+  color: var(--sidebar-active-text);
 }
 
 .library-upload-box {
   margin-top: auto;
-  background-color: var(--color-tertiary);
-  border-radius: 2px;
+  background-color: var(--brand-primary-soft);
+  border-radius: var(--radius-sm);
   padding: 12px;
   text-align: center;
 
@@ -55,7 +55,7 @@
 }
 
 .upload-icon {
-  border-radius: 18px;
+  border-radius: var(--radius-xl);
   background: rgba(123, 71, 255, 0.12);
   padding: 12px;
   display: flex;
@@ -65,9 +65,9 @@
 
 .library-upload-box p {
   max-width: 220px;
-  font-size: 12px;
-  font-weight: var(--fw-regular);
-  color: var(--color-secondary);
+  font-size: var(--text-xs);
+  font-weight: var(--font-regular);
+  color: var(--text-secondary);
   margin: 0;
 }
 

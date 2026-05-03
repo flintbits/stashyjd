@@ -11,13 +11,20 @@ pub async fn create_document(
     file_path: String,
     document_type: String,
 ) -> Result<ApiResponse<()>, String> {
-    let full_path = resolve_path(&app, &file_path).map_err(|_| "Invalid file path".to_string())?;
+    // Resolve and normalize the file path
+    let full_path = resolve_path(&app, &file_path)
+        .map_err(|e| format!("Failed to resolve path: {}", e))?
+        .canonicalize()
+        .map_err(|e| format!("Failed to canonicalize path: {}", e))?;
 
-    crate::services::document_service::create_document(
-        &state.db,
-        full_path.to_string_lossy().replace("\\", "/"),
-        document_type,
-    )
-    .await
-    .map_err(|e| format!("Failed to create document: {}", e))
+    // Convert PathBuf to String (fail if invalid UTF-8)
+    let full_path_str = full_path
+        .to_str()
+        .ok_or("Path contains invalid UTF-8".to_string())?
+        .to_string();
+
+    // Call service layer to process and store document
+    crate::services::document_service::create_document(&state.db, full_path_str, document_type)
+        .await
+        .map_err(|e| format!("Failed to create document: {}", e))
 }

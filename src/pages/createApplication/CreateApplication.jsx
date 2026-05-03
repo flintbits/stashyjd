@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import "./CreateApplication.css";
 import SecondaryButton from "../../widgets/secondary-button/SecondaryButton";
 import GradientButton from "../../widgets/gradient-button/GradientButton";
@@ -6,10 +7,30 @@ import ApplicationForm from "./application-form/ApplicationForm";
 import { api } from "./services/createApplicationService";
 import { subscribeApiState } from "../../lib/api";
 import { useToast } from "../../app/context/ToastProvider";
+import RightSidebar from "./components/RightSidebar";
 
 export default function CreateApplication() {
   const [loading, setLoading] = useState(false);
   const { addToast } = useToast();
+
+  // Use outlet context to control the global right panel
+  const context = useOutletContext() || {};
+  const { setRightPanelContent, setShowRight } = context;
+
+  useEffect(() => {
+    // Render custom RightSidebar into the global right panel when this page mounts
+    if (setRightPanelContent) {
+      setRightPanelContent(<RightSidebar setShowRight={setShowRight} />);
+      setShowRight?.(true); // Ensure it's visible
+    }
+
+    // Cleanup when leaving the page
+    return () => {
+      if (setRightPanelContent) {
+        setRightPanelContent(null);
+      }
+    };
+  }, [setRightPanelContent, setShowRight]);
 
   useEffect(() => {
     return subscribeApiState((state) => {
@@ -26,7 +47,6 @@ export default function CreateApplication() {
         jobUrl: "https://jobs.openai.com",
       });
     } catch (err) {
-      alert(err.message);
       addToast({
         title: "Unable to create application",
         message: err.message,
@@ -35,26 +55,20 @@ export default function CreateApplication() {
     }
   };
 
-  const handleClick = () => {
-    addToast({ title: "Saved", message: "Saved!", type: "success" });
-    addToast({ title: "Error", message: "Something failed", type: "error" });
-    addToast({ title: "Warning", message: "Warning!", type: "warning" });
-    addToast({ title: "Info", message: "Information!", type: "info" });
-  };
-
   return (
-    <div>
+    <div className="create-application-page">
       <section className="application-header">
         <div className="application-header-content">
           <h1 className="application-header-title">New Application</h1>
           <p className="application-header-subtitle">
-            Record a new job opportunity to your pipeline.
+            Add job details manually or paste a job description to enrich your
+            application.
           </p>
         </div>
 
         <div className="application-header-actions">
-          <SecondaryButton text="Cancel" onClick={handleClick} />
-          <SecondaryButton text="Save Draft" />
+          {/* <SecondaryButton text="Discard Draft" />
+          <SecondaryButton text="Save Draft" /> */}
           <GradientButton
             text="Create Application"
             onClick={handleCreateApplication}
@@ -65,11 +79,7 @@ export default function CreateApplication() {
 
       <section className="application-main">
         <section className="application-form-container">
-          {/* <div style={{ height: "20px", background: "red" }}></div> */}
           <ApplicationForm />
-        </section>
-        <section className="application-side-panel">
-          {/* <div style={{ height: "20px", background: "red" }}></div> */}
         </section>
       </section>
     </div>

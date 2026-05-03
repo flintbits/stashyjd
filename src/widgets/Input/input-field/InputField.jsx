@@ -16,7 +16,7 @@ const InputField = ({
   return (
     <div className={`input-field ${error ? "has-error" : ""}`}>
       {label && (
-        <label htmlFor={name} className="input-label">
+        <label htmlFor={id} className="input-label">
           {label} {required && <span>*</span>}
         </label>
       )}

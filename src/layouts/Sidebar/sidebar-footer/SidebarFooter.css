@@ -7,7 +7,7 @@
 }
 
 .sidebar-footer-version-text {
-  font-size: 12px;
+  font-size: var(--text-xs);
   font-weight: 600;
-  color: var(--color-secondary);
+  color: var(--text-secondary);
 }

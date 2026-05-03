@@ -6,25 +6,21 @@
 
 .form-section {
   padding: 24px;
-  /* background-color: var(--color-tertiary); */
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   width: 100%;
 }
 
 .form-section-header {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 18px;
-}
-
-.form-section-icon {
-  color: var(--color-gradient-primary);
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
 .form-section-title {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: var(--text-md);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
   margin: 0;
 }
 
@@ -37,6 +33,13 @@
 .field-split {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+.field-three-col {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   width: 100%;
 }
