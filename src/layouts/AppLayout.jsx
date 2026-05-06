@@ -8,7 +8,7 @@ import RightPanel from "./RightPanel";
 import Sidebar from "./Sidebar/Sidebar";
 
 export default function AppLayout() {
-  const [sidebarWidth, setSidebarWidth] = useState(240);
+  const [sidebarWidth, setSidebarWidth] = useState(220);
   const [rightWidth, setRightWidth] = useState(320);
 
   const [showRight, setShowRight] = useState(true);
@@ -50,7 +50,7 @@ export default function AppLayout() {
         setRightWidth(clamped);
       }
     },
-    "left"
+    "left",
   );
 
   useHotkeys({
@@ -84,17 +84,15 @@ export default function AppLayout() {
         )}
 
         <main className="main">
-          <PageContainer>
-            <Outlet
-              context={{
-                showRight,
-                setShowRight,
-                collapsed,
-                setCollapsed,
-                setRightPanelContent,
-              }}
-            />
-          </PageContainer>
+          <Outlet
+            context={{
+              showRight,
+              setShowRight,
+              collapsed,
+              setCollapsed,
+              setRightPanelContent,
+            }}
+          />
         </main>
 
         {showRight && (
@@ -108,7 +106,11 @@ export default function AppLayout() {
 
         {showRight && (
           <aside className="right-panel">
-            {rightPanelContent ? rightPanelContent : <RightPanel setShowRight={setShowRight} />}
+            {rightPanelContent ? (
+              rightPanelContent
+            ) : (
+              <RightPanel setShowRight={setShowRight} />
+            )}
           </aside>
         )}
 

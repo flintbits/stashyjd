@@ -1,0 +1,167 @@
+.data-table-layout {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  min-height: 0;
+
+  overflow: hidden;
+}
+
+.data-table-scroll {
+  flex: 1;
+
+  min-height: 0;
+
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.data-table-scroll::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.data-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background-color: var(--bg-elevated);
+
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  font-weight: var(--font-medium);
+}
+
+.data-table thead .filter-row th {
+  top: 30px;
+  z-index: 3;
+
+  background-color: var(--bg-elevated);
+}
+
+.data-table th,
+.data-table td {
+  padding: 10px;
+
+  border-bottom: 1px solid var(--border-subtle);
+
+  text-align: left;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.data-table tbody tr {
+  transition: background-color 0.15s ease;
+
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  font-weight: var(--font-medium);
+}
+
+.data-table tbody tr:hover {
+  background-color: var(--brand-primary-soft);
+}
+
+.data-table tbody tr.row-selected {
+  background-color: var(--brand-primary-soft);
+}
+
+.data-table tbody tr.row-selected:hover {
+  background-color: var(--brand-primary-soft);
+}
+
+.sortable-header {
+  cursor: pointer;
+  user-select: none;
+}
+
+.sortable-header:hover {
+  background: #eef1f8;
+}
+
+.sort-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 18px;
+
+  margin-left: 6px;
+
+  font-size: var(--text-xs);
+
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+
+.sort-indicator.none {
+  opacity: 0.4;
+}
+
+.sort-indicator.asc,
+.sort-indicator.desc {
+  opacity: 1;
+}
+
+.data-table input[type="checkbox"] {
+  transform: scale(0.9);
+
+  accent-color: var(--brand-primary);
+
+  cursor: pointer;
+}
+
+.data-table td:first-child,
+.data-table th:first-child {
+  width: 40px;
+
+  text-align: center;
+}
+
+.column-filter {
+  width: 100%;
+
+  padding: 4px 6px;
+
+  font-size: var(--text-xs);
+
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+
+  outline: none;
+}
+
+.column-filter:focus {
+  border-color: var(--brand-primary-hover);
+
+  box-shadow: 0 0 0 1px var(--brand-primary-soft);
+}
+
+.data-table-footer {
+  flex-shrink: 0;
+
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 16px;
+
+  border-top: 1px solid var(--border-subtle);
+
+  background: white;
+
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}

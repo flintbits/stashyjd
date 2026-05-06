@@ -1,5 +1,5 @@
 use crate::models::api_response::ApiResponse;
-use crate::models::document::NewDocument;
+use crate::models::document::{DocumentWithResumeProfile, NewDocument};
 use crate::repositories::document_repository;
 use crate::utils;
 use crate::utils::document::file::extract_file_name;
@@ -12,11 +12,17 @@ pub async fn create_document(
     db: &SqlitePool,
     file_path: String,
     document_type: String,
+    original_file_name: String,
 ) -> Result<ApiResponse<()>, String> {
     // Compute file hash and size
-    let (file_hash, file_size) = utils::document::file::compute_file_data(Path::new(&file_path))
-        .await
-        .map_err(|e| format!("Failed to compute metadata: {}", e))?;
+    let (file_hash, file_size_u64) =
+        utils::document::file::compute_file_data(Path::new(&file_path))
+            .await
+            .map_err(|e| format!("Failed to compute metadata: {}", e))?;
+
+    //convert file size from u64 to i64
+    let file_size =
+        i64::try_from(file_size_u64).map_err(|_| "File size exceeds supported range")?;
 
     // Detect MIME type from file path
     let mime_type = mime_guess::from_path(&file_path)
@@ -44,11 +50,12 @@ pub async fn create_document(
     let doc = NewDocument {
         public_id: Uuid::new_v4().to_string(),
         document_type,
-        file_name: extract_file_name(&file_path),
+        stored_file_name: extract_file_name(&file_path),
+        original_file_name: original_file_name,
         file_path,
         version: None,
         is_default: false,
-        file_size: file_size.to_string(),
+        file_size: file_size as i64,
         mime_type,
         raw_text: Some(processed.raw_text),
         file_hash,
@@ -73,5 +80,22 @@ pub async fn create_document(
     Ok(ApiResponse::success(
         "Document uploaded and stored successfully",
         None,
+    ))
+}
+
+pub async fn fetch_documents(
+    db: &SqlitePool,
+) -> Result<ApiResponse<Vec<DocumentWithResumeProfile>>, String> {
+    let documents = document_repository::fetch_all_document_with_resume_profile(db)
+        .await
+        .map_err(|e| e.to_string())?;
+
+    if documents.is_empty() {
+        return Ok(ApiResponse::warning("No documents found", None));
+    }
+
+    Ok(ApiResponse::success(
+        "Documents fetched successfully",
+        Some(documents),
     ))
 }

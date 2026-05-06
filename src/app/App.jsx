@@ -4,7 +4,6 @@ import { relaunch } from "@tauri-apps/plugin-process";
 import { getVersion } from "@tauri-apps/api/app";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import { routes } from "./routes";
-import AppShell from "../layouts/AppShell";
 import AppLayout from "../layouts/AppLayout";
 import DashboardPage from "../pages/dashboard/DashboardPage";
 

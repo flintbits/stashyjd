@@ -29,8 +29,8 @@ CREATE TABLE IF NOT EXISTS applications (
 
     archived INTEGER NOT NULL DEFAULT 0,
 
-    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    created_at DATETIME DEFAULT (datetime('now','localtime')),
+    updated_at DATETIME DEFAULT (datetime('now','localtime'))
 
     -- FOREIGN KEY (resume_id) REFERENCES resumes(id) ON DELETE SET NULL,
     -- FOREIGN KEY (cover_letter_id) REFERENCES cover_letters(id) ON DELETE SET NULL

@@ -23,3 +23,23 @@ export const ErrorIcon = ICONS.ErrorIcon;
 export const WaringIcon = ICONS.WaringIcon;
 
 export const InfoIcon = ICONS.InfoIcon;
+
+export const UnsortedIcon = ICONS.UnsortedIcon;
+
+export const DownSortIcon = ICONS.DownSortIcon;
+
+export const UpSortIcon = ICONS.UpSortIcon;
+
+export const CalendarIcon = ICONS.CalendarIcon;
+
+export const AllDocumentsIcon = ICONS.AllDocumentsIcon;
+
+export const AllResumeIcon = ICONS.AllResumeIcon;
+
+export const AllCoverLetterIcon = ICONS.AllCoverLetterIcon;
+
+export const DeleteIcon = ICONS.DeleteIcon;
+
+export const PreviewIcon = ICONS.PreviewIcon;
+
+export const DownloadIcon = ICONS.DownloadIcon;
