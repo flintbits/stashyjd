@@ -1,19 +1,20 @@
-use crate::models::document::NewDocument;
+use crate::models::document::{DocumentWithResumeProfile, NewDocument};
 
 pub async fn insert_document(db: &sqlx::SqlitePool, doc: NewDocument) -> Result<(), sqlx::Error> {
     let result = sqlx::query(
         r#"
         INSERT INTO documents (
-            public_id, document_type, file_name, file_path,
+            public_id, document_type, stored_file_name, original_file_name, file_path,
             version, is_default, file_size, mime_type,
             raw_text, file_hash, text_hash
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         "#,
     )
     .bind(doc.public_id)
     .bind(doc.document_type)
-    .bind(doc.file_name)
+    .bind(doc.stored_file_name)
+    .bind(doc.original_file_name)
     .bind(doc.file_path)
     .bind(doc.version)
     .bind(if doc.is_default { 1 } else { 0 })
@@ -44,4 +45,29 @@ pub async fn exists_by_text_hash(
             .await?;
 
     Ok(exists == 1)
+}
+
+pub async fn fetch_all_document_with_resume_profile(
+    db: &sqlx::SqlitePool,
+) -> Result<Vec<DocumentWithResumeProfile>, sqlx::Error> {
+    let documents = sqlx::query_as::<_, DocumentWithResumeProfile>(
+        r#"
+        SELECT 
+            public_id,
+            document_type,
+            stored_file_name,
+            original_file_name,
+            file_path,
+            version,
+            file_size,
+            mime_type,
+            updated_at
+        FROM documents
+        ORDER BY updated_at DESC
+        "#,
+    )
+    .fetch_all(db)
+    .await?;
+
+    Ok(documents)
 }

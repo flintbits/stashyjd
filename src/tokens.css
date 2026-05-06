@@ -34,7 +34,7 @@
 /* colors*/
 :root {
   --brand-primary: #7c3aed;
-  --brand-primary-hover: #6d28d9;
+  --brand-primary-hover: #bc9bf2;
   --brand-primary-soft: #f3e8ff;
 
   --brand-accent: #10b981;
@@ -49,13 +49,13 @@
   --bg-elevated: #ffffff;
 
   /* Borders */
-  --border-subtle: #d9d9d9;
+  --border-subtle: #e6e8f0;
   --border-default: #9b9b9b;
   --border-strong: #585858;
 
   /* Text */
   --text-primary: #0d1c2e;
-  --text-secondary: #262626;
+  --text-secondary: #454545;
   --text-tertiary: #4f576a;
   --text-inverse: #ffffff;
 
@@ -120,6 +120,7 @@
   --text-xl: 22px;
   --text-2xl: 28px;
 
+  --font-thin: 200;
   --font-regular: 400;
   --font-medium: 500;
   --font-semibold: 600;
@@ -178,3 +179,11 @@
   --transition-fast: 120ms ease;
   --transition-normal: 200ms ease;
 }
+
+/* Button varients 
+<Button text="Primary Button" />
+<Button text="Upload Document" variant="outline" />
+<Button text="Preview" variant="ghost" />
+<Button text="Move to Folder" variant="neutral" />
+<Button text="Delete Document" variant="danger" />
+<Button text="Loading..." loading={true} /> */

@@ -23,4 +23,12 @@ impl<T> ApiResponse<T> {
             data,
         }
     }
+
+    pub fn warning(message: &str, data: Option<T>) -> Self {
+        Self {
+            status: "warning".into(),
+            message: message.into(),
+            data,
+        }
+    }
 }

@@ -5,7 +5,8 @@ CREATE TABLE IF NOT EXISTS documents (
     document_type TEXT NOT NULL CHECK (
         document_type IN ('resume', 'cover_letter', 'portfolio')
     ),
-    file_name TEXT NOT NULL,
+    stored_file_name TEXT NOT NULL,
+    original_file_name TEXT NOT NULL,
     file_path TEXT NOT NULL,
 
     version TEXT,
@@ -19,8 +20,8 @@ CREATE TABLE IF NOT EXISTS documents (
     file_hash TEXT NOT NULL UNIQUE,
     text_hash TEXT NOT NULL UNIQUE,
 
-    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    created_at DATETIME DEFAULT (datetime('now','localtime')),
+    updated_at DATETIME DEFAULT (datetime('now','localtime'))
 );
 
 -- indexes
@@ -28,7 +29,7 @@ CREATE INDEX IF NOT EXISTS idx_documents_type_default
 ON documents(document_type, is_default);
 
 CREATE INDEX IF NOT EXISTS idx_documents_file_name
-ON documents(file_name);
+ON documents(stored_file_name);
 
 CREATE INDEX IF NOT EXISTS idx_documents_created_at
 ON documents(created_at);

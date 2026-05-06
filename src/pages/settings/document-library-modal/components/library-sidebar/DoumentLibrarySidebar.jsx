@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./DoumentLibrarySidebar.css";
 import { UploadIcon } from "../../../../../assets/icons/icon";
-import GradientButton from "../../../../../widgets/gradient-button/GradientButton";
 import DropZone from "../../../../../features/dropzone/DropZone";
 
 export default function DocumentLibrarySidebar() {

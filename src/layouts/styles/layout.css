@@ -11,22 +11,6 @@
   --resize-handle-width: 0px;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-html,
-body,
-#root {
-  height: 100%;
-  margin: 0;
-}
-
-body {
-  background: var(--bg-app);
-}
-
-/* MAIN LAYOUT */
 .app-layout {
   display: grid;
   grid-template-columns:
@@ -40,7 +24,6 @@ body {
   background: var(--bg-app);
 }
 
-/* NO RIGHT PANEL */
 .app-layout.no-right {
   grid-template-columns:
     var(--sidebar-width)
@@ -48,7 +31,6 @@ body {
     minmax(0, 1fr);
 }
 
-/* COLLAPSED SIDEBAR */
 .app-layout.sidebar-collapsed {
   grid-template-columns:
     72px
@@ -57,14 +39,12 @@ body {
     var(--rightpanel-width);
 }
 
-/* COLLAPSED + NO RIGHT */
 .app-layout.sidebar-collapsed.no-right {
   grid-template-columns:
     72px
     minmax(0, 1fr);
 }
 
-/* SIDEBAR */
 .sidebar {
   min-width: 0;
   overflow: hidden;
@@ -72,24 +52,33 @@ body {
   border-right: 1px solid var(--border-subtle);
 }
 
-/* MAIN */
 .main {
   min-width: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
+  min-height: 0;
+
+  overflow: hidden;
+
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+
+  /* overflow-y: auto;
+  overflow-x: hidden; */
 }
 
-/* CONTENT */
-.page-container {
-  width: 100%;
-  max-width: 1100px;
-  padding: 24px;
+.main::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
-/* RIGHT PANEL */
+.main::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.main::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+}
+
 .right-panel {
   min-width: 0;
   overflow-y: auto;
@@ -98,7 +87,6 @@ body {
   border-left: 1px solid var(--border-subtle);
 }
 
-/* RESIZE HANDLE */
 .resize-handle {
   position: relative;
   width: var(--resize-handle-width);
@@ -125,7 +113,6 @@ body {
   opacity: 0.2;
 }
 
-/* COMMAND PALETTE */
 .command-overlay {
   position: fixed;
   inset: 0;

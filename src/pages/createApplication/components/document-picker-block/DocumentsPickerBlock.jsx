@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SecondaryButton from "../../../../widgets/secondary-button/SecondaryButton";
 import DropZone from "../../../../features/dropzone/DropZone";
-import "./CustomBlocks.css";
+import "../CustomBlocks.css";
 
 export default function DocumentsPickerBlock({ values, onChange }) {
   const [resumes, setResumes] = useState([]);

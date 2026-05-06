@@ -35,7 +35,7 @@ export function ToastProvider({ children }) {
   };
 
   const addToast = useCallback(
-    ({ title, message, type = "info", duration = 3000 }) => {
+    ({ title, message, type = "info", duration = 10000 }) => {
       const id = crypto.randomUUID();
       const newToast = { id, title, message, type, duration };
 

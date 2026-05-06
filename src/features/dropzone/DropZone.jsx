@@ -8,7 +8,11 @@ import { useProgress } from "../../app/context/ProgressProvider";
 import { api } from "./service/dropboxService";
 import { useToast } from "../../app/context/ToastProvider";
 
-export default function DropZone({ type = "resume" }) {
+export default function DropZone({
+  label = "Upload",
+  type = "resume",
+  successCallback,
+}) {
   const { start, setProgress, finish } = useProgress();
   const { addToast } = useToast();
 
@@ -32,6 +36,7 @@ export default function DropZone({ type = "resume" }) {
       const res = await api.uploadDocument({
         filePath: `documents/${fileName}`,
         documentType: type,
+        originalFileName: file.name,
       });
 
       console.log("Backend response:", res);
@@ -42,6 +47,7 @@ export default function DropZone({ type = "resume" }) {
           message: res.message,
           type: "success",
         });
+        await successCallback();
       } else if (res.status === "duplicate") {
         addToast({
           title: "Duplicate",
@@ -52,7 +58,7 @@ export default function DropZone({ type = "resume" }) {
     } catch (err) {
       addToast({
         title: "Failed",
-        message: err.message,
+        message: JSON.stringify(err),
         type: "error",
       });
     }
@@ -96,23 +102,19 @@ export default function DropZone({ type = "resume" }) {
   };
 
   return (
-    <div className="file-upload-box">
-      <label htmlFor="resume-upload" className="upload-dropzone">
-        <span className="upload-icon-wrapper">
-          <LuCloudUpload className="upload-icon" size={24} />
-        </span>
-
-        <p className="upload-title">Drag & drop a new resume here</p>
-        <p className="upload-subtitle">PDF, DOCX up to 5MB</p>
-
-        <input
-          id="resume-upload"
-          type="file"
-          className="upload-input"
-          accept=".pdf,.docx"
-          onChange={handleFileUpload}
-        />
+    <div className="resume-upload-container">
+      <label htmlFor="resume-upload" className="upload-btn">
+        <LuCloudUpload size={16} />
+        {label}
       </label>
+
+      <input
+        id="resume-upload"
+        type="file"
+        className="upload-input"
+        accept=".pdf,.docx"
+        onChange={handleFileUpload}
+      />
     </div>
   );
 }
