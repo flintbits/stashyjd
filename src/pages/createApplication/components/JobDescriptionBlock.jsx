@@ -10,19 +10,25 @@ export default function JobDescriptionBlock({ values, onChange }) {
           <div className="jd-header">
             <label>Paste job description</label>
             <div className="jd-actions">
-              <SecondaryButton text="Extract Keywords" />
+              {/* <SecondaryButton text="Extract Keywords" /> */}
               <button className="text-btn">Clear JD</button>
             </div>
           </div>
-          <textarea 
+          <textarea
             placeholder="We are looking for a Senior Product Designer to lead design initiatives across web and mobile platforms..."
             value={values.job_description || ""}
-            onChange={(e) => onChange({ target: { id: 'job_description', value: e.target.value }})}
+            onChange={(e) =>
+              onChange({
+                target: { id: "job_description", value: e.target.value },
+              })
+            }
           />
-          <span className="jd-hint">Tip: Paste the full job description for better keyword extraction.</span>
+          <span className="jd-hint">
+            Tip: Paste the full job description for better keyword extraction.
+          </span>
         </div>
 
-        <div className="jd-keywords-area">
+        {/* <div className="jd-keywords-area">
           <label>Extracted Keywords (editable)</label>
           <div className="keyword-chips">
             <span className="chip">Product Design</span>
@@ -38,7 +44,7 @@ export default function JobDescriptionBlock({ values, onChange }) {
             <span className="chip add">+</span>
           </div>
           <span className="jd-hint">Keyword extraction is local and may not be fully accurate.</span>
-        </div>
+        </div> */}
       </div>
     </div>
   );

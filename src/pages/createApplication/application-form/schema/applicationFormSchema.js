@@ -298,12 +298,12 @@ export const CREATE_APPLICATION_FORM_SCHEMA = [
     stepNumber: "3",
     type: "custom_job_description",
   },
-  {
-    id: "documents_matching",
-    title: "Documents & Matching",
-    stepNumber: "4",
-    type: "custom_documents_matching",
-  },
+  // {
+  //   id: "documents_matching",
+  //   title: "Documents & Matching",
+  //   stepNumber: "4",
+  //   type: "custom_documents_matching",
+  // },
   {
     id: "organization_notes",
     title: "Organization & Notes",

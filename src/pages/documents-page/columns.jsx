@@ -189,6 +189,12 @@ export const document_table_columns = [
     header: "Size",
     enableColumnFilter: true,
     size: 100,
+  },
+  {
+    accessorKey: "file_size",
+    header: "Size",
+    enableColumnFilter: true,
+    size: 100,
     cell: ({ getValue }) => formatSize(getValue()),
   },
 ];

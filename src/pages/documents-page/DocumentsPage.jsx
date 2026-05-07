@@ -8,7 +8,6 @@ import {
 import "./DocumentsPage.css";
 import DataTable from "../../features/data-table/DataTable";
 import { document_table_columns as baseColumns } from "./columns";
-import useDynamicRows from "../../app/hooks/useDynamicRows";
 import { documentPageApi } from "./services/documentspageService";
 import { useToast } from "../../app/context/ToastProvider";
 import DropZone from "../../features/dropzone/DropZone";
@@ -29,7 +28,6 @@ const DOCUMENT_TABS = [
 export default function DocumentsPage() {
   const [activeTab, setActiveTab] = useState("all");
   const columns = useMemo(() => baseColumns, []);
-  const { containerRef, rowsPerPage } = useDynamicRows();
   const { addToast } = useToast();
   const [data, setData] = useState([]);
   const [selectedDoc, setSelectedDoc] = useState(null);
@@ -100,11 +98,6 @@ export default function DocumentsPage() {
             type="cover_letter"
             successCallback={fetchDocuments}
           />
-          {/* todo optimistic ui successCallback=
-          {({ response }) => {
-            fetchDocuments(); // or smarter update later
-          }}
-          */}
         </div>
       </PageHeader>
 
