@@ -1,4 +1,3 @@
-import { LuCloudUpload } from "react-icons/lu";
 import React from "react";
 import "./DropZone.css";
 import { appDataDir, join } from "@tauri-apps/api/path";
@@ -7,6 +6,7 @@ import { invoke } from "@tauri-apps/api/core";
 import { useProgress } from "../../app/context/ProgressProvider";
 import { api } from "./service/dropboxService";
 import { useToast } from "../../app/context/ToastProvider";
+import { UploadIcon } from "../../assets/icons/icon";
 
 export default function DropZone({
   label = "Upload",
@@ -104,7 +104,7 @@ export default function DropZone({
   return (
     <div className="resume-upload-container">
       <label htmlFor="resume-upload" className="upload-btn">
-        <LuCloudUpload size={16} />
+        <UploadIcon size={12} />
         {label}
       </label>
 

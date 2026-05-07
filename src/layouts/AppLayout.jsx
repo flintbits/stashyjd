@@ -4,8 +4,9 @@ import useResizable from "../app/hooks/useResizable";
 import useHotkeys from "../app/hooks/useHotkeys";
 import "./styles/layout.css";
 import PageContainer from "./PageContainer";
-import RightPanel from "./RightPanel";
 import Sidebar from "./Sidebar/Sidebar";
+import RightPanel from "./right-panel/RightPanel";
+import { DrawerIcon } from "../assets/icons/icon";
 
 export default function AppLayout() {
   const [sidebarWidth, setSidebarWidth] = useState(220);
@@ -13,7 +14,6 @@ export default function AppLayout() {
 
   const [showRight, setShowRight] = useState(true);
   const [collapsed, setCollapsed] = useState(false);
-  const [showCommand, setShowCommand] = useState(false);
   const [rightPanelContent, setRightPanelContent] = useState(null);
 
   const sidebarRef = useRef(null);
@@ -52,12 +52,6 @@ export default function AppLayout() {
     },
     "left",
   );
-
-  useHotkeys({
-    onCommand: () => setShowCommand(true),
-    toggleSidebar: () => setCollapsed((s) => !s),
-    toggleRight: () => setShowRight((r) => !r),
-  });
 
   return (
     <>
@@ -134,25 +128,14 @@ export default function AppLayout() {
               justifyContent: "center",
               zIndex: 100,
               boxShadow: "var(--shadow-sm)",
+              color: "var(--text-tertiary)",
             }}
             title="Open right panel"
           >
-            «
+            <DrawerIcon />
           </button>
         )}
       </div>
-
-      {showCommand && (
-        <div className="command-overlay" onClick={() => setShowCommand(false)}>
-          <div className="command-box" onClick={(e) => e.stopPropagation()}>
-            <input
-              autoFocus
-              placeholder="Type a command..."
-              className="command-input"
-            />
-          </div>
-        </div>
-      )}
     </>
   );
 }

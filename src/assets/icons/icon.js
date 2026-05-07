@@ -43,3 +43,5 @@ export const DeleteIcon = ICONS.DeleteIcon;
 export const PreviewIcon = ICONS.PreviewIcon;
 
 export const DownloadIcon = ICONS.DownloadIcon;
+
+export const DrawerIcon = ICONS.DrawerIcon;

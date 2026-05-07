@@ -84,33 +84,33 @@ export default function Sidebar({ collapsed, setCollapsed }) {
 
         <nav>
           <ul>
-            <li>
+            <li title="Dashboard">
               <NavLink to="/" className="sidebar-link">
-                <DashboardIcon size={18} />
+                <DashboardIcon size={14} />
                 <span className="sidebar-text">Dashboard</span>
               </NavLink>
             </li>
-            <li>
+            <li title="Applications">
               <NavLink to="/applications" className="sidebar-link">
-                <ApplicationIcon size={18} />
+                <ApplicationIcon size={14} />
                 <span className="sidebar-text">Applications</span>
               </NavLink>
             </li>
-            <li>
+            <li title="Documents">
               <NavLink to="/documents" className="sidebar-link">
-                <DocumentsIcon size={18} />
+                <DocumentsIcon size={14} />
                 <span className="sidebar-text">Documents</span>
               </NavLink>
             </li>
-            <li>
+            <li title="Calendar">
               <NavLink to="/calendar" className="sidebar-link">
-                <CalendarIcon size={18} />
+                <CalendarIcon size={14} />
                 <span className="sidebar-text">Calendar</span>
               </NavLink>
             </li>
-            <li>
+            <li title="Settings">
               <NavLink to="/settings" className="sidebar-link">
-                <SettingsIcon size={18} />
+                <SettingsIcon size={14} />
                 <span className="sidebar-text">Settings</span>
               </NavLink>
             </li>

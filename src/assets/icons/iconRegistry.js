@@ -3,7 +3,7 @@ import {
   LuBriefcase,
   LuSettings,
   LuX,
-  LuCloudUpload,
+  LuUpload,
   LuPlus,
   LuCirclePlus,
   LuCircleCheck,
@@ -18,6 +18,7 @@ import {
   LuTrash2,
   LuEye,
   LuDownload,
+  LuChevronsLeft,
 } from "react-icons/lu";
 
 import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa6";
@@ -28,13 +29,14 @@ export const ICONS = {
   SettingsIcon: LuSettings,
   DocumentsIcon: LuFileText,
   CloseIcon: LuX,
-  UploadIcon: LuCloudUpload,
+  UploadIcon: LuUpload,
   DownloadIcon: LuDownload,
   AddIcon: LuPlus,
   CircleAddIcon: LuCirclePlus,
   CalendarIcon: LuCalendar,
   DeleteIcon: LuTrash2,
   PreviewIcon: LuEye,
+  DrawerIcon: LuChevronsLeft,
 
   SuccessIcon: LuCircleCheck,
   ErrorIcon: LuCircleAlert,
