@@ -9,23 +9,25 @@ import RightSidebar from "./components/RightSidebar";
 import "./CreateApplication.css";
 import PageHeader from "../../widgets/page-header/PageHeader";
 import Button from "../../widgets/gradient-button/Button";
+import useFormValidation from "../../features/form-validation/hooks/useFormValidation";
+import { normalizeApplicationPayload } from "../../utils/normalization";
 
 export default function CreateApplication() {
   const [loading, setLoading] = useState(false);
+  const { fieldValues, onChange } = useFormValidation();
   const { addToast } = useToast();
 
-  // Use outlet context to control the global right panel
+  console.log(fieldValues);
+
   const context = useOutletContext() || {};
   const { setRightPanelContent, setShowRight } = context;
 
   useEffect(() => {
-    // Render custom RightSidebar into the global right panel when this page mounts
     if (setRightPanelContent) {
       setRightPanelContent(<RightSidebar setShowRight={setShowRight} />);
-      setShowRight?.(true); // Ensure it's visible
+      setShowRight?.(true);
     }
 
-    // Cleanup when leaving the page
     return () => {
       if (setRightPanelContent) {
         setRightPanelContent(null);
@@ -41,12 +43,7 @@ export default function CreateApplication() {
 
   const handleCreateApplication = async () => {
     try {
-      await api.createApplication({
-        companyName: "OpenAI",
-        roleTitle: "Frontend Engineer",
-        location: "Remote",
-        jobUrl: "https://jobs.openai.com",
-      });
+      await api.createApplication(normalizeApplicationPayload(fieldValues));
     } catch (err) {
       addToast({
         title: "Unable to create application",
@@ -72,7 +69,7 @@ export default function CreateApplication() {
 
       <section className="application-main">
         <section className="application-form-container">
-          <ApplicationForm />
+          <ApplicationForm onChange={onChange} fieldValues={fieldValues} />
         </section>
       </section>
     </div>

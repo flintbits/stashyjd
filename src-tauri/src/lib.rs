@@ -1,8 +1,10 @@
 pub mod app_state;
 pub mod commands;
 pub mod db;
+pub mod errors;
 pub mod models;
 pub mod repositories;
+pub mod responses;
 pub mod services;
 pub mod utils;
 
@@ -36,7 +38,9 @@ pub fn run() {
         .plugin(tauri_plugin_fs::init())
         .invoke_handler(tauri::generate_handler![
             greet,
+            //applications
             commands::applications::create_application,
+            commands::applications::fetch_applications,
             //documents
             commands::document::create_document,
             commands::document::fetch_documents

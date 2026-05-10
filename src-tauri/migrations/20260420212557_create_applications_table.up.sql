@@ -7,22 +7,31 @@ CREATE TABLE IF NOT EXISTS applications (
 
     company_name TEXT NOT NULL,
     role_title TEXT NOT NULL,
+
     department TEXT,
     location TEXT,
+
+    work_type TEXT,
+    employment_type TEXT,
+
     job_url TEXT,
-
-    stage TEXT NOT NULL DEFAULT 'wishlist',
-    priority INTEGER NOT NULL DEFAULT 0,
-
     source TEXT,
+
+    status TEXT NOT NULL DEFAULT 'applied',
+    priority INTEGER NOT NULL DEFAULT 'low',
+
     salary_min INTEGER,
     salary_max INTEGER,
+    bonus INTEGER,
+    equity INTEGER,
+
     currency TEXT NOT NULL DEFAULT 'USD',
 
     applied_at TEXT,
     deadline_at TEXT,
 
     notes TEXT,
+    job_description TEXT,
 
     resume_id INTEGER,
     cover_letter_id INTEGER,
@@ -39,8 +48,8 @@ CREATE TABLE IF NOT EXISTS applications (
 CREATE INDEX IF NOT EXISTS idx_applications_public_id
 ON applications(public_id);
 
-CREATE INDEX IF NOT EXISTS idx_applications_stage
-ON applications(stage);
+CREATE INDEX IF NOT EXISTS idx_applications_status
+ON applications(status);
 
 CREATE INDEX IF NOT EXISTS idx_applications_company_name
 ON applications(company_name);

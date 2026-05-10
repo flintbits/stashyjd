@@ -6,6 +6,7 @@ export default function useFormValidation() {
   const onChange = (e) => {
     const fieldId = e.target.id;
     const fieldval = e.target.value;
+
     setFieldValues((prev) => ({ ...prev, [fieldId]: fieldval }));
   };
 

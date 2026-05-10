@@ -11,7 +11,7 @@ import "./DataTable.css";
 
 import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa6";
 
-const DataTable = ({ data, columns, onRowClick }) => {
+const DataTable = ({ data, columns, onRowClick, showFooter = true }) => {
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const [rowSelection, setRowSelection] = useState({});
@@ -143,9 +143,11 @@ const DataTable = ({ data, columns, onRowClick }) => {
       </div>
 
       {/* FIXED FOOTER */}
-      <div className="data-table-footer">
-        Showing {table.getRowModel().rows.length} results
-      </div>
+      {showFooter && (
+        <div className="data-table-footer">
+          Showing {table.getRowModel().rows.length} results
+        </div>
+      )}
     </div>
   );
 };

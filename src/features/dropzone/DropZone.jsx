@@ -33,32 +33,32 @@ export default function DropZone({
     console.log(fullPath);
 
     try {
-      const res = await api.uploadDocument({
+      const response = await api.uploadDocument({
         filePath: `documents/${fileName}`,
         documentType: type,
         originalFileName: file.name,
       });
 
-      console.log("Backend response:", res);
+      console.log("Backend response:", response);
 
-      if (res.status === "success") {
-        addToast({
-          title: "Success",
-          message: res.message,
-          type: "success",
-        });
+      addToast({
+        title: response.status,
+        message: response.message,
+        type:
+          response.status === "error"
+            ? "error"
+            : response.status === "success"
+              ? "success"
+              : "warning",
+      });
+
+      if (response.status === "success") {
         await successCallback();
-      } else if (res.status === "duplicate") {
-        addToast({
-          title: "Duplicate",
-          message: res.message,
-          type: "warning",
-        });
       }
     } catch (err) {
       addToast({
-        title: "Failed",
-        message: JSON.stringify(err),
+        title: "Error",
+        message: String(err),
         type: "error",
       });
     }

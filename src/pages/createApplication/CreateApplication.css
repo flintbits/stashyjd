@@ -1,21 +1,19 @@
 .create-application-page {
   flex: 1;
-
   min-height: 0;
-
   overflow-y: auto;
-
   display: flex;
   flex-direction: column;
+  padding: 8px;
 }
 
 .create-application-page::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
+
 .application-main {
   flex: 1;
-  padding: 0 32px 32px 32px;
 }
 
 .application-form-container {

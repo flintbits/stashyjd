@@ -7,7 +7,6 @@ import {
 } from "react-icons/fa";
 
 export default function getIcon(mime) {
-  console.log("called");
   if (!mime) return <FaFile />;
 
   if (mime.includes("pdf")) return <FaFilePdf color="#e53935" />;

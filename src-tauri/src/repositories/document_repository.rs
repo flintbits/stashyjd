@@ -49,6 +49,7 @@ pub async fn exists_by_text_hash(
 
 pub async fn fetch_all_document_with_resume_profile(
     db: &sqlx::SqlitePool,
+    doc_type: Option<String>,
 ) -> Result<Vec<DocumentWithResumeProfile>, sqlx::Error> {
     let documents = sqlx::query_as::<_, DocumentWithResumeProfile>(
         r#"
@@ -63,9 +64,11 @@ pub async fn fetch_all_document_with_resume_profile(
             mime_type,
             updated_at
         FROM documents
+        WHERE (?1 IS NULL OR ?1 = '' OR document_type = ?1)
         ORDER BY updated_at DESC
         "#,
     )
+    .bind(doc_type)
     .fetch_all(db)
     .await?;
 

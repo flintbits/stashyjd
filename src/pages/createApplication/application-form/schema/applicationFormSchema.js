@@ -176,7 +176,7 @@ const sortedCurrencies = currencies.sort((a, b) =>
   a.name.localeCompare(b.name),
 );
 
-const CURRENCYOPTIONS = sortedCurrencies.map((c) => `${c.name} (${c.symbol})`);
+// const CURRENCYOPTIONS = sortedCurrencies.map((c) => `${c.name} (${c.symbol})`);
 
 export const CREATE_APPLICATION_FORM_SCHEMA = [
   {
@@ -201,6 +201,39 @@ export const CREATE_APPLICATION_FORM_SCHEMA = [
             type: "text",
             placeholder: "Senior Product Designer",
             required: true,
+          },
+        ],
+      },
+
+      {
+        layout: "split",
+        fields: [
+          {
+            id: "work_type",
+            label: "Work Type",
+            type: "select",
+            options: [
+              { label: "Remote", value: "remote" },
+              { label: "Hybrid", value: "hybrid" },
+              { label: "On-site", value: "onsite" },
+              { label: "Flexible", value: "flexible" },
+            ],
+            placeholder: "Select Work Type",
+          },
+          {
+            id: "employment_type",
+            label: "Employment Type",
+            type: "select",
+            options: [
+              { label: "Full-time", value: "full_time" },
+              { label: "Part-time", value: "part_time" },
+              { label: "Contract", value: "contract" },
+              { label: "Freelance", value: "freelance" },
+              { label: "Internship", value: "internship" },
+              { label: "Temporary", value: "temporary" },
+              { label: "Apprenticeship", value: "apprenticeship" },
+            ],
+            placeholder: "Select Employment Type",
           },
         ],
       },
@@ -241,20 +274,47 @@ export const CREATE_APPLICATION_FORM_SCHEMA = [
     type: "dynamic",
     rows: [
       {
-        layout: "split",
+        layout: "three-col",
         fields: [
-          {
-            id: "salary",
-            label: "Salary (Annual)",
-            type: "text",
-            placeholder: "$120,000 - $160,000",
-          },
           {
             id: "currency",
             label: "Currency",
             type: "select",
-            options: CURRENCYOPTIONS,
-            placeholder: "USD ($)",
+            options: sortedCurrencies.map((c) => ({
+              label: `${c.name} (${c.symbol})`,
+              value: c.code,
+            })),
+
+            placeholder: "Select Currency",
+          },
+          {
+            id: "minsalary",
+            label: "Base Salary Min",
+            type: "text",
+            placeholder: "120,000",
+          },
+          {
+            id: "maxsalary",
+            label: "Base Salary Max",
+            type: "text",
+            placeholder: "160,000",
+          },
+        ],
+      },
+      {
+        layout: "split",
+        fields: [
+          {
+            id: "equity",
+            label: "Equity",
+            type: "text",
+            placeholder: "60,000",
+          },
+          {
+            id: "bonus",
+            label: "Bonus",
+            type: "text",
+            placeholder: "60,000",
           },
         ],
       },
@@ -265,8 +325,12 @@ export const CREATE_APPLICATION_FORM_SCHEMA = [
             id: "source",
             label: "Source",
             type: "select",
-            options: ["LinkedIn", "Indeed", "Company Site"],
-            placeholder: "LinkedIn",
+            options: [
+              { label: "LinkedIn", value: "linkedin" },
+              { label: "Indeed", value: "indeed" },
+              { label: "Company Site", value: "company_site" },
+            ],
+            placeholder: "Select source",
           },
           {
             id: "priority",
@@ -278,8 +342,12 @@ export const CREATE_APPLICATION_FORM_SCHEMA = [
             id: "status",
             label: "Status",
             type: "select",
-            options: ["Saved", "Applied", "Interview"],
-            placeholder: "Saved",
+            options: [
+              { label: "Saved", value: "saved" },
+              { label: "Applied", value: "applied" },
+              { label: "Interview", value: "interview" },
+            ],
+            placeholder: "Select Status",
           },
         ],
       },
@@ -311,3 +379,9 @@ export const CREATE_APPLICATION_FORM_SCHEMA = [
     type: "custom_organization_notes",
   },
 ];
+
+// TODO;
+options: currencies.map((c) => ({
+  label: `${c.name} (${c.symbol})`,
+  value: c.code,
+}));

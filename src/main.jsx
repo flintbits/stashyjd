@@ -9,12 +9,10 @@ import TopProgressBar from "./features/top-progressbar/TopProgressbar";
 import { ToastProvider } from "./app/context/ToastProvider";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <ProgressProvider>
-      <ToastProvider>
-        <TopProgressBar />
-        <App />
-      </ToastProvider>
-    </ProgressProvider>
-  </React.StrictMode>,
+  <ProgressProvider>
+    <ToastProvider>
+      <TopProgressBar />
+      <App />
+    </ToastProvider>
+  </ProgressProvider>,
 );

@@ -1,16 +1,13 @@
 import React from "react";
 import "./ApplicationForm.css";
 import { CREATE_APPLICATION_FORM_SCHEMA } from "./schema/applicationFormSchema";
-import useFormValidation from "../../../features/form-validation/hooks/useFormValidation";
 import DynamicFormBlock from "../components/DynamicFormBlock";
 import JobDescriptionBlock from "../components/JobDescriptionBlock";
 import DocumentsMatchingBlock from "../components/document-picker-block/DocumentsPickerBlock";
 import OrganizationNotesBlock from "../components/OrganizationNotesBlock";
 import DocumentsPickerBlock from "../components/document-picker-block/DocumentsPickerBlock";
 
-export default function ApplicationForm() {
-  const { fieldValues, onChange } = useFormValidation();
-
+export default function ApplicationForm({ onChange, fieldValues }) {
   const renderSectionContent = (section) => {
     switch (section.type) {
       case "dynamic":

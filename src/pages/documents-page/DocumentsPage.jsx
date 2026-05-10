@@ -13,6 +13,7 @@ import { useToast } from "../../app/context/ToastProvider";
 import DropZone from "../../features/dropzone/DropZone";
 import { useOutletContext } from "react-router-dom";
 import DocPageRightBar from "./documents-page-rightbar/DocPageRightBar";
+import TabsComponent from "../../features/tabs-component/TabsComponent";
 
 const DOCUMENT_TABS = [
   { id: "all", label: "All Documents", count: 24, icon: AllDocumentsIcon },
@@ -26,7 +27,6 @@ const DOCUMENT_TABS = [
 ];
 
 export default function DocumentsPage() {
-  const [activeTab, setActiveTab] = useState("all");
   const columns = useMemo(() => baseColumns, []);
   const { addToast } = useToast();
   const [data, setData] = useState([]);
@@ -55,23 +55,32 @@ export default function DocumentsPage() {
   }, [selectedDoc, setRightPanelContent, setShowRight]);
 
   async function fetchDocuments() {
-    try {
-      const data = await documentPageApi.fetchAllDocumets();
-      console.log(data);
+    console.log("fetchDocuments called");
 
-      if (data.status === "warning") {
-        addToast({
-          title: "Warning",
-          message: data.message,
-          type: "warning",
-        });
-      } else if (data.status === "success") {
-        setData(data.data);
+    try {
+      const response = await documentPageApi.fetchAllDocumets();
+
+      console.log(response);
+
+      if (response.status === "success") {
+        setData(response.data);
+        return;
       }
+
+      addToast({
+        title: response.status,
+        message: response.message,
+        type:
+          response.status === "error"
+            ? "error"
+            : response.status === "success"
+              ? "success"
+              : "warning",
+      });
     } catch (e) {
       addToast({
         title: "Error",
-        message: e,
+        message: String(e),
         type: "error",
       });
     }
@@ -102,26 +111,9 @@ export default function DocumentsPage() {
       </PageHeader>
 
       <section className="document-page-main">
-        <section className="document-tabs">
-          {DOCUMENT_TABS.map((tab) => {
-            const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
-
-            return (
-              <button
-                key={tab.id}
-                className={`tab ${isActive ? "active" : ""}`}
-                onClick={() => setActiveTab(tab.id)}
-              >
-                <Icon className="tab-icon" />
-
-                <span className="tab-label">{tab.label}</span>
-
-                <span className="tab-count">{tab.count}</span>
-              </button>
-            );
-          })}
-        </section>
+        <div style={{ padding: "16px" }}>
+          <TabsComponent tabs={DOCUMENT_TABS} defaultTab="all" />
+        </div>
 
         <section className="table-container">
           <DataTable

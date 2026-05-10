@@ -28,9 +28,7 @@
 
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 
-  animation:
-    toast-in 0.3s ease,
-    toast-out 0.3s ease 3s;
+  animation: toast-in 0.3s ease;
 }
 
 /* Left content */
