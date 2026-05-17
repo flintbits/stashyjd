@@ -31,19 +31,23 @@ pub async fn create_document(
         .to_string();
 
     // Process document (extract text, compute text hash, etc.)
-    // TODO: move to spawn_blocking if CPU-intensive
-    let processed = process_document(&file_path, &mime_type)
-        .map_err(|_| AppError::Validation("Failed to process document".into()))?;
+    let file_path_clone = file_path.clone();
+    let mime_type_clone = mime_type.clone();
 
-    // let processed = tokio::task::spawn_blocking(move || process_document(&file_path, &mime_type))
-    //     .await
-    //     .map_err(|_| "Processing failed")??;
+    let processed =
+        tokio::task::spawn_blocking(move || process_document(&file_path_clone, &mime_type_clone))
+            .await
+            .map_err(|_| AppError::Validation("Processing task failed".into()))?
+            .map_err(|_| AppError::Validation("Failed to process document".into()))?;
 
-    // // Check for duplicate document using text hash
-    if document_repository::exists_by_text_hash(db, &processed.text_hash).await? {
-        println!("Duplicate document detected");
-
-        return Ok(ApiResponse::duplicate("Duplicate document detected", None));
+    // Check for duplicate document using text hash
+    // Check for exact duplicate document
+    if let Some(existing_doc) =
+        document_repository::find_exact_duplicate(db, &file_hash, &processed.text_hash).await?
+    {
+        println!("DUPLICATE FOUND");
+        document_repository::touch_document(db, &existing_doc.public_id).await?;
+        return Ok(ApiResponse::success("Document already uploaded", None));
     }
 
     // Build document model for insertion
@@ -68,10 +72,6 @@ pub async fn create_document(
     // Handle insert result and unique constraint
     match insert_result {
         Ok(_) => {}
-
-        Err(sqlx::Error::Database(e)) if e.is_unique_violation() => {
-            return Ok(ApiResponse::duplicate("Duplicate document detected", None));
-        }
 
         Err(e) => {
             return Err(AppError::Database(e));

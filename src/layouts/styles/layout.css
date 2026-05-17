@@ -11,7 +11,7 @@
   --resize-handle-width: 0px;
 }
 
-.app-layout {
+/* .app-layout {
   display: grid;
   grid-template-columns:
     var(--sidebar-width)
@@ -22,6 +22,24 @@
   height: 100vh;
   min-height: 0;
   background: var(--bg-app);
+  transition:
+    grid-template-columns 220ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 200ms ease;
+} */
+
+.app-layout {
+  display: grid;
+
+  grid-template-columns:
+    var(--sidebar-current-width)
+    0px
+    minmax(0, 1fr)
+    0px
+    var(--right-current-width);
+
+  transition: grid-template-columns 240ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  height: 100vh;
 }
 
 .app-layout.no-right {
@@ -85,6 +103,27 @@
   overflow-x: hidden;
   background: var(--bg-surface);
   border-left: 1px solid var(--border-subtle);
+
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.right-panel.closed {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(12px);
+}
+
+.sidebar,
+.right-panel {
+  transition:
+    width 220ms cubic-bezier(0.4, 0, 0.2, 1),
+    min-width 220ms cubic-bezier(0.4, 0, 0.2, 1),
+    max-width 220ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 180ms ease,
+    transform 220ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 180ms ease;
+  will-change: width, transform, opacity;
 }
 
 .resize-handle {

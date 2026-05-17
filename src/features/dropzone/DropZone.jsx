@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useId } from "react";
 import "./DropZone.css";
 import { appDataDir, join } from "@tauri-apps/api/path";
 import { mkdir, writeFile } from "@tauri-apps/plugin-fs";
@@ -8,11 +8,8 @@ import { api } from "./service/dropboxService";
 import { useToast } from "../../app/context/ToastProvider";
 import { UploadIcon } from "../../assets/icons/icon";
 
-export default function DropZone({
-  label = "Upload",
-  type = "resume",
-  successCallback,
-}) {
+export default function DropZone({ label = "Upload", type, successCallback }) {
+  const inputId = useId();
   const { start, setProgress, finish } = useProgress();
   const { addToast } = useToast();
 
@@ -28,9 +25,6 @@ export default function DropZone({
     const bytes = new Uint8Array(await file.arrayBuffer());
 
     await writeFile(fullPath, bytes);
-
-    console.log(`relativePath: documents/${fileName}`);
-    console.log(fullPath);
 
     try {
       const response = await api.uploadDocument({
@@ -67,7 +61,8 @@ export default function DropZone({
   };
 
   const handleFileUpload = async (e) => {
-    const file = e.target.files?.[0];
+    const input = e.target;
+    const file = input.files?.[0];
     if (!file) return;
 
     const allowed = [
@@ -98,18 +93,21 @@ export default function DropZone({
         message: "Failed to save file",
         type: "error",
       });
+    } finally {
+      //Important to upload the file again without reloading the screen
+      input.value = "";
     }
   };
 
   return (
     <div className="resume-upload-container">
-      <label htmlFor="resume-upload" className="upload-btn">
+      <label htmlFor={inputId} className="upload-btn">
         <UploadIcon size={12} />
         {label}
       </label>
 
       <input
-        id="resume-upload"
+        id={inputId}
         type="file"
         className="upload-input"
         accept=".pdf,.docx"

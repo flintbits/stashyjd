@@ -1,5 +1,5 @@
 .application-detail-panel {
-  padding: 24px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -43,6 +43,17 @@
 
 .detail-tabs {
   display: flex;
+}
+
+.detail-main {
+  height: 200px;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.detail-main::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 .ghost-btn {

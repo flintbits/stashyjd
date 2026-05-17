@@ -381,26 +381,53 @@
   align-content: flex-start;
 }
 
-.tags-container .tag {
-  padding: 4px 8px;
-  background: var(--brand-primary-soft);
-  color: var(--brand-primary);
-  font-size: var(--text-xs);
-  border-radius: var(--radius-sm);
+.tag {
   display: flex;
   align-items: center;
   gap: 6px;
+
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+
+  background: var(--brand-primary-soft);
+  color: var(--brand-primary);
+
+  font-size: var(--text-xs);
+  white-space: nowrap;
 }
 
-.tags-container .tag .close {
+.close {
   cursor: pointer;
+  line-height: 1;
 }
 
-.tags-container .add-tag {
-  padding: 4px 8px;
+.add-tag {
+  border: none;
+  background: transparent;
   color: var(--text-tertiary);
   font-size: var(--text-xs);
   cursor: pointer;
+
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.add-tag:hover {
+  background: var(--surface-secondary);
+}
+
+.tag-input {
+  border: none;
+  outline: none;
+
+  min-width: 90px;
+  max-width: 140px;
+
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+
+  background: var(--surface-secondary);
+  font-size: var(--text-xs);
 }
 
 .org-col textarea {

@@ -9,7 +9,7 @@ pub struct ProcessedDocument {
 pub fn process_document(
     file_path: &str,
     mime_type: &str,
-) -> Result<ProcessedDocument, Box<dyn Error>> {
+) -> Result<ProcessedDocument, Box<dyn Error + Send + Sync>> {
     let raw_text = super::text::extract_text(file_path, mime_type);
 
     let normalized_text = super::text::normalize_text(&raw_text);

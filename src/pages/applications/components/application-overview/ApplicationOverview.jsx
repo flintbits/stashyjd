@@ -2,7 +2,7 @@ import React from "react";
 import "./ApplicationOverview.css";
 import { formatRelativeDate } from "../../../../utils/formatDate";
 
-export default function ({ application }) {
+export default function ApplicationOverview({ application }) {
   return (
     <div className="detail-grid">
       <div className="detail-card">

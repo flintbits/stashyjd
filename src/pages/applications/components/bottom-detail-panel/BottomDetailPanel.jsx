@@ -6,6 +6,7 @@ import { DocumentsIcon } from "../../../../assets/icons/icon";
 import TabsComponent from "../../../../features/tabs-component/TabsComponent";
 import { formatRelativeDate } from "../../../../utils/formatDate";
 import ApplicationOverview from "../application-overview/ApplicationOverview";
+import JobDetails from "../job-details/JobDetails";
 
 const APPLICATION_DETAIL_TABS = [
   { id: "overview", label: "Overview", icon: DocumentsIcon },
@@ -13,33 +14,6 @@ const APPLICATION_DETAIL_TABS = [
   { id: "documentsused", label: "Documents used", icon: DocumentsIcon },
   { id: "notes", label: "Notes", icon: DocumentsIcon },
 ];
-
-/*
-"public_id": "d7e94533-772b-41cc-b25e-cd45c890888c",
-    "company_name": "Google",
-    "role_title": "SDE2",
-    "department": "Software",
-    "location": "Bangalore",
-    "work_type": "hybrid",
-    "employment_type": "full_time",
-    "job_url": "www.google.com",
-    "source": "linkedin",
-    "status": "interview",
-    "priority": "high",
-    "salary_min": 1234567,
-    "salary_max": 1234567890,
-    "bonus": 1234567890,
-    "equity": 12345678,
-    "currency": "INR",
-    "applied_at": "2026-05-28",
-    "deadline_at": "2026-05-25",
-    "notes": "asdfghjk sdrftgyhjk sdfghjk wertyjk ertyjk ertyui",
-    "job_description": "Frontend Engineer (Remote)\n\nFull-time position\n\nReal people. Real service.\n\nAt SupplyHouse.com, we value every 
-    "resume_id": null,
-    "cover_letter_id": null,
-    "created_at": "2026-05-08 20:38:23",
-    "updated_at": "2026-05-08 20:38:23"
-*/
 
 export default function BottomDetailPanel({ application }) {
   const [activeTab, setActivetab] = useState("overview");
@@ -53,6 +27,16 @@ export default function BottomDetailPanel({ application }) {
     switch (tab) {
       case "overview":
         return <ApplicationOverview application={application} />;
+        break;
+
+      case "jobdetails":
+        return <JobDetails />;
+        break;
+
+      case "documentsused":
+        break;
+
+      case "notes":
         break;
 
       default:
@@ -89,15 +73,7 @@ export default function BottomDetailPanel({ application }) {
       </div>
 
       {/* Main Grid */}
-      <div
-        style={{
-          height: "200px",
-          width: "100%",
-          overflowY: "scroll",
-        }}
-      >
-        {getActiveComponent(activeTab)}
-      </div>
+      <div className="detail-main">{getActiveComponent(activeTab)}</div>
 
       {/* Footer */}
       <div className="detail-footer">

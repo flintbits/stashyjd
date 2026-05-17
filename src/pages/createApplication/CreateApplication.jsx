@@ -11,9 +11,12 @@ import PageHeader from "../../widgets/page-header/PageHeader";
 import Button from "../../widgets/gradient-button/Button";
 import useFormValidation from "../../features/form-validation/hooks/useFormValidation";
 import { normalizeApplicationPayload } from "../../utils/normalization";
+import RightPanel from "./components/create-application-right-panel/RightPanel";
 
 export default function CreateApplication() {
   const [loading, setLoading] = useState(false);
+  const [selectedResume, setSelectedResume] = useState(null);
+  const [selectedCoverLetter, setSelectedCoverLetter] = useState(null);
   const { fieldValues, onChange } = useFormValidation();
   const { addToast } = useToast();
 
@@ -24,7 +27,16 @@ export default function CreateApplication() {
 
   useEffect(() => {
     if (setRightPanelContent) {
-      setRightPanelContent(<RightSidebar setShowRight={setShowRight} />);
+      setRightPanelContent(
+        <RightPanel
+          setShowRight={setShowRight}
+          selectedResume={selectedResume}
+          setSelectedResume={setSelectedResume}
+          selectedCoverLetter={selectedCoverLetter}
+          setSelectedCoverLetter={setSelectedCoverLetter}
+        />,
+      );
+
       setShowRight?.(true);
     }
 
@@ -33,7 +45,7 @@ export default function CreateApplication() {
         setRightPanelContent(null);
       }
     };
-  }, [setRightPanelContent, setShowRight]);
+  }, [setRightPanelContent, setShowRight, selectedResume, selectedCoverLetter]);
 
   useEffect(() => {
     return subscribeApiState((state) => {
@@ -43,7 +55,15 @@ export default function CreateApplication() {
 
   const handleCreateApplication = async () => {
     try {
-      await api.createApplication(normalizeApplicationPayload(fieldValues));
+      const createApplicationPayload = {
+        ...fieldValues,
+        resume_document_id: selectedResume,
+        cover_letter_document_id: selectedCoverLetter,
+      };
+
+      await api.createApplication(
+        normalizeApplicationPayload(createApplicationPayload),
+      );
     } catch (err) {
       addToast({
         title: "Unable to create application",

@@ -1,5 +1,4 @@
 import React from "react";
-import "./RightSidebar.css";
 import {
   LuCheck,
   LuFileText,

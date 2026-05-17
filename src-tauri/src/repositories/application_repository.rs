@@ -32,8 +32,8 @@ pub async fn create_application(
             deadline_at,
             notes,
             job_description,
-            resume_id,
-            cover_letter_id
+            resume_document_id,
+            cover_letter_document_id
         )
         VALUES
         (
@@ -65,8 +65,8 @@ pub async fn create_application(
     .bind(application_data.deadline_at)
     .bind(application_data.notes)
     .bind(application_data.job_description)
-    .bind(application_data.resume_id)
-    .bind(application_data.cover_letter_id)
+    .bind(application_data.resume_document_id)
+    .bind(application_data.cover_letter_document_id)
     .execute(db)
     .await?;
 
@@ -99,8 +99,8 @@ pub async fn fetch_all_applications(
             deadline_at,
             notes,
             job_description,
-            resume_id,
-            cover_letter_id,
+            resume_document_id,
+            cover_letter_document_id,
             created_at,
             updated_at
         FROM applications

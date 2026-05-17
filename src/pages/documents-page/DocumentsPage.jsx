@@ -16,12 +16,11 @@ import DocPageRightBar from "./documents-page-rightbar/DocPageRightBar";
 import TabsComponent from "../../features/tabs-component/TabsComponent";
 
 const DOCUMENT_TABS = [
-  { id: "all", label: "All Documents", count: 24, icon: AllDocumentsIcon },
-  { id: "resume", label: "Resumes", count: 8, icon: AllResumeIcon },
+  { id: "all", label: "All Documents", icon: AllDocumentsIcon },
+  { id: "resume", label: "Resumes", icon: AllResumeIcon },
   {
     id: "cover_letter",
     label: "Cover Letters",
-    count: 6,
     icon: AllCoverLetterIcon,
   },
 ];
@@ -31,7 +30,7 @@ export default function DocumentsPage() {
   const { addToast } = useToast();
   const [data, setData] = useState([]);
   const [selectedDoc, setSelectedDoc] = useState(null);
-
+  const [activeTab, setActivetab] = useState("all");
   const context = useOutletContext() || {};
   const { setRightPanelContent, setShowRight } = context;
 
@@ -55,10 +54,13 @@ export default function DocumentsPage() {
   }, [selectedDoc, setRightPanelContent, setShowRight]);
 
   async function fetchDocuments() {
-    console.log("fetchDocuments called");
+    //reset when tab changes to avoid stale state
+    setData([]);
 
     try {
-      const response = await documentPageApi.fetchAllDocumets();
+      const response = await documentPageApi.fetchAllDocumets({
+        docType: activeTab === "all" ? null : activeTab,
+      });
 
       console.log(response);
 
@@ -88,7 +90,11 @@ export default function DocumentsPage() {
 
   useEffect(() => {
     fetchDocuments();
-  }, []);
+  }, [activeTab]);
+
+  const handleTabChange = (tab_id) => {
+    setActivetab(tab_id);
+  };
 
   return (
     <div className="documents-page">
@@ -98,11 +104,13 @@ export default function DocumentsPage() {
       >
         <div className="document-header-action">
           <DropZone
+            key="resume"
             label="Upload Resume"
             type="resume"
             successCallback={fetchDocuments}
           />
           <DropZone
+            key="cover_letter"
             label="Upload Cover Letter"
             type="cover_letter"
             successCallback={fetchDocuments}
@@ -112,7 +120,11 @@ export default function DocumentsPage() {
 
       <section className="document-page-main">
         <div style={{ padding: "16px" }}>
-          <TabsComponent tabs={DOCUMENT_TABS} defaultTab="all" />
+          <TabsComponent
+            tabs={DOCUMENT_TABS}
+            defaultTab="all"
+            onChange={handleTabChange}
+          />
         </div>
 
         <section className="table-container">

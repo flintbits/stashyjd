@@ -17,8 +17,10 @@ CREATE TABLE IF NOT EXISTS documents (
 
     raw_text TEXT,
 
-    file_hash TEXT NOT NULL UNIQUE,
-    text_hash TEXT NOT NULL UNIQUE,
+    file_hash TEXT NOT NULL,
+    text_hash TEXT NOT NULL,
+
+     deleted_at DATETIME,
 
     created_at DATETIME DEFAULT (datetime('now','localtime')),
     updated_at DATETIME DEFAULT (datetime('now','localtime'))
@@ -33,3 +35,6 @@ ON documents(stored_file_name);
 
 CREATE INDEX IF NOT EXISTS idx_documents_created_at
 ON documents(created_at);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_documents_exact_duplicate
+ON documents(file_hash, text_hash);

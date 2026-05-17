@@ -55,8 +55,8 @@ pub async fn create_document(
 
 #[tauri::command]
 pub async fn fetch_documents(
-    state: State<'_, AppState>,
     doc_type: Option<String>,
+    state: State<'_, AppState>,
 ) -> Result<ApiResponse<Vec<DocumentWithResumeProfile>>, ApiResponse<Vec<DocumentWithResumeProfile>>>
 {
     let db = &state.db;

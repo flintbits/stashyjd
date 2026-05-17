@@ -17,9 +17,8 @@
   margin-left: 10px;
 }
 
-.document-modal-body {
-  display: flex;
-  height: 100%;
-  padding: 0;
-  overflow: hidden;
+.document-library-grid-wrapper {
+  padding: 20px;
+  height: 70vh;
+  overflow-y: auto;
 }

@@ -37,6 +37,7 @@ sha2 = "0.10"
 mime_guess = "2"
 pdf-extract = "0.7"
 docx-rs = "0.4"
+unicode-normalization = "0.1"
 zip = "0.6"
 
 

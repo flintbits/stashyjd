@@ -19,19 +19,33 @@ export default function AppLayout() {
   const sidebarRef = useRef(null);
   const rightRef = useRef(null);
 
-  useEffect(() => {
-    document.documentElement.style.setProperty(
-      "--sidebar-width",
-      `${sidebarWidth}px`,
-    );
-  }, [sidebarWidth]);
+  // useEffect(() => {
+  //   document.documentElement.style.setProperty(
+  //     "--sidebar-width",
+  //     `${sidebarWidth}px`,
+  //   );
+  // }, [sidebarWidth]);
+
+  // useEffect(() => {
+  //   document.documentElement.style.setProperty(
+  //     "--rightpanel-width",
+  //     `${rightWidth}px`,
+  //   );
+  // }, [rightWidth]);
 
   useEffect(() => {
     document.documentElement.style.setProperty(
-      "--rightpanel-width",
-      `${rightWidth}px`,
+      "--right-current-width",
+      showRight ? `${rightWidth}px` : "0px",
     );
-  }, [rightWidth]);
+  }, [showRight, rightWidth]);
+
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      "--sidebar-current-width",
+      collapsed ? "72px" : `${sidebarWidth}px`,
+    );
+  }, [collapsed, sidebarWidth]);
 
   useResizable(sidebarRef, (w) => {
     const clamped = Math.max(180, Math.min(320, w));
@@ -99,7 +113,7 @@ export default function AppLayout() {
         )}
 
         {showRight && (
-          <aside className="right-panel">
+          <aside className={`right-panel ${showRight ? "open" : "closed"}`}>
             {rightPanelContent ? (
               rightPanelContent
             ) : (

@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
+  background: var(--bg-surface);
 }
 
 .input-label {
@@ -45,12 +46,22 @@
   outline: none;
   font-size: var(--text-sm);
   color: var(--text-primary);
-  background: transparent;
+  background: var(--bg-surface);
   width: 100%;
+  appearance: none;
+}
+
+.input-control:-webkit-autofill,
+.input-control:-webkit-autofill:hover,
+.input-control:-webkit-autofill:focus,
+.input-control:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--bg-surface) inset !important;
+  -webkit-text-fill-color: var(--text-primary) !important;
+  transition: background-color 9999s ease-in-out 0s;
 }
 
 .input-control::placeholder {
-  color: var(--text-tertiary);
+  color: var(--text-subtle);
 }
 
 .has-error .input-wrapper {

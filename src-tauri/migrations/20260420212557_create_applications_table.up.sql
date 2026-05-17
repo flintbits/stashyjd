@@ -33,16 +33,16 @@ CREATE TABLE IF NOT EXISTS applications (
     notes TEXT,
     job_description TEXT,
 
-    resume_id INTEGER,
-    cover_letter_id INTEGER,
+    resume_document_id TEXT,
+    cover_letter_document_id TEXT,
 
     archived INTEGER NOT NULL DEFAULT 0,
 
     created_at DATETIME DEFAULT (datetime('now','localtime')),
-    updated_at DATETIME DEFAULT (datetime('now','localtime'))
+    updated_at DATETIME DEFAULT (datetime('now','localtime')),
 
-    -- FOREIGN KEY (resume_id) REFERENCES resumes(id) ON DELETE SET NULL,
-    -- FOREIGN KEY (cover_letter_id) REFERENCES cover_letters(id) ON DELETE SET NULL
+    FOREIGN KEY (resume_document_id) REFERENCES documents(public_id) ON DELETE SET NULL,
+    FOREIGN KEY (cover_letter_document_id) REFERENCES documents(public_id) ON DELETE SET NULL
 );
 
 CREATE INDEX IF NOT EXISTS idx_applications_public_id
