@@ -51,7 +51,7 @@ jobs:
           releaseName: StashyJD ${{ github.ref_name }}
           releaseDraft: false
           prerelease: false
-
+          includeUpdaterJson: true
 # while pushing tag and push
 # package.json - "version": "0.1.0" -> "version": "0.1.1"
 # tauri.conf.json - "version": "0.1.0" -> "version": "0.1.1"
