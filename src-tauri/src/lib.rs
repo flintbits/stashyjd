@@ -14,6 +14,8 @@ use db::pragmas::apply;
 
 use tauri::Manager;
 
+use tauri_plugin_log::{RotationStrategy, Target, TargetKind};
+
 #[tauri::command]
 fn greet(name: &str) -> String {
     format!("Hello, {}!", name)
@@ -21,6 +23,7 @@ fn greet(name: &str) -> String {
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
+    println!("Tauri V2 starting....");
     tauri::Builder::default()
         .setup(|app| {
             tauri::async_runtime::block_on(async {
@@ -34,8 +37,20 @@ pub fn run() {
             Ok(())
         })
         .plugin(tauri_plugin_opener::init())
-        .plugin(tauri_plugin_updater::Builder::new().build())
+        // .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(tauri_plugin_fs::init())
+        .plugin(
+            tauri_plugin_log::Builder::default()
+                .max_file_size(1_000_000)
+                .rotation_strategy(RotationStrategy::KeepOne)
+                .targets([
+                    Target::new(TargetKind::Stdout),
+                    Target::new(TargetKind::LogDir {
+                        file_name: Some("app".into()),
+                    }),
+                ])
+                .build(),
+        )
         .invoke_handler(tauri::generate_handler![
             greet,
             //applications
