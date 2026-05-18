@@ -1,0 +1,129 @@
+.titlebar {
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #656464;
+  /* border-bottom: 1px solid #252525; */
+  /* padding: 0 12px; */
+  user-select: none;
+}
+
+.titlebar-left,
+.titlebar-center,
+.titlebar-right {
+  display: flex;
+  align-items: center;
+}
+
+.titlebar-left {
+  width: 300px;
+  gap: 12px;
+}
+
+.titlebar-center {
+  flex: 1;
+  justify-content: center;
+}
+
+.titlebar-right {
+  width: 300px;
+  justify-content: flex-end;
+}
+
+/* BRAND */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo {
+  width: 14px;
+  height: 14px;
+
+  border-radius: 4px;
+
+  background: #10b981;
+}
+
+/* SEARCH */
+
+.titlebar input {
+  width: 300px;
+  height: 30px;
+
+  background: #1d1d1d;
+
+  border: 1px solid #333;
+
+  border-radius: 8px;
+
+  color: white;
+
+  padding: 0 12px;
+
+  outline: none;
+
+  -webkit-app-region: no-drag;
+}
+
+/* WINDOWS CONTROLS */
+
+.window-controls {
+  display: flex;
+}
+
+.window-controls button {
+  width: 42px;
+  height: 42px;
+
+  border: none;
+
+  background: transparent;
+
+  /* color: white; */
+
+  cursor: pointer;
+
+  -webkit-app-region: no-drag;
+}
+
+.window-controls button:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.close-btn:hover {
+  background: #e81123 !important;
+}
+
+/* MAC */
+
+.mac-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.mac-btn {
+  width: 12px;
+  height: 12px;
+
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  -webkit-app-region: no-drag;
+}
+
+.close {
+  background: #ff5f57;
+}
+
+.minimize {
+  background: #ffbd2f;
+}
+
+.maximize {
+  background: #28c840;
+}
