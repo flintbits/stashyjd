@@ -7,6 +7,8 @@ import PageContainer from "./PageContainer";
 import Sidebar from "./Sidebar/Sidebar";
 import RightPanel from "./right-panel/RightPanel";
 import { DrawerIcon } from "../assets/icons/icon";
+import TitleBar from "../features/titlebar/TitleBar";
+import { useWindowContext } from "../app/context/WindowContext";
 
 export default function AppLayout() {
   const [sidebarWidth, setSidebarWidth] = useState(220);
@@ -18,6 +20,8 @@ export default function AppLayout() {
 
   const sidebarRef = useRef(null);
   const rightRef = useRef(null);
+
+  const { useCustomTitlebar } = useWindowContext();
 
   // useEffect(() => {
   //   document.documentElement.style.setProperty(
@@ -69,6 +73,7 @@ export default function AppLayout() {
 
   return (
     <>
+      {useCustomTitlebar && <TitleBar />}
       <div
         className={[
           "app-layout",

@@ -7,12 +7,15 @@ import "./fonts.css";
 import { ProgressProvider } from "./app/context/ProgressProvider";
 import TopProgressBar from "./features/top-progressbar/TopProgressbar";
 import { ToastProvider } from "./app/context/ToastProvider";
+import { WindowProvider } from "./app/context/WindowContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <ProgressProvider>
-    <ToastProvider>
-      <TopProgressBar />
-      <App />
-    </ToastProvider>
+    <WindowProvider>
+      <ToastProvider>
+        <TopProgressBar />
+        <App />
+      </ToastProvider>
+    </WindowProvider>
   </ProgressProvider>,
 );
