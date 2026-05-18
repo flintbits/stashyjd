@@ -25,19 +25,16 @@ export default function GeneralSettings() {
         />
         Use custom titlebar
       </label>
-
       <hr />
-
       <h3>Updates</h3>
       <p>Current version: {version}</p>
       <p>{status}</p>
-      {progress > 0 && <p>{progress}%</p>}
+      {progress > 0 && <p>{progress}%</p>}git add .
       {!updateAvailable && (
         <button onClick={checkForUpdates} disabled={loading}>
           {loading ? "Checking..." : "Check for updates"}
         </button>
       )}
-
       {updateAvailable && (
         <button onClick={installUpdate} disabled={loading}>
           {loading ? "Installing..." : "Install update"}
