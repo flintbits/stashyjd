@@ -18,28 +18,46 @@ jobs:
 
     runs-on: ${{ matrix.platform }}
 
+    env:
+      RUSTC_WRAPPER: sccache
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Node + npm cache
+      # Node setup
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
+      # Cache node_modules
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       # Rust toolchain
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
+
+      # sccache
+      - name: Install sccache
+        uses: mozilla-actions/sccache-action@v0.0.7
 
       # Rust crate + target cache
       - name: Rust Cache
         uses: Swatinem/rust-cache@v2
 
+      # Install deps
       - name: Install frontend dependencies
         run: npm ci
 
+      # Build + release
       - name: Build and Release Tauri App
         uses: tauri-apps/tauri-action@v0
         env:

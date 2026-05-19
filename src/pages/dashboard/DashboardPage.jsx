@@ -6,5 +6,5 @@ import { useNavigate } from "react-router-dom";
 import { invoke } from "@tauri-apps/api/core";
 
 export default function DashboardPage() {
-  return <div></div>;
+  return <div>dfgdgfsg</div>;
 }
