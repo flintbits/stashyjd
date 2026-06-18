@@ -60,7 +60,7 @@ At the moment I'm focused on improving the overall workflow, polishing the deskt
 ## Running Locally
 
 ```bash
-git clone https://github.com/<your-username>/stashyjd.git
+git clone https://github.com/flintbits/stashyjd.git
 
 cd stashyjd
 
