@@ -1,0 +1,32 @@
+/* TODO: Replace this with downloaded fonts */
+@import url("https://fonts.googleapis.com/css2?family=Rufina:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Average+Sans&display=swap");
+
+:root {
+  --font-heading: "Rufina", serif;
+  --font-body: "Average Sans", sans-serif;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  --text-xs: clamp(10px, 0.7vw, 11px);
+  --text-sm: clamp(13px, 0.85vw, 14px);
+  --text-base: clamp(14px, 1vw, 16px);
+  --text-lg: clamp(16px, 1.15vw, 18px);
+  --text-xl: clamp(20px, 1.5vw, 24px);
+  --text-2xl: clamp(26px, 2vw, 32px);
+  --text-3xl: clamp(36px, 3vw, 48px);
+  --text-4xl: clamp(48px, 4vw, 64px);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+}
+
+body {
+  font-family: var(--font-body);
+}

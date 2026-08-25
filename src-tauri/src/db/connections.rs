@@ -36,7 +36,7 @@ pub async fn create_pool(app: &tauri::AppHandle) -> SqlitePool {
     .await
     .unwrap();
 
-    println!("TABLES: {:?}", tables);
+    // println!("TABLES: {:?}", tables);
 
     pool
 }

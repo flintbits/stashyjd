@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import "./ApplicationsPage.css";
-import DataTable from "../../features/data-table/DataTable";
+import styles from "./ApplicationsPage.module.css";
+import DataTable from "../../components/DataTable/DataTable";
 import { TABLEHEADERS } from "./configs";
 import { useEffect, useMemo, useState } from "react";
-import PageHeader from "../../widgets/page-header/PageHeader";
-import BottomDetailPanel from "./components/bottom-detail-panel/BottomDetailPanel";
+import PageHeader from "../../components/PageHeader/PageHeader";
+import BottomDetailPanel from "./components/BottomDetailPanel/BottomDetailPanel";
 import { useToast } from "../../app/context/ToastProvider";
-import { applucationServiceApi } from "./service/applicationsService";
+import { applucationServiceApi } from "./services/applicationsService";
 import { application_table_columns } from "./columns";
 
 export default function ApplicationsPage() {
@@ -51,14 +51,14 @@ export default function ApplicationsPage() {
   }, []);
 
   return (
-    <div className="applications-page">
+    <div className={styles["applications-page"]}>
       <PageHeader
         title="Applications"
         subtitle="Manage your applications"
       ></PageHeader>
 
-      <section className="applications-page-main">
-        <section className="table-container">
+      <section className={styles["applications-page-main"]}>
+        <section className={styles["table-container"]}>
           <DataTable
             data={data}
             columns={columns}

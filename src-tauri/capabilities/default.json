@@ -53,8 +53,8 @@
 
     "fs:allow-read-file",
 
-    "fs:allow-mkdir"
+    "fs:allow-mkdir",
 
-    
+     "log:default"
   ]
 }

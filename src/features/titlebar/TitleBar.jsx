@@ -1,5 +1,5 @@
 import useOS from "../../app/hooks/useOS";
-import "./titlebar.css";
+import styles from "./TitleBar.module.css";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import WindowsControls from "./WindowsControls";
 
@@ -27,21 +27,21 @@ export default function TitleBar() {
   };
 
   return (
-    <header className="titlebar" data-tauri-drag-region>
+    <header className={styles.titlebar} data-tauri-drag-region>
       {/* LEFT */}
-      <div className="titlebar-left">
+      <div className={styles["titlebar-left"]}>
         {os === "mac" && (
-          <div className="mac-controls">
-            <div className="mac-btn close" onClick={close} />
+          <div className={styles["mac-controls"]}>
+            <div className={`${styles["mac-btn"]} ${styles.close}`} onClick={close} />
 
-            <div className="mac-btn minimize" onClick={minimize} />
+            <div className={`${styles["mac-btn"]} ${styles.minimize}`} onClick={minimize} />
 
-            <div className="mac-btn maximize" onClick={maximize} />
+            <div className={`${styles["mac-btn"]} ${styles.maximize}`} onClick={maximize} />
           </div>
         )}
 
-        <div className="brand">
-          <div className="logo" />
+        <div className={styles.brand}>
+          <div className={styles.logo} />
           <span>stashy.jd</span>
         </div>
       </div>
@@ -52,7 +52,7 @@ export default function TitleBar() {
       </div> */}
 
       {/* RIGHT */}
-      <div className="titlebar-right">
+      <div className={styles["titlebar-right"]}>
         {os === "windows" && <WindowsControls />}
       </div>
     </header>

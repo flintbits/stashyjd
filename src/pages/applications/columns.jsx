@@ -1,6 +1,6 @@
 import { formatRelativeDate } from "../../utils/formatDate";
 import { formatSalaryRange } from "../../utils/formatPrice";
-import AvatarLetter from "../../widgets/avatar-letter/AvatarLetter";
+import AvatarLetter from "../../components/AvatarLetter/AvatarLetter";
 
 export const application_table_columns = [
   {

@@ -75,6 +75,6 @@ jobs:
 # tauri.conf.json - "version": "0.1.0" -> "version": "0.1.1"
 # git add .
 # git commit -m "Bump version"
-# git tag v0.2.2
+# git tag v0.2.3
 # git push
-# git push origin v0.2.2
+# git push origin v0.2.3

@@ -1,10 +1,10 @@
 import React, { useId } from "react";
-import "./DropZone.css";
+import styles from "./DropZone.module.css";
 import { appDataDir, join } from "@tauri-apps/api/path";
 import { mkdir, writeFile } from "@tauri-apps/plugin-fs";
 import { invoke } from "@tauri-apps/api/core";
 import { useProgress } from "../../app/context/ProgressProvider";
-import { api } from "./service/dropboxService";
+import { api } from "./services/dropboxService";
 import { useToast } from "../../app/context/ToastProvider";
 import { UploadIcon } from "../../assets/icons/icon";
 
@@ -100,8 +100,8 @@ export default function DropZone({ label = "Upload", type, successCallback }) {
   };
 
   return (
-    <div className="resume-upload-container">
-      <label htmlFor={inputId} className="upload-btn">
+    <div className={styles["resume-upload-container"]}>
+      <label htmlFor={inputId} className={styles["upload-btn"]}>
         <UploadIcon size={12} />
         {label}
       </label>
@@ -109,7 +109,7 @@ export default function DropZone({ label = "Upload", type, successCallback }) {
       <input
         id={inputId}
         type="file"
-        className="upload-input"
+        className={styles["upload-input"]}
         accept=".pdf,.docx"
         onChange={handleFileUpload}
       />

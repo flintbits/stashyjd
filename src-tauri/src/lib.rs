@@ -65,6 +65,6 @@ pub fn run() {
 }
 
 //sqlx migrate add create_users
-//$env:DATABASE_URL="sqlite:///C:/Users/Victus/AppData/Roaming/StashyJD/app.db"
+//$env:DATABASE_URL="sqlite:///C:/Users/Victus/AppData/Roaming/StashyJD-crimson/app.db"
 //sqlx migrate run
 //sqlx migrate revert

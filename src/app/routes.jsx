@@ -1,21 +1,21 @@
 import React, { lazy } from "react";
-import SettingsPage from "../pages/settings/SettingsPage.jsx";
-import CalendarPage from "../pages/calendar/CalendarPage.jsx";
+import SettingsPage from "../pages/Settings/SettingsPage.jsx";
+import CalendarPage from "../pages/Calendar/CalendarPage.jsx";
 import AppLayout from "../layouts/AppLayout.jsx";
 
 const DashboardPage = lazy(
-  () => import("../pages/dashboard/DashboardPage.jsx"),
+  () => import("../pages/Dashboard/DashboardPage.jsx"),
 );
 const ApplicationsPage = lazy(
-  () => import("../pages/applications/ApplicationsPage.jsx"),
+  () => import("../pages/Applications/ApplicationsPage.jsx"),
 );
 
 const CreateApplication = lazy(
-  () => import("../pages/createApplication/CreateApplication.jsx"),
+  () => import("../pages/CreateApplication/CreateApplication.jsx"),
 );
 
 const DocumentsPage = lazy(
-  () => import("../pages/documents-page/DocumentsPage.jsx"),
+  () => import("../pages/Documents/DocumentsPage.jsx"),
 );
 
 export const routes = [

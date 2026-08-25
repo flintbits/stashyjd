@@ -1,17 +1,17 @@
 import React from "react";
-import SecondaryButton from "../../../widgets/secondary-button/SecondaryButton";
-import "./CustomBlocks.css";
+import SecondaryButton from "../../../components/SecondaryButton/SecondaryButton";
+import styles from "./CustomBlocks.module.css";
 
 export default function JobDescriptionBlock({ values, onChange }) {
   return (
-    <div className="custom-block job-description-block">
-      <div className="jd-body">
-        <div className="jd-input-area">
-          <div className="jd-header">
+    <div className={`${styles["custom-block"]} ${styles["job-description-block"]}`}>
+      <div className={styles["jd-body"]}>
+        <div className={styles["jd-input-area"]}>
+          <div className={styles["jd-header"]}>
             <label>Paste job description</label>
-            <div className="jd-actions">
+            <div className={styles["jd-actions"]}>
               {/* <SecondaryButton text="Extract Keywords" /> */}
-              <button className="text-btn">Clear JD</button>
+              <button className={styles["text-btn"]}>Clear JD</button>
             </div>
           </div>
           <textarea
@@ -23,7 +23,7 @@ export default function JobDescriptionBlock({ values, onChange }) {
               })
             }
           />
-          <span className="jd-hint">
+          <span className={styles["jd-hint"]}>
             Tip: Paste the full job description for better keyword extraction.
           </span>
         </div>

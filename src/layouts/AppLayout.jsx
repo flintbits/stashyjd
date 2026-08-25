@@ -1,75 +1,20 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import useResizable from "../app/hooks/useResizable";
-import useHotkeys from "../app/hooks/useHotkeys";
 import "./styles/layout.css";
-import PageContainer from "./PageContainer";
 import Sidebar from "./Sidebar/Sidebar";
-import RightPanel from "./right-panel/RightPanel";
+import RightPanel from "./RightPanel/RightPanel";
 import { DrawerIcon } from "../assets/icons/icon";
-import TitleBar from "../features/titlebar/TitleBar";
+import TitleBar from "../features/TitleBar/TitleBar";
 import { useWindowContext } from "../app/context/WindowContext";
 
 export default function AppLayout() {
-  const [sidebarWidth, setSidebarWidth] = useState(220);
-  const [rightWidth, setRightWidth] = useState(320);
-
   const [showRight, setShowRight] = useState(true);
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
+  const [sidebarHovered, setSidebarHovered] = useState(false);
   const [rightPanelContent, setRightPanelContent] = useState(null);
-
-  const sidebarRef = useRef(null);
-  const rightRef = useRef(null);
+  const sidebarIsCollapsed = collapsed && !sidebarHovered;
 
   const { useCustomTitlebar } = useWindowContext();
-
-  // useEffect(() => {
-  //   document.documentElement.style.setProperty(
-  //     "--sidebar-width",
-  //     `${sidebarWidth}px`,
-  //   );
-  // }, [sidebarWidth]);
-
-  // useEffect(() => {
-  //   document.documentElement.style.setProperty(
-  //     "--rightpanel-width",
-  //     `${rightWidth}px`,
-  //   );
-  // }, [rightWidth]);
-
-  useEffect(() => {
-    document.documentElement.style.setProperty(
-      "--right-current-width",
-      showRight ? `${rightWidth}px` : "0px",
-    );
-  }, [showRight, rightWidth]);
-
-  useEffect(() => {
-    document.documentElement.style.setProperty(
-      "--sidebar-current-width",
-      collapsed ? "72px" : `${sidebarWidth}px`,
-    );
-  }, [collapsed, sidebarWidth]);
-
-  useResizable(sidebarRef, (w) => {
-    const clamped = Math.max(180, Math.min(320, w));
-    setSidebarWidth(clamped);
-  });
-
-  useResizable(
-    rightRef,
-    (w) => {
-      if (w < 150) {
-        // If dragged very small, fully collapse it
-        setShowRight(false);
-        setRightWidth(320); // Reset width for when it opens again
-      } else {
-        const clamped = Math.min(420, Math.max(260, w));
-        setRightWidth(clamped);
-      }
-    },
-    "left",
-  );
 
   return (
     <>
@@ -77,24 +22,19 @@ export default function AppLayout() {
       <div
         className={[
           "app-layout",
-          collapsed ? "sidebar-collapsed" : "",
+          sidebarIsCollapsed ? "sidebar-collapsed" : "",
           !showRight ? "no-right" : "",
         ]
           .filter(Boolean)
           .join(" ")}
       >
-        <aside className="sidebar">
-          <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
+        <aside
+          className="sidebar"
+          onMouseEnter={() => collapsed && setSidebarHovered(true)}
+          onMouseLeave={() => setSidebarHovered(false)}
+        >
+          <Sidebar collapsed={sidebarIsCollapsed} setCollapsed={setCollapsed} />
         </aside>
-
-        {!collapsed && (
-          <div
-            ref={sidebarRef}
-            className="resize-handle"
-            aria-label="Resize sidebar"
-            role="separator"
-          />
-        )}
 
         <main className="main">
           <Outlet
@@ -107,15 +47,6 @@ export default function AppLayout() {
             }}
           />
         </main>
-
-        {showRight && (
-          <div
-            ref={rightRef}
-            className="resize-handle"
-            aria-label="Resize right panel"
-            role="separator"
-          />
-        )}
 
         {showRight && (
           <aside className={`right-panel ${showRight ? "open" : "closed"}`}>

@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS applications (
     source TEXT,
 
     status TEXT NOT NULL DEFAULT 'applied',
-    priority INTEGER NOT NULL DEFAULT 'low',
+    priority TEXT NOT NULL DEFAULT 'low',
 
     salary_min INTEGER,
     salary_max INTEGER,
@@ -37,6 +37,8 @@ CREATE TABLE IF NOT EXISTS applications (
     cover_letter_document_id TEXT,
 
     archived INTEGER NOT NULL DEFAULT 0,
+
+    last_activity_at DATETIME,
 
     created_at DATETIME DEFAULT (datetime('now','localtime')),
     updated_at DATETIME DEFAULT (datetime('now','localtime')),

@@ -1,0 +1,142 @@
+:root {
+  --sidebar-width: 240px;
+  --rightpanel-width: 320px;
+}
+
+/* .app-layout {
+  display: grid;
+  grid-template-columns:
+    var(--sidebar-width)
+    var(--resize-handle-width)
+    minmax(0, 1fr)
+    var(--resize-handle-width)
+    var(--rightpanel-width);
+  height: 100vh;
+  min-height: 0;
+  background: var(--bg-app);
+  transition:
+    grid-template-columns 220ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 200ms ease;
+} */
+
+.app-layout {
+  display: grid;
+
+  grid-template-columns:
+    var(--sidebar-width)
+    minmax(0, 1fr)
+    var(--rightpanel-width);
+
+  transition: grid-template-columns 240ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  height: 100vh;
+}
+
+.app-layout.no-right {
+  grid-template-columns:
+    var(--sidebar-width)
+    minmax(0, 1fr);
+}
+
+.app-layout.sidebar-collapsed {
+  grid-template-columns:
+    72px
+    minmax(0, 1fr)
+    var(--rightpanel-width);
+}
+
+.app-layout.sidebar-collapsed.no-right {
+  grid-template-columns:
+    72px
+    minmax(0, 1fr);
+}
+
+.sidebar {
+  min-width: 0;
+  overflow: hidden;
+  background: var(--bg-surface);
+  border-right: 1px solid var(--border-subtle);
+}
+
+.main {
+  min-width: 0;
+  min-height: 0;
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  /* overflow-y: auto;
+  overflow-x: hidden; */
+}
+
+.main::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.main::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.main::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+}
+
+.right-panel {
+  min-width: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--bg-surface);
+  border-left: 1px solid var(--border-subtle);
+
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.right-panel.closed {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(12px);
+}
+
+.sidebar,
+.right-panel {
+  transition:
+    width 220ms cubic-bezier(0.4, 0, 0.2, 1),
+    min-width 220ms cubic-bezier(0.4, 0, 0.2, 1),
+    max-width 220ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 180ms ease,
+    transform 220ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 180ms ease;
+  will-change: width, transform, opacity;
+}
+
+.command-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 120px;
+  z-index: 1000;
+}
+
+.command-box {
+  width: min(600px, calc(100vw - 32px));
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  padding: 16px;
+}
+
+.command-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  outline: none;
+}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./CustomBlocks.css";
-import InputField from "../../../widgets/Input/input-field/InputField";
+import styles from "./CustomBlocks.module.css";
+import InputField from "../../../components/Input/InputField/InputField";
 
 export default function OrganizationNotesBlock({ values, onChange }) {
   const [tags, setTags] = useState([]);
@@ -9,16 +9,16 @@ export default function OrganizationNotesBlock({ values, onChange }) {
 
   console.log(tags);
   return (
-    <div className="custom-block org-notes-block">
-      <div className="org-cols">
-        <div className="org-col">
+    <div className={`${styles["custom-block"]} ${styles["org-notes-block"]}`}>
+      <div className={styles["org-cols"]}>
+        <div className={styles["org-col"]}>
           <label>Tags</label>
-          <div className="tags-container">
+          <div className={styles["tags-container"]}>
             {tags?.map((tag, index) => (
-              <span className="tag" key={index}>
+              <span className={styles.tag} key={index}>
                 {tag}
                 <span
-                  className="close"
+                  className={styles.close}
                   onClick={() => {
                     let index = tags.indexOf(tag);
 
@@ -34,7 +34,7 @@ export default function OrganizationNotesBlock({ values, onChange }) {
             {!isAddTag ? (
               <button
                 type="button"
-                className="add-tag"
+                className={styles["add-tag"]}
                 onClick={() => setIsAddTag(true)}
               >
                 + Add Tag
@@ -42,7 +42,7 @@ export default function OrganizationNotesBlock({ values, onChange }) {
             ) : (
               <input
                 autoFocus
-                className="tag-input"
+                className={styles["tag-input"]}
                 placeholder="New tag"
                 onBlur={() => setIsAddTag(false)}
                 onKeyDown={(e) => {
@@ -60,7 +60,7 @@ export default function OrganizationNotesBlock({ values, onChange }) {
           </div>
         </div>
 
-        <div className="org-col">
+        <div className={styles["org-col"]}>
           <label>Notes</label>
           <textarea
             placeholder="Add your notes here..."

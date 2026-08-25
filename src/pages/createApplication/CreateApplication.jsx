@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
-import SecondaryButton from "../../widgets/secondary-button/SecondaryButton";
-import ApplicationForm from "./application-form/ApplicationForm";
+import SecondaryButton from "../../components/SecondaryButton/SecondaryButton";
+import ApplicationForm from "./components/ApplicationForm/ApplicationForm";
 import { api } from "./services/createApplicationService";
 import { subscribeApiState } from "../../lib/api";
 import { useToast } from "../../app/context/ToastProvider";
-import RightSidebar from "./components/RightSidebar";
-import "./CreateApplication.css";
-import PageHeader from "../../widgets/page-header/PageHeader";
-import Button from "../../widgets/gradient-button/Button";
-import useFormValidation from "../../features/form-validation/hooks/useFormValidation";
+import RightSidebar from "./components/RightSidebar/RightSidebar";
+import styles from "./CreateApplication.module.css";
+import PageHeader from "../../components/PageHeader/PageHeader";
+import Button from "../../components/Button/Button";
+import useFormValidation from "../../features/FormValidation/hooks/useFormValidation";
 import { normalizeApplicationPayload } from "../../utils/normalization";
-import RightPanel from "./components/create-application-right-panel/RightPanel";
+import RightPanel from "./components/RightPanel/RightPanel";
 
 export default function CreateApplication() {
   const [loading, setLoading] = useState(false);
@@ -74,7 +74,7 @@ export default function CreateApplication() {
   };
 
   return (
-    <div className="create-application-page">
+    <div className={styles["create-application-page"]}>
       <PageHeader
         title="New Application"
         subtitle=" Add job details manually or paste a job description to enrich your
@@ -87,8 +87,8 @@ export default function CreateApplication() {
         />
       </PageHeader>
 
-      <section className="application-main">
-        <section className="application-form-container">
+      <section className={styles["application-main"]}>
+        <section className={styles["application-form-container"]}>
           <ApplicationForm onChange={onChange} fieldValues={fieldValues} />
         </section>
       </section>

@@ -5,7 +5,7 @@ import { getVersion } from "@tauri-apps/api/app";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import { routes } from "./routes";
 import AppLayout from "../layouts/AppLayout";
-import DashboardPage from "../pages/dashboard/DashboardPage";
+import DashboardPage from "../pages/Dashboard/DashboardPage";
 
 function App() {
   return (

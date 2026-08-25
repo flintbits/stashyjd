@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./settingspage.css";
-import PageHeader from "../../widgets/page-header/PageHeader";
-import GeneralSettings from "./Components/GeneralSettings";
+import styles from "./SettingsPage.module.css";
+import PageHeader from "../../components/PageHeader/PageHeader";
+import GeneralSettings from "./components/GeneralSettings/GeneralSettings";
 
 const settingsConfig = [
   {
@@ -44,30 +44,30 @@ export default function SettingsPage() {
   )?.component;
 
   return (
-    <div className="settings-page">
+    <div className={styles["settings-page"]}>
       <PageHeader title="Settings" subtitle="yaay settings"></PageHeader>
 
-      <div className="settings-layout">
-        <aside className="settings-sidebar">
-          <div className="settings-menu">
+      <div className={styles["settings-layout"]}>
+        <aside className={styles["settings-sidebar"]}>
+          <div className={styles["settings-menu"]}>
             {settingsConfig.map((item) => (
               <button
                 key={item.id}
-                className={`settings-menu-item ${
-                  activeTab === item.id ? "active" : ""
+                className={`${styles["settings-menu-item"]} ${
+                  activeTab === item.id ? styles.active : ""
                 }`}
                 onClick={() => setActiveTab(item.id)}
               >
                 <div>
-                  <span className="settings-menu-title">{item.label}</span>
-                  <span className="settings-menu-desc">{item.description}</span>
+                  <span className={styles["settings-menu-title"]}>{item.label}</span>
+                  <span className={styles["settings-menu-desc"]}>{item.description}</span>
                 </div>
               </button>
             ))}
           </div>
         </aside>
 
-        <main className="settings-content">
+        <main className={styles["settings-content"]}>
           {ActiveComponent && <ActiveComponent />}
         </main>
       </div>

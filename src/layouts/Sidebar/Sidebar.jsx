@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import "./Sidebar.css";
+import styles from "./Sidebar.module.css";
 import {
   ApplicationIcon,
   CalendarIcon,
@@ -9,8 +9,8 @@ import {
   DocumentsIcon,
   SettingsIcon,
 } from "../../assets/icons/icon";
-import SidebarFooter from "./sidebar-footer/SidebarFooter";
-import Button from "../../widgets/gradient-button/Button";
+import SidebarFooter from "./SidebarFooter/SidebarFooter";
+import Button from "../../components/Button/Button";
 
 export default function Sidebar({ collapsed, setCollapsed }) {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ export default function Sidebar({ collapsed, setCollapsed }) {
   };
 
   return (
-    <div className={`sidebar-content ${collapsed ? "collapsed" : ""}`}>
+    <div className={`${styles["sidebar-content"]} ${collapsed ? styles.collapsed : ""}`}>
       <section>
         <div
           style={{
@@ -32,10 +32,10 @@ export default function Sidebar({ collapsed, setCollapsed }) {
           }}
         >
           <h2
-            className="sidebar-text"
-            style={{ margin: 0, fontSize: "var(--text-xl)" }}
+            className={styles["sidebar-text"]}
+            style={{ margin: 0, fontSize: "var(--text-2xl)" }}
           >
-            Logo
+            StashyJD
           </h2>
           <button
             onClick={() => setCollapsed(!collapsed)}
@@ -85,33 +85,33 @@ export default function Sidebar({ collapsed, setCollapsed }) {
         <nav>
           <ul>
             <li title="Dashboard">
-              <NavLink to="/" className="sidebar-link">
+              <NavLink to="/" className={({ isActive }) => `${styles["sidebar-link"]} ${isActive ? styles.active : ""}`}>
                 <DashboardIcon size={14} />
-                <span className="sidebar-text">Dashboard</span>
+                <span className={styles["sidebar-text"]}>Dashboard</span>
               </NavLink>
             </li>
             <li title="Applications">
-              <NavLink to="/applications" className="sidebar-link">
+              <NavLink to="/applications" className={({ isActive }) => `${styles["sidebar-link"]} ${isActive ? styles.active : ""}`}>
                 <ApplicationIcon size={14} />
-                <span className="sidebar-text">Applications</span>
+                <span className={styles["sidebar-text"]}>Applications</span>
               </NavLink>
             </li>
             <li title="Documents">
-              <NavLink to="/documents" className="sidebar-link">
+              <NavLink to="/documents" className={({ isActive }) => `${styles["sidebar-link"]} ${isActive ? styles.active : ""}`}>
                 <DocumentsIcon size={14} />
-                <span className="sidebar-text">Documents</span>
+                <span className={styles["sidebar-text"]}>Documents</span>
               </NavLink>
             </li>
             <li title="Calendar">
-              <NavLink to="/calendar" className="sidebar-link">
+              <NavLink to="/calendar" className={({ isActive }) => `${styles["sidebar-link"]} ${isActive ? styles.active : ""}`}>
                 <CalendarIcon size={14} />
-                <span className="sidebar-text">Calendar</span>
+                <span className={styles["sidebar-text"]}>Calendar</span>
               </NavLink>
             </li>
             <li title="Settings">
-              <NavLink to="/settings" className="sidebar-link">
+              <NavLink to="/settings" className={({ isActive }) => `${styles["sidebar-link"]} ${isActive ? styles.active : ""}`}>
                 <SettingsIcon size={14} />
-                <span className="sidebar-text">Settings</span>
+                <span className={styles["sidebar-text"]}>Settings</span>
               </NavLink>
             </li>
           </ul>

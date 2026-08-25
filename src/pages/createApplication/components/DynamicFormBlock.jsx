@@ -1,8 +1,8 @@
 import React from "react";
-import InputField from "../../../widgets/Input/input-field/InputField";
-import SelectField from "../../../widgets/Input/select-field/SelectField";
-import ButtonsField from "../../../widgets/Input/buttons-field/ButtonsField";
-import RangeField from "../../../widgets/Input/range-field/RangeField";
+import InputField from "../../../components/Input/InputField/InputField";
+import SelectField from "../../../components/Input/SelectField/SelectField";
+import ButtonsField from "../../../components/Input/ButtonsField/ButtonsField";
+import RangeField from "../../../components/Input/RangeField/RangeField";
 
 export default function DynamicFormBlock({ section, values, onChange }) {
   const renderField = (field) => {

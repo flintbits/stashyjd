@@ -1,3 +1,4 @@
+import styles from "./TitleBar.module.css";
 import React from "react";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { FiMinus, FiSquare, FiX } from "react-icons/fi";
@@ -23,7 +24,7 @@ export default function WindowsControls() {
     await appWindow.close();
   };
   return (
-    <div className="window-controls">
+    <div className={styles["window-controls"]}>
       <button onClick={minimize}>
         <FiMinus size={16} />
       </button>
@@ -32,7 +33,7 @@ export default function WindowsControls() {
         <FiSquare size={14} />
       </button>
 
-      <button className="close-btn" onClick={close}>
+      <button className={styles["close-btn"]} onClick={close}>
         <FiX size={18} />
       </button>
     </div>
