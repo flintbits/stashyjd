@@ -63,7 +63,7 @@
 
 .doc-text h4 {
   margin: 0;
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   font-weight: var(--font-medium);
   color: var(--text-primary);
 
@@ -73,7 +73,7 @@
 }
 
 .doc-text p {
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   font-weight: var(--font-medium);
   color: var(--text-tertiary);
 

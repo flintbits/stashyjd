@@ -23,3 +23,15 @@
   min-height: 0;
   overflow: hidden;
 }
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 4px 8px;
+  border-radius: 999px;
+  color: var(--brand-primary);
+  background: var(--bg-secondary);
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+}

@@ -60,7 +60,7 @@
 .section-title .subtitle {
   font-weight: var(--font-regular);
   color: var(--text-tertiary);
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
 }
 
 .selected-doc {
@@ -76,7 +76,7 @@
 }
 
 .doc-name {
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   font-weight: var(--font-medium);
   color: var(--text-primary);
 }
@@ -99,7 +99,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   color: var(--text-secondary);
 }
 
@@ -118,7 +118,7 @@
   background: none;
   border: none;
   padding: 0;
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   color: var(--text-tertiary);
   cursor: pointer;
   margin-left: 22px;
@@ -155,7 +155,7 @@
 }
 
 .match-badge {
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   font-weight: var(--font-semibold);
   color: var(--brand-primary);
 }
@@ -168,7 +168,7 @@
   background: none;
   border: none;
   padding: 0;
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   color: var(--brand-primary);
   cursor: pointer;
   font-weight: var(--font-medium);

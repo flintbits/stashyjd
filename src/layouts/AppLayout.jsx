@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import "./styles/layout.css";
+import styles from "./styles/layout.module.css";
 import Sidebar from "./Sidebar/Sidebar";
 import RightPanel from "./RightPanel/RightPanel";
 import { DrawerIcon } from "../assets/icons/icon";
-import TitleBar from "../features/TitleBar/TitleBar";
+import TitleBar from "../components/TitleBar/TitleBar";
 import { useWindowContext } from "../app/context/WindowContext";
 
 export default function AppLayout() {
@@ -21,22 +21,22 @@ export default function AppLayout() {
       {useCustomTitlebar && <TitleBar />}
       <div
         className={[
-          "app-layout",
-          sidebarIsCollapsed ? "sidebar-collapsed" : "",
-          !showRight ? "no-right" : "",
+          styles["app-layout"],
+          sidebarIsCollapsed ? styles["sidebar-collapsed"] : "",
+          !showRight ? styles["no-right"] : "",
         ]
           .filter(Boolean)
           .join(" ")}
       >
         <aside
-          className="sidebar"
+          className={styles.sidebar}
           onMouseEnter={() => collapsed && setSidebarHovered(true)}
           onMouseLeave={() => setSidebarHovered(false)}
         >
           <Sidebar collapsed={sidebarIsCollapsed} setCollapsed={setCollapsed} />
         </aside>
 
-        <main className="main">
+        <main className={styles.main}>
           <Outlet
             context={{
               showRight,
@@ -49,7 +49,11 @@ export default function AppLayout() {
         </main>
 
         {showRight && (
-          <aside className={`right-panel ${showRight ? "open" : "closed"}`}>
+          <aside
+            className={[styles["right-panel"], !showRight ? styles.closed : ""]
+              .filter(Boolean)
+              .join(" ")}
+          >
             {rightPanelContent ? (
               rightPanelContent
             ) : (

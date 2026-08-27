@@ -3,6 +3,7 @@ import InputField from "../../../components/Input/InputField/InputField";
 import SelectField from "../../../components/Input/SelectField/SelectField";
 import ButtonsField from "../../../components/Input/ButtonsField/ButtonsField";
 import RangeField from "../../../components/Input/RangeField/RangeField";
+import styles from "./ApplicationForm/ApplicationForm.module.css";
 
 export default function DynamicFormBlock({ section, values, onChange }) {
   const renderField = (field) => {
@@ -59,11 +60,11 @@ export default function DynamicFormBlock({ section, values, onChange }) {
   };
 
   return (
-    <div className="form-section-content">
+    <div className={styles["form-section-content"]}>
       {section.rows.map((row, rowIndex) => (
-        <div key={rowIndex} className={`field-${row.layout}`}>
+        <div key={rowIndex} className={styles[`field-${row.layout}`]}>
           {row.fields.map((field, fieldIndex) => (
-            <div className="field-item" key={fieldIndex}>
+            <div className={styles["field-item"]} key={fieldIndex}>
               {renderField(field)}
             </div>
           ))}

@@ -10,7 +10,7 @@ import DataTable from "../../components/DataTable/DataTable";
 import { document_table_columns as baseColumns } from "./columns";
 import { documentPageApi } from "./services/documentsService";
 import { useToast } from "../../app/context/ToastProvider";
-import DropZone from "../../features/DropZone/DropZone";
+import DropZone from "../../components/DropZone/DropZone";
 import { useOutletContext } from "react-router-dom";
 import DocPageRightBar from "./components/DocPageRightBar/DocPageRightBar";
 import TabsComponent from "../../components/TabsComponent/TabsComponent";

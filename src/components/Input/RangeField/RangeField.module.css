@@ -6,7 +6,7 @@
 }
 
 .range-label {
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   font-weight: var(--font-medium);
   color: var(--text-tertiary);
 }
@@ -92,6 +92,6 @@
 
 .range-error {
   margin: 0;
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   color: var(--error);
 }

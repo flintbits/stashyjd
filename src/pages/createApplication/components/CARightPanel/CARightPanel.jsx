@@ -1,14 +1,14 @@
 import React, { useEffect, useMemo, useState } from "react";
-import styles from "./RightPanel.module.css";
+import styles from "./CARightPanel.module.css";
 import { LuFileText, LuX } from "react-icons/lu";
 import { documentPageApi } from "../../../Documents/services/documentsService";
 import { useToast } from "../../../../app/context/ToastProvider";
 import { formatRelativeDate } from "../../../../utils/formatDate";
 import getIcon from "../../../../utils/getIcon";
 import Button from "../../../../components/Button/Button";
-import DropZone from "../../../../features/DropZone/DropZone";
+import DropZone from "../../../../components/DropZone/DropZone";
 import LabeledToggle from "../../../../components/LabeledToggle/LabeledToggle";
-import DocumentLibraryModal from "../DocumentLibraryModal/DocumentLibraryModal";
+// import DocumentLibraryModal from "../DocumentLibraryModal/DocumentLibraryModal";
 
 export default function RightPanel({
   setShowRight,
@@ -72,7 +72,9 @@ export default function RightPanel({
   return (
     <div className={styles["create-application-right-sidebar"]}>
       <section className={styles["create-application-block"]}>
-        <h3 className={styles["create-application-side-title"]}>Application Documents</h3>
+        <h3 className={styles["create-application-side-title"]}>
+          Application Documents
+        </h3>
 
         <div className={styles["window-actions"]}>
           <LuX
@@ -109,9 +111,14 @@ export default function RightPanel({
                     : "1px solid transparent",
                 }}
               >
-                <div className={styles["doc-icon"]}>{getIcon(resume.mime_type)}</div>
+                <div className={styles["doc-icon"]}>
+                  {getIcon(resume.mime_type)}
+                </div>
                 <div className={styles["doc-info"]}>
-                  <span className={styles["doc-name"]} title={resume.original_file_name}>
+                  <span
+                    className={styles["doc-name"]}
+                    title={resume.original_file_name}
+                  >
                     {resume.original_file_name}
                   </span>
 
@@ -175,10 +182,15 @@ export default function RightPanel({
                     : "1px solid transparent",
                 }}
               >
-                <div className={styles["doc-icon"]}>{getIcon(cover.mime_type)}</div>
+                <div className={styles["doc-icon"]}>
+                  {getIcon(cover.mime_type)}
+                </div>
 
                 <div className={styles["doc-info"]}>
-                  <span className={styles["doc-name"]} title={cover.original_file_name}>
+                  <span
+                    className={styles["doc-name"]}
+                    title={cover.original_file_name}
+                  >
                     {cover.original_file_name}
                   </span>
 
@@ -202,9 +214,9 @@ export default function RightPanel({
         variant="ghost"
         onClick={() => setIsModalOpen(true)}
       />
-      {isModalOpen && (
-        <DocumentLibraryModal setIsOpen={setIsModalOpen} isOpen={isModalOpen} />
-      )}
+      {/* {isModalOpen && (
+        // <DocumentLibraryModal setIsOpen={setIsModalOpen} isOpen={isModalOpen} />
+      )} */}
     </div>
   );
 }

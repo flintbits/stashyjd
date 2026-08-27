@@ -9,9 +9,9 @@ import RightSidebar from "./components/RightSidebar/RightSidebar";
 import styles from "./CreateApplication.module.css";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import Button from "../../components/Button/Button";
-import useFormValidation from "../../features/FormValidation/hooks/useFormValidation";
 import { normalizeApplicationPayload } from "../../utils/normalization";
-import RightPanel from "./components/RightPanel/RightPanel";
+import useFormValidation from "../../app/hooks/useFormValidation";
+import RightPanel from "./components/CARightPanel/CARightPanel";
 
 export default function CreateApplication() {
   const [loading, setLoading] = useState(false);

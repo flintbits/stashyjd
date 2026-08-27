@@ -7,7 +7,6 @@ import "./styles/typography.css";
 import "./styles/themes.css";
 import "./styles/accents.css";
 import { ProgressProvider } from "./app/context/ProgressProvider";
-import TopProgressBar from "./features/TopProgressBar/TopProgressBar";
 import { ToastProvider } from "./app/context/ToastProvider";
 import { WindowProvider } from "./app/context/WindowContext";
 import { error, info } from "@tauri-apps/plugin-log";
@@ -31,7 +30,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <ThemeProvider>
       <WindowProvider>
         <ToastProvider>
-          <TopProgressBar />
           <App />
         </ToastProvider>
       </WindowProvider>

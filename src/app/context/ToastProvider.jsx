@@ -1,13 +1,13 @@
 import { createContext, useContext, useState, useCallback } from "react";
-import ToastContainer from "../../features/Toast/ToastContainer";
+import ToastContainer from "../../components/Toast/ToastContainer";
 
 const ToastContext = createContext();
 
 const MAX_TOASTS = 10;
 
 export function ToastProvider({ children }) {
-  const [toasts, setToasts] = useState([]); // visible
-  const [queue, setQueue] = useState([]); // waiting
+  const [toasts, setToasts] = useState([]);
+  const [queue, setQueue] = useState([]);
 
   const removeToast = useCallback((id) => {
     setToasts((prev) => {
