@@ -3,6 +3,31 @@
 version = 4
 
 [[package]]
+name = "StashyJd"
+version = "0.2.4"
+dependencies = [
+ "docx-rs",
+ "mime_guess",
+ "pdf-extract",
+ "serde",
+ "serde_json",
+ "sha2",
+ "sqlx",
+ "tauri",
+ "tauri-build",
+ "tauri-plugin-fs",
+ "tauri-plugin-log",
+ "tauri-plugin-opener",
+ "tauri-plugin-process",
+ "tauri-plugin-updater",
+ "thiserror 1.0.69",
+ "tokio",
+ "unicode-normalization",
+ "uuid",
+ "zip 0.6.6",
+]
+
+[[package]]
 name = "adler2"
 version = "2.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4742,31 +4767,6 @@ name = "stable_deref_trait"
 version = "1.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6ce2be8dc25455e1f91df71bfa12ad37d7af1092ae736f3a6cd0e37bc7810596"
-
-[[package]]
-name = "stashyjd"
-version = "0.1.0"
-dependencies = [
- "docx-rs",
- "mime_guess",
- "pdf-extract",
- "serde",
- "serde_json",
- "sha2",
- "sqlx",
- "tauri",
- "tauri-build",
- "tauri-plugin-fs",
- "tauri-plugin-log",
- "tauri-plugin-opener",
- "tauri-plugin-process",
- "tauri-plugin-updater",
- "thiserror 1.0.69",
- "tokio",
- "unicode-normalization",
- "uuid",
- "zip 0.6.6",
-]
 
 [[package]]
 name = "string_cache"

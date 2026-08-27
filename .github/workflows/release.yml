@@ -73,6 +73,7 @@ jobs:
 # while pushing tag and push
 # package.json - "version": "0.1.0" -> "version": "0.1.1"
 # tauri.conf.json - "version": "0.1.0" -> "version": "0.1.1"
+# cargo.toml - "version" : "0.1.0" -> "version": "0.1.1"
 # git add .
 # git commit -m "Bump version"
 # git tag v0.2.3
