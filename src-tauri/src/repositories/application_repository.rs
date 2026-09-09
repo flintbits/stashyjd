@@ -30,7 +30,6 @@ pub async fn create_application(
             currency,
             applied_at,
             deadline_at,
-            notes,
             job_description,
             resume_document_id,
             cover_letter_document_id
@@ -40,7 +39,7 @@ pub async fn create_application(
             ?, ?, ?, ?, ?,
             ?, ?, ?, ?, ?,
             ?, ?, ?, ?, ?,
-            ?, ?, ?, ?, ?,
+            ?, ?, ?, ?,
             ?, ?
         );
         "#,
@@ -63,7 +62,6 @@ pub async fn create_application(
     .bind(application_data.currency)
     .bind(application_data.applied_at)
     .bind(application_data.deadline_at)
-    .bind(application_data.notes)
     .bind(application_data.job_description)
     .bind(application_data.resume_document_id)
     .bind(application_data.cover_letter_document_id)
@@ -97,7 +95,6 @@ pub async fn fetch_all_applications(
             currency,
             applied_at,
             deadline_at,
-            notes,
             job_description,
             resume_document_id,
             cover_letter_document_id,
@@ -112,4 +109,23 @@ pub async fn fetch_all_applications(
     .await?;
 
     Ok(applications)
+}
+
+pub async fn find_by_id(
+    db: &sqlx::SqlitePool,
+    public_id: &str,
+) -> Result<Option<ApplicationRecord>, sqlx::Error> {
+    sqlx::query_as::<_, ApplicationRecord>(
+        r#"
+        SELECT
+            id,
+            public_id,
+            title
+        FROM applications
+        WHERE public_id = ?
+        "#,
+    )
+    .bind(public_id)
+    .fetch_optional(db)
+    .await
 }

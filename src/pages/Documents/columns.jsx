@@ -119,26 +119,23 @@ export const document_table_columns = [
             fontSize: "var(--text-xs))",
           }}
         >
-          <span style={{ fontWeight: 500 }}>{relative}</span>
-
-          <span
-            style={{
-              fontWeight: "var(--font-thin)",
-              color: "var(--text-tertiary)",
-            }}
-          >
-            {absolute}
+          <span style={{ fontWeight: 500 }}>
+            {relative}
+            <span
+              style={{
+                marginLeft: 6,
+                fontWeight: "var(--font-thin)",
+                color: "var(--text-tertiary)",
+              }}
+            >
+              · {absolute}
+            </span>
           </span>
         </div>
       );
     },
   },
-  {
-    accessorKey: "file_size_temp",
-    header: "Size",
-    enableColumnFilter: true,
-    size: 100,
-  },
+
   {
     accessorKey: "file_size",
     header: "Size",

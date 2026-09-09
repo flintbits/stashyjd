@@ -1,4 +1,4 @@
-import { ICONS } from "./iconRegistry";
+import { ICONS } from './iconRegistry';
 
 export const DashboardIcon = ICONS.DashboardIcon;
 
@@ -45,3 +45,5 @@ export const PreviewIcon = ICONS.PreviewIcon;
 export const DownloadIcon = ICONS.DownloadIcon;
 
 export const DrawerIcon = ICONS.DrawerIcon;
+
+export const SelectArrowIcon = ICONS.SelectArrowIcon;

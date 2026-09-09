@@ -20,8 +20,6 @@ export default function DocumentLibraryModal({ isOpen, setIsOpen }) {
         docType: null,
       });
 
-      console.log(response);
-
       if (response.status === "success") {
         setDocuments(response.data);
         return;
@@ -50,7 +48,9 @@ export default function DocumentLibraryModal({ isOpen, setIsOpen }) {
         <section className={styles["document-modal-header"]}>
           <div className={styles["document-modal-header-content"]}>
             <DocumentsIcon size={16} />
-            <h1 className={styles["document-modal-header-title"]}>Document Library</h1>
+            <h1 className={styles["document-modal-header-title"]}>
+              Document Library
+            </h1>
           </div>
 
           <div className={styles["document-modal-header-actions"]}>

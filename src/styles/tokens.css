@@ -9,29 +9,6 @@
 }
 
 :root {
-  /* Backgrounds */
-  --bg-app: #f6f7fb;
-  --bg-surface: #ffffff;
-  --bg-muted: #f1f3f9;
-  --bg-elevated: #ffffff;
-
-  /* Borders */
-  --border-subtle: #e6e8f0;
-  --border-default: #cccccc;
-  --border-strong: #585858;
-
-  /* Text */
-  --text-primary: #0d1c2e;
-  --text-secondary: #545758;
-  --text-tertiary: #4f576a;
-  --text-subtle: #cdcdcd;
-
-  /* Icon */
-  --icon-default: #404657;
-  --icon-muted: #676767;
-}
-
-:root {
   --success: #22c55e;
   --warning: #f59e0b;
   --error: #ef4444;

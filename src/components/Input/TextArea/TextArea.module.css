@@ -1,0 +1,75 @@
+.textarea-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--bg-surface);
+}
+
+.textarea-label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--text-tertiary);
+}
+
+.textarea-wrapper {
+  display: flex;
+  align-items: flex-start;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  min-height: 80px;
+  transition: all var(--transition-fast);
+}
+
+.textarea-wrapper:hover {
+  border-color: var(--text-tertiary);
+}
+
+.textarea-wrapper:focus-within {
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 1px var(--brand-primary);
+}
+
+.textarea-control {
+  width: 100%;
+  min-height: 60px;
+  padding: 0;
+  border: none;
+  outline: none;
+  resize: vertical;
+  font-family: inherit;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--text-primary);
+  background: transparent;
+  appearance: none;
+}
+
+.textarea-control::placeholder {
+  color: var(--text-subtle);
+}
+
+.textarea-control:-webkit-autofill,
+.textarea-control:-webkit-autofill:hover,
+.textarea-control:-webkit-autofill:focus,
+.textarea-control:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--bg-surface) inset !important;
+  -webkit-text-fill-color: var(--text-primary) !important;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+.has-error .textarea-wrapper {
+  border-color: var(--error);
+}
+
+.has-error .textarea-wrapper:focus-within {
+  box-shadow: 0 0 0 1px var(--error);
+}
+
+.textarea-error {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--error);
+}

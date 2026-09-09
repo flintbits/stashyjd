@@ -1,6 +1,6 @@
 import { invokeSafe } from "../../../lib/api";
 
-export const applucationServiceApi = {
+export const applicationServiceApi = {
   fetchAllApplications() {
     return invokeSafe("fetch_applications");
   },

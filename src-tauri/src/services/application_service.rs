@@ -4,7 +4,7 @@ use crate::{
     errors::app_error::AppError,
     models::application::{ApplicationRecord, CreateApplicationRequest},
     repositories::application_repository,
-    responses::api_response::ApiResponse,
+    utils::common::generate_public_id,
 };
 
 pub async fn create_application(
@@ -20,37 +20,23 @@ pub async fn create_application(
         return Err(AppError::Validation("Role title is required".into()));
     }
 
-    let public_id = uuid::Uuid::new_v4().to_string();
+    let public_id = generate_public_id();
 
-    let result = application_repository::create_application(db, public_id, application_data).await;
-
-    match result {
+    match application_repository::create_application(db, public_id, application_data).await {
         Ok(_) => Ok(()),
 
-        Err(sqlx::Error::Database(db_err)) => {
-            // SQLite UNIQUE constraint
-            if db_err.message().contains("UNIQUE constraint failed") {
-                return Err(AppError::DuplicateApplication);
-            }
-
-            Err(AppError::Database(sqlx::Error::Database(db_err)))
+        Err(sqlx::Error::Database(db_err))
+            if db_err.message().contains("UNIQUE constraint failed") =>
+        {
+            Err(AppError::Conflict("Application already exists".into()))
         }
 
-        Err(e) => Err(AppError::Database(e)),
+        Err(error) => Err(AppError::Database(error)),
     }
 }
 
-pub async fn fetch_applications(
-    db: &SqlitePool,
-) -> Result<ApiResponse<Vec<ApplicationRecord>>, AppError> {
+pub async fn fetch_applications(db: &SqlitePool) -> Result<Vec<ApplicationRecord>, AppError> {
     let applications = application_repository::fetch_all_applications(db).await?;
 
-    if applications.is_empty() {
-        return Ok(ApiResponse::warning("No documents found", None));
-    }
-
-    Ok(ApiResponse::success(
-        "Applications fetched successfully",
-        Some(applications),
-    ))
+    Ok(applications)
 }

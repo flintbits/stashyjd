@@ -1,8 +1,8 @@
 use sha2::{Digest, Sha256};
 use std::fs::File;
 use std::io::Read;
-use zip::ZipArchive;
 use unicode_normalization::UnicodeNormalization;
+use zip::ZipArchive;
 
 pub fn extract_text(file_path: &str, mime_type: &str) -> String {
     match mime_type {

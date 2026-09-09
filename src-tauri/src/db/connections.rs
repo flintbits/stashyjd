@@ -29,12 +29,12 @@ pub async fn create_pool(app: &tauri::AppHandle) -> SqlitePool {
     sqlx::migrate!("./migrations").run(&pool).await.unwrap();
 
     // for debuggging
-    let tables = sqlx::query_scalar::<sqlx::Sqlite, String>(
-        "SELECT name FROM sqlite_master WHERE type='table' ORDER BY name",
-    )
-    .fetch_all(&pool)
-    .await
-    .unwrap();
+    // let tables = sqlx::query_scalar::<sqlx::Sqlite, String>(
+    //     "SELECT name FROM sqlite_master WHERE type='table' ORDER BY name",
+    // )
+    // .fetch_all(&pool)
+    // .await
+    // .unwrap();
 
     // println!("TABLES: {:?}", tables);
 

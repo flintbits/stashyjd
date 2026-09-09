@@ -1,0 +1,19 @@
+.header-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-side-title {
+  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+}
+
+.window-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  cursor: pointer;
+}

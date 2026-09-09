@@ -10,5 +10,6 @@ export default function useFormValidation() {
     setFieldValues((prev) => ({ ...prev, [fieldId]: fieldval }));
   };
 
-  return { fieldValues, onChange };
+  //TODO : remove setFieleValues from return object
+  return { fieldValues, onChange, setFieldValues };
 }

@@ -54,11 +54,13 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             greet,
             //applications
-            commands::applications::create_application,
-            commands::applications::fetch_applications,
+            commands::application::create_application,
+            commands::application::fetch_applications,
             //documents
             commands::document::create_document,
-            commands::document::fetch_documents
+            commands::document::fetch_documents,
+            //tasks
+            commands::task::create_task
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
@@ -68,3 +70,7 @@ pub fn run() {
 //$env:DATABASE_URL="sqlite:///C:/Users/Victus/AppData/Roaming/StashyJD-crimson/app.db"
 //sqlx migrate run
 //sqlx migrate revert
+
+//sqlx migrate add create_application_tasks_table
+
+//cargo clippy

@@ -47,7 +47,6 @@ pub struct ApplicationRecord {
     pub currency: Option<String>,
     pub applied_at: Option<String>,
     pub deadline_at: Option<String>,
-    pub notes: Option<String>,
     pub job_description: Option<String>,
     pub resume_document_id: String,
     pub cover_letter_document_id: Option<String>,

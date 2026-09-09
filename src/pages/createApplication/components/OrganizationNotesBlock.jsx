@@ -7,7 +7,6 @@ export default function OrganizationNotesBlock({ values, onChange }) {
   const [isAddTag, setIsAddTag] = useState(false);
   const [newTag, setNewTag] = useState("");
 
-  console.log(tags);
   return (
     <div className={`${styles["custom-block"]} ${styles["org-notes-block"]}`}>
       <div className={styles["org-cols"]}>

@@ -11,22 +11,16 @@
   gap: 8px;
   padding: 6px 10px;
   border-bottom: 1px solid transparent;
-  border-radius: 0px;
-  font-size: var(--text-sm);
-  font-weight: var(--font-medium);
-  color: var(--text-secondary);
+  color: var(--text-primary);
   cursor: pointer;
   white-space: nowrap;
-  transition: all 0.2s ease;
-}
-
-.tab:hover {
-  background: var(--brand-primary-soft);
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .tab.active {
   border-color: var(--brand-primary);
-  background: var(--brand-primary-soft);
   color: var(--brand-primary);
 }
 
@@ -36,13 +30,16 @@
 }
 
 .tab-label {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-regular);
   display: inline-block;
 }
 
 .tab-count {
   padding: 2px 8px;
   font-size: var(--text-sm);
-  font-weight: var(--font-semibold);
+  font-weight: var(--weight-regular);
+  transition: color 0.2s ease;
 }
 
 .tab.active .tab-count {

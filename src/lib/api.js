@@ -66,6 +66,7 @@ export async function invokeSafe(
 
         const ms = Math.round(performance.now() - start);
         console.log(`[API] ${command} success (${ms}ms)`);
+        console.log(result);
 
         return result;
       } catch (err) {

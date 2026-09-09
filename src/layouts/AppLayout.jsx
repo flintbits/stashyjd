@@ -7,8 +7,10 @@ import { DrawerIcon } from "../assets/icons/icon";
 import TitleBar from "../components/TitleBar/TitleBar";
 import { useWindowContext } from "../app/context/WindowContext";
 
-export default function AppLayout() {
+export default function AppLayout({ rightPanelWidth = 320 }) {
   const [showRight, setShowRight] = useState(true);
+  const [activeRightPanelWidth, setActiveRightPanelWidth] =
+    useState(rightPanelWidth);
   const [collapsed, setCollapsed] = useState(true);
   const [sidebarHovered, setSidebarHovered] = useState(false);
   const [rightPanelContent, setRightPanelContent] = useState(null);
@@ -27,6 +29,7 @@ export default function AppLayout() {
         ]
           .filter(Boolean)
           .join(" ")}
+        style={{ "--rightpanel-width": `${activeRightPanelWidth}px` }}
       >
         <aside
           className={styles.sidebar}
@@ -44,6 +47,7 @@ export default function AppLayout() {
               collapsed,
               setCollapsed,
               setRightPanelContent,
+              setRightPanelWidth: setActiveRightPanelWidth,
             }}
           />
         </main>

@@ -18,10 +18,11 @@ import {
   LuTrash2,
   LuEye,
   LuDownload,
+  LuChevronDown,
   LuChevronsLeft,
-} from "react-icons/lu";
+} from 'react-icons/lu';
 
-import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa6";
+import { FaSort, FaSortDown, FaSortUp } from 'react-icons/fa6';
 
 export const ICONS = {
   DashboardIcon: LuLayoutDashboard,
@@ -37,6 +38,7 @@ export const ICONS = {
   DeleteIcon: LuTrash2,
   PreviewIcon: LuEye,
   DrawerIcon: LuChevronsLeft,
+  SelectArrowIcon: LuChevronDown,
 
   SuccessIcon: LuCircleCheck,
   ErrorIcon: LuCircleAlert,

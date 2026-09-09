@@ -1,8 +1,9 @@
 use tauri::State;
 
 use crate::{
-    app_state::AppState, errors::app_error::AppError, models::document::DocumentWithResumeProfile,
-    responses::api_response::ApiResponse, utils::document::paths::resolve_path,
+    app_state::AppState, models::document::DocumentWithResumeProfile,
+    responses::app_response::AppResponse, services::document_service,
+    utils::document::paths::resolve_path,
 };
 
 #[tauri::command]
@@ -12,23 +13,25 @@ pub async fn create_document(
     file_path: String,
     document_type: String,
     original_file_name: String,
-) -> Result<ApiResponse<()>, ApiResponse<()>> {
+) -> Result<AppResponse<()>, AppResponse<()>> {
     // Resolve and normalize the file path
     let full_path = match resolve_path(&app, &file_path) {
         Ok(path) => match path.canonicalize() {
             Ok(canonicalized) => canonicalized,
 
             Err(_) => {
-                return Err(ApiResponse::from(AppError::Validation(
-                    "Failed to canonicalize path".into(),
-                )));
+                return Ok(AppResponse::from(
+                    crate::errors::app_error::AppError::Validation(
+                        "Failed to canonicalize path".into(),
+                    ),
+                ));
             }
         },
 
         Err(_) => {
-            return Err(ApiResponse::from(AppError::Validation(
-                "Failed to resolve path".into(),
-            )));
+            return Ok(AppResponse::from(
+                crate::errors::app_error::AppError::Validation("Failed to resolve path".into()),
+            ));
         }
     };
 
@@ -37,31 +40,45 @@ pub async fn create_document(
         Some(path) => path.to_string(),
 
         None => {
-            return Err(ApiResponse::from(AppError::Validation(
-                "Path contains invalid UTF-8".into(),
-            )));
+            return Ok(AppResponse::from(
+                crate::errors::app_error::AppError::Validation(
+                    "Path contains invalid UTF-8".into(),
+                ),
+            ));
         }
     };
 
-    return crate::services::document_service::create_document(
+    match document_service::create_document(
         &state.db,
         full_path_str,
         document_type,
         original_file_name,
     )
     .await
-    .map_err(ApiResponse::from);
+    {
+        Ok(_) => Ok(AppResponse::success(
+            "DOCUMENT_CREATED",
+            "Document uploaded and stored successfully",
+            None,
+        )),
+
+        Err(error) => Ok(error.into()),
+    }
 }
 
 #[tauri::command]
 pub async fn fetch_documents(
     doc_type: Option<String>,
     state: State<'_, AppState>,
-) -> Result<ApiResponse<Vec<DocumentWithResumeProfile>>, ApiResponse<Vec<DocumentWithResumeProfile>>>
+) -> Result<AppResponse<Vec<DocumentWithResumeProfile>>, AppResponse<Vec<DocumentWithResumeProfile>>>
 {
-    let db = &state.db;
+    match document_service::fetch_documents(&state.db, doc_type).await {
+        Ok(documents) => Ok(AppResponse::success(
+            "DOCUMENTS_FETCHED",
+            "Documents fetched successfully",
+            Some(documents),
+        )),
 
-    crate::services::document_service::fetch_documents(db, doc_type)
-        .await
-        .map_err(ApiResponse::from)
+        Err(error) => Ok(error.into()),
+    }
 }

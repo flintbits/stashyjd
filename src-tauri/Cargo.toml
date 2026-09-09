@@ -40,5 +40,6 @@ docx-rs = "0.4"
 unicode-normalization = "0.1"
 zip = "0.6"
 tauri-plugin-log = "2.8.0"
+tracing = "0.1"
 
 

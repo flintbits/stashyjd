@@ -22,6 +22,7 @@ dependencies = [
  "tauri-plugin-updater",
  "thiserror 1.0.69",
  "tokio",
+ "tracing",
  "unicode-normalization",
  "uuid",
  "zip 0.6.6",

@@ -33,8 +33,6 @@ export default function DropZone({ label = "Upload", type, successCallback }) {
         originalFileName: file.name,
       });
 
-      console.log("Backend response:", response);
-
       addToast({
         title: response.status,
         message: response.message,
@@ -84,7 +82,6 @@ export default function DropZone({ label = "Upload", type, successCallback }) {
 
     try {
       const relativePath = await saveFile(file);
-      console.log("Saved:", relativePath);
     } catch (err) {
       console.error(err);
 

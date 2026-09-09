@@ -20,11 +20,11 @@ export default function TabsComponent({ tabs, defaultTab, onChange }) {
             className={`${styles.tab} ${isActive ? styles.active : ""}`}
             onClick={() => handleTabClick(tab.id)}
           >
-            <Icon className={styles["tab-icon"]} />
+            {Icon && <Icon className={styles["tab-icon"]} />}
 
             <span className={styles["tab-label"]}>{tab.label}</span>
 
-            <span className={styles["tab-count"]}>{tab.count}</span>
+            {/* <span className={styles["tab-count"]}>{tab.count}</span> */}
           </button>
         );
       })}

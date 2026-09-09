@@ -21,14 +21,11 @@
 
 .app-layout {
   display: grid;
-
   grid-template-columns:
     var(--sidebar-width)
     minmax(0, 1fr)
     var(--rightpanel-width);
-
   transition: grid-template-columns 240ms cubic-bezier(0.22, 1, 0.36, 1);
-
   height: 100vh;
 }
 

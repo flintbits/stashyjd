@@ -1,20 +1,19 @@
 use crate::errors::app_error::AppError;
 use crate::models::document::{DocumentWithResumeProfile, NewDocument};
 use crate::repositories::document_repository;
-use crate::responses::api_response::ApiResponse;
 use crate::utils;
+use crate::utils::common::generate_public_id;
 use crate::utils::document::file::extract_file_name;
 use crate::utils::document::processor::process_document;
 use sqlx::SqlitePool;
 use std::path::Path;
-use uuid::Uuid;
 
 pub async fn create_document(
     db: &SqlitePool,
     file_path: String,
     document_type: String,
     original_file_name: String,
-) -> Result<ApiResponse<()>, AppError> {
+) -> Result<(), AppError> {
     // Compute file hash and size
     let (file_hash, file_size_u64) =
         utils::document::file::compute_file_data(Path::new(&file_path))
@@ -46,13 +45,15 @@ pub async fn create_document(
         document_repository::find_exact_duplicate(db, &file_hash, &processed.text_hash).await?
     {
         println!("DUPLICATE FOUND");
+
         document_repository::touch_document(db, &existing_doc.public_id).await?;
-        return Ok(ApiResponse::success("Document already uploaded", None));
+
+        return Ok(());
     }
 
     // Build document model for insertion
     let doc = NewDocument {
-        public_id: Uuid::new_v4().to_string(),
+        public_id: generate_public_id(),
         document_type,
         stored_file_name: extract_file_name(&file_path),
         original_file_name,
@@ -73,31 +74,27 @@ pub async fn create_document(
     match insert_result {
         Ok(_) => {}
 
-        Err(e) => {
-            return Err(AppError::Database(e));
+        Err(sqlx::Error::Database(db_err))
+            if db_err.message().contains("UNIQUE constraint failed") =>
+        {
+            return Err(AppError::Conflict("Document already exists".into()));
+        }
+
+        Err(error) => {
+            return Err(AppError::Database(error));
         }
     }
 
     // Return success response
-    Ok(ApiResponse::success(
-        "Document uploaded and stored successfully",
-        None,
-    ))
+    Ok(())
 }
 
 pub async fn fetch_documents(
     db: &SqlitePool,
     doc_type: Option<String>,
-) -> Result<ApiResponse<Vec<DocumentWithResumeProfile>>, AppError> {
+) -> Result<Vec<DocumentWithResumeProfile>, AppError> {
     let documents =
         document_repository::fetch_all_document_with_resume_profile(db, doc_type).await?;
 
-    if documents.is_empty() {
-        return Ok(ApiResponse::warning("No documents found", None));
-    }
-
-    Ok(ApiResponse::success(
-        "Documents fetched successfully",
-        Some(documents),
-    ))
+    Ok(documents)
 }

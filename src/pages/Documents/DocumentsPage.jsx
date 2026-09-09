@@ -25,7 +25,7 @@ const DOCUMENT_TABS = [
   },
 ];
 
-export default function DocumentsPage() {
+export default function DocumentsPage({ rightPanelWidth = 320 }) {
   const columns = useMemo(() => baseColumns, []);
   const { addToast } = useToast();
   const [data, setData] = useState([]);
@@ -33,6 +33,14 @@ export default function DocumentsPage() {
   const [activeTab, setActivetab] = useState("all");
   const context = useOutletContext() || {};
   const { setRightPanelContent, setShowRight } = context;
+
+  useEffect(() => {
+    context.setRightPanelWidth?.(rightPanelWidth);
+
+    return () => {
+      context.setRightPanelWidth?.(320);
+    };
+  }, [context.setRightPanelWidth, rightPanelWidth]);
 
   useEffect(() => {
     if (!setRightPanelContent) return;
@@ -43,7 +51,6 @@ export default function DocumentsPage() {
       );
       setShowRight?.(true);
     } else {
-      //here
       setRightPanelContent(null);
       setShowRight?.(false);
     }
@@ -60,9 +67,7 @@ export default function DocumentsPage() {
     try {
       const response = await documentPageApi.fetchAllDocumets({
         docType: activeTab === "all" ? null : activeTab,
-      });
-
-      console.log(response);
+      });6
 
       if (response.status === "success") {
         setData(response.data);

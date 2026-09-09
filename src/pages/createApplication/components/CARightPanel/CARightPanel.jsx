@@ -36,14 +36,10 @@ export default function RightPanel({
   }, []);
 
   async function fetchDocuments() {
-    console.log("fetchDocuments called");
-
     try {
       const response = await documentPageApi.fetchAllDocumets({
         docType: null,
       });
-
-      console.log(response);
 
       if (response.status === "success") {
         setDocuments(response.data);

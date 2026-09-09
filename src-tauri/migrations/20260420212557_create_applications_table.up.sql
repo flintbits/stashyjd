@@ -30,7 +30,6 @@ CREATE TABLE IF NOT EXISTS applications (
     applied_at TEXT,
     deadline_at TEXT,
 
-    notes TEXT,
     job_description TEXT,
 
     resume_document_id TEXT,
