@@ -105,6 +105,15 @@
   --transition-normal: 200ms ease;
 }
 
+:root {
+  --sidebar-row-height: 40px;
+  --sidebar-icon-size: 18px;
+  --sidebar-icon-column: 20px;
+  --sidebar-nav-gap: var(--space-3);
+  --sidebar-create-bg: var(--brand-primary);
+  --sidebar-create-hover: var(--brand-primary-hover);
+}
+
 /* Button varients 
 <Button text="Primary Button" />
 <Button text="Upload Document" variant="outline" />

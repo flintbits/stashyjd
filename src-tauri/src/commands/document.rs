@@ -79,6 +79,6 @@ pub async fn fetch_documents(
             Some(documents),
         )),
 
-        Err(error) => Ok(error.into()),
+        Err(error) => Err(error.into()),
     }
 }

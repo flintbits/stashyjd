@@ -10,7 +10,6 @@ import {
   SettingsIcon,
 } from '../../assets/icons/icon';
 import SidebarFooter from './SidebarFooter/SidebarFooter';
-import Button from '../../components/Button/Button';
 
 export default function Sidebar({ collapsed, setCollapsed }) {
   const navigate = useNavigate();
@@ -22,18 +21,8 @@ export default function Sidebar({ collapsed, setCollapsed }) {
   return (
     <div className={`${styles['sidebar-content']} ${collapsed ? styles.collapsed : ''}`}>
       <section>
-        <div
-          style={{
-            padding: '0 8px',
-            marginBottom: 24,
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
-        >
-          <h2 className={styles['sidebar-text']} style={{ margin: 0, fontSize: 'var(--text-xl)' }}>
-            StashyJD
-          </h2>
+        <div className={styles['sidebar-brand']}>
+          <h2 className={styles['sidebar-text']}>StashyJD</h2>
           {/* <button
             onClick={() => setCollapsed(!collapsed)}
             style={{
@@ -49,34 +38,15 @@ export default function Sidebar({ collapsed, setCollapsed }) {
           </button> */}
         </div>
 
-        <section style={{ marginBlock: 24 }}>
-          {collapsed ? (
-            <button
-              onClick={handleNewApplication}
-              title="New Application"
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: 8,
-                background: 'var(--brand-primary)',
-                color: 'white',
-                border: 'none',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                margin: '0 auto',
-                cursor: 'pointer',
-              }}
-            >
-              <CircleAddIcon size={20} />
-            </button>
-          ) : (
-            <Button
-              text="New Application"
-              onClick={handleNewApplication}
-              leftIcon={CircleAddIcon}
-            />
-          )}
+        <section className={styles['create-section']}>
+          <button
+            className={styles['sidebar-create-link']}
+            onClick={handleNewApplication}
+            title="New Application"
+          >
+            <CircleAddIcon size={20} />
+            <span className={styles['sidebar-text']}>New Application</span>
+          </button>
         </section>
 
         <nav>
@@ -88,7 +58,7 @@ export default function Sidebar({ collapsed, setCollapsed }) {
                   `${styles['sidebar-link']} ${isActive ? styles.active : ''}`
                 }
               >
-                <DashboardIcon size={14} />
+                <DashboardIcon size={18} />
                 <span className={styles['sidebar-text']}>Dashboard</span>
               </NavLink>
             </li>
@@ -99,7 +69,7 @@ export default function Sidebar({ collapsed, setCollapsed }) {
                   `${styles['sidebar-link']} ${isActive ? styles.active : ''}`
                 }
               >
-                <ApplicationIcon size={14} />
+                <ApplicationIcon size={18} />
                 <span className={styles['sidebar-text']}>Applications</span>
               </NavLink>
             </li>
@@ -110,7 +80,7 @@ export default function Sidebar({ collapsed, setCollapsed }) {
                   `${styles['sidebar-link']} ${isActive ? styles.active : ''}`
                 }
               >
-                <DocumentsIcon size={14} />
+                <DocumentsIcon size={18} />
                 <span className={styles['sidebar-text']}>Documents</span>
               </NavLink>
             </li>
@@ -121,7 +91,7 @@ export default function Sidebar({ collapsed, setCollapsed }) {
                   `${styles['sidebar-link']} ${isActive ? styles.active : ''}`
                 }
               >
-                <CalendarIcon size={14} />
+                <CalendarIcon size={18} />
                 <span className={styles['sidebar-text']}>Calendar</span>
               </NavLink>
             </li>
@@ -132,7 +102,7 @@ export default function Sidebar({ collapsed, setCollapsed }) {
                   `${styles['sidebar-link']} ${isActive ? styles.active : ''}`
                 }
               >
-                <SettingsIcon size={14} />
+                <SettingsIcon size={18} />
                 <span className={styles['sidebar-text']}>Settings</span>
               </NavLink>
             </li>

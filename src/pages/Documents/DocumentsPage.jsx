@@ -1,26 +1,22 @@
-import React, { useEffect, useMemo, useState } from "react";
-import PageHeader from "../../components/PageHeader/PageHeader";
-import {
-  AllCoverLetterIcon,
-  AllDocumentsIcon,
-  AllResumeIcon,
-} from "../../assets/icons/icon";
-import styles from "./DocumentsPage.module.css";
-import DataTable from "../../components/DataTable/DataTable";
-import { document_table_columns as baseColumns } from "./columns";
-import { documentPageApi } from "./services/documentsService";
-import { useToast } from "../../app/context/ToastProvider";
-import DropZone from "../../components/DropZone/DropZone";
-import { useOutletContext } from "react-router-dom";
-import DocPageRightBar from "./components/DocPageRightBar/DocPageRightBar";
-import TabsComponent from "../../components/TabsComponent/TabsComponent";
+import React, { useEffect, useMemo, useState } from 'react';
+import PageHeader from '../../components/PageHeader/PageHeader';
+import { AllCoverLetterIcon, AllDocumentsIcon, AllResumeIcon } from '../../assets/icons/icon';
+import styles from './DocumentsPage.module.css';
+import DataTable from '../../components/DataTable/DataTable';
+import { document_table_columns as baseColumns } from './columns';
+import { documentService } from '../../services/documentService';
+import { useToast } from '../../app/context/ToastProvider';
+import DropZone from '../../components/DropZone/DropZone';
+import { useOutletContext } from 'react-router-dom';
+import DocPageRightBar from './components/DocPageRightBar/DocPageRightBar';
+import TabsComponent from '../../components/TabsComponent/TabsComponent';
 
 const DOCUMENT_TABS = [
-  { id: "all", label: "All Documents", icon: AllDocumentsIcon },
-  { id: "resume", label: "Resumes", icon: AllResumeIcon },
+  { id: 'all', label: 'All Documents', icon: AllDocumentsIcon },
+  { id: 'resume', label: 'Resumes', icon: AllResumeIcon },
   {
-    id: "cover_letter",
-    label: "Cover Letters",
+    id: 'cover_letter',
+    label: 'Cover Letters',
     icon: AllCoverLetterIcon,
   },
 ];
@@ -30,7 +26,7 @@ export default function DocumentsPage({ rightPanelWidth = 320 }) {
   const { addToast } = useToast();
   const [data, setData] = useState([]);
   const [selectedDoc, setSelectedDoc] = useState(null);
-  const [activeTab, setActivetab] = useState("all");
+  const [activeTab, setActivetab] = useState('all');
   const context = useOutletContext() || {};
   const { setRightPanelContent, setShowRight } = context;
 
@@ -46,9 +42,7 @@ export default function DocumentsPage({ rightPanelWidth = 320 }) {
     if (!setRightPanelContent) return;
 
     if (selectedDoc) {
-      setRightPanelContent(
-        <DocPageRightBar setShowRight={setShowRight} doc={selectedDoc} />,
-      );
+      setRightPanelContent(<DocPageRightBar setShowRight={setShowRight} doc={selectedDoc} />);
       setShowRight?.(true);
     } else {
       setRightPanelContent(null);
@@ -65,30 +59,29 @@ export default function DocumentsPage({ rightPanelWidth = 320 }) {
     setData([]);
 
     try {
-      const response = await documentPageApi.fetchAllDocumets({
-        docType: activeTab === "all" ? null : activeTab,
-      });6
+      const response = await documentService.fetchAllDocuments(
+        activeTab === 'all' ? null : activeTab,
+      );
+      6;
 
-      if (response.status === "success") {
+      if (response.status === 'success') {
         setData(response.data);
         return;
       }
 
       addToast({
-        title: response.status,
         message: response.message,
         type:
-          response.status === "error"
-            ? "error"
-            : response.status === "success"
-              ? "success"
-              : "warning",
+          response.status === 'error'
+            ? 'error'
+            : response.status === 'success'
+              ? 'success'
+              : 'warning',
       });
     } catch (e) {
       addToast({
-        title: "Error",
         message: String(e),
-        type: "error",
+        type: 'error',
       });
     }
   }
@@ -102,12 +95,12 @@ export default function DocumentsPage({ rightPanelWidth = 320 }) {
   };
 
   return (
-    <div className={styles["documents-page"]}>
+    <div className={styles['documents-page']}>
       <PageHeader
         title="Documents"
         subtitle="Manage resumes, cover letters, and other documents for your applications"
       >
-        <div className={styles["document-header-action"]}>
+        <div className={styles['document-header-action']}>
           <DropZone
             key="resume"
             label="Upload Resume"
@@ -123,16 +116,12 @@ export default function DocumentsPage({ rightPanelWidth = 320 }) {
         </div>
       </PageHeader>
 
-      <section className={styles["document-page-main"]}>
-        <div style={{ padding: "16px" }}>
-          <TabsComponent
-            tabs={DOCUMENT_TABS}
-            defaultTab="all"
-            onChange={handleTabChange}
-          />
+      <section className={styles['document-page-main']}>
+        <div style={{ padding: '16px' }}>
+          <TabsComponent tabs={DOCUMENT_TABS} defaultTab="all" onChange={handleTabChange} />
         </div>
 
-        <section className={styles["table-container"]}>
+        <section className={styles['table-container']}>
           <DataTable
             data={data}
             columns={columns}

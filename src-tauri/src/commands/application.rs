@@ -9,17 +9,17 @@ use crate::{
 
 #[tauri::command]
 pub async fn create_application(
-    application_data: CreateApplicationRequest,
     state: State<'_, AppState>,
+    application_data: CreateApplicationRequest,
 ) -> Result<AppResponse<()>, AppResponse<()>> {
     match application_service::create_application(&state.db, application_data).await {
-        Ok(_) => Ok(AppResponse::success(
+        Ok(()) => Ok(AppResponse::success(
             "APPLICATION_CREATED",
             "Application created successfully",
             None,
         )),
 
-        Err(error) => Ok(error.into()),
+        Err(error) => Err(error.into()),
     }
 }
 
@@ -34,6 +34,6 @@ pub async fn fetch_applications(
             Some(applications),
         )),
 
-        Err(error) => Ok(error.into()),
+        Err(error) => Err(error.into()),
     }
 }

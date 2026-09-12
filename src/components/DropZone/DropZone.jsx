@@ -1,14 +1,13 @@
-import React, { useId } from "react";
-import styles from "./DropZone.module.css";
-import { appDataDir, join } from "@tauri-apps/api/path";
-import { mkdir, writeFile } from "@tauri-apps/plugin-fs";
-import { invoke } from "@tauri-apps/api/core";
-import { useProgress } from "../../app/context/ProgressProvider";
-import { api } from "./services/dropboxService";
-import { useToast } from "../../app/context/ToastProvider";
-import { UploadIcon } from "../../assets/icons/icon";
+import React, { useId } from 'react';
+import styles from './DropZone.module.css';
+import { appDataDir, join } from '@tauri-apps/api/path';
+import { mkdir, writeFile } from '@tauri-apps/plugin-fs';
+import { useProgress } from '../../app/context/ProgressProvider';
+import { documentService } from '../../services/documentService';
+import { useToast } from '../../app/context/ToastProvider';
+import { UploadIcon } from '../../assets/icons/icon';
 
-export default function DropZone({ label = "Upload", type, successCallback }) {
+export default function DropZone({ label = 'Upload', type, successCallback }) {
   const inputId = useId();
   const { start, setProgress, finish } = useProgress();
   const { addToast } = useToast();
@@ -16,7 +15,7 @@ export default function DropZone({ label = "Upload", type, successCallback }) {
   const saveFile = async (file) => {
     const baseDir = await appDataDir();
 
-    const docsDir = await join(baseDir, "documents");
+    const docsDir = await join(baseDir, 'documents');
     await mkdir(docsDir, { recursive: true });
 
     const fileName = `${crypto.randomUUID()}_${file.name}`;
@@ -27,31 +26,29 @@ export default function DropZone({ label = "Upload", type, successCallback }) {
     await writeFile(fullPath, bytes);
 
     try {
-      const response = await api.uploadDocument({
+      const response = await documentService.uploadDocument({
         filePath: `documents/${fileName}`,
         documentType: type,
         originalFileName: file.name,
       });
 
       addToast({
-        title: response.status,
         message: response.message,
         type:
-          response.status === "error"
-            ? "error"
-            : response.status === "success"
-              ? "success"
-              : "warning",
+          response.status === 'error'
+            ? 'error'
+            : response.status === 'success'
+              ? 'success'
+              : 'warning',
       });
 
-      if (response.status === "success") {
+      if (response.status === 'success') {
         await successCallback();
       }
     } catch (err) {
       addToast({
-        title: "Error",
         message: String(err),
-        type: "error",
+        type: 'error',
       });
     }
 
@@ -64,8 +61,8 @@ export default function DropZone({ label = "Upload", type, successCallback }) {
     if (!file) return;
 
     const allowed = [
-      "application/pdf",
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      'application/pdf',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
     ];
 
     const extOk = /\.(pdf|docx)$/i.test(file.name);
@@ -73,9 +70,8 @@ export default function DropZone({ label = "Upload", type, successCallback }) {
 
     if (!extOk && !mimeOk) {
       addToast({
-        title: "Invalid file",
-        message: "Only PDF or DOCX allowed",
-        type: "warning",
+        message: 'Invalid file Only PDF or DOCX allowed',
+        type: 'warning',
       });
       return;
     }
@@ -86,27 +82,28 @@ export default function DropZone({ label = "Upload", type, successCallback }) {
       console.error(err);
 
       addToast({
-        title: "Error",
-        message: "Failed to save file",
-        type: "error",
+        message: 'Failed to save file',
+        type: 'error',
       });
     } finally {
       //Important to upload the file again without reloading the screen
-      input.value = "";
+      input.value = '';
     }
   };
 
   return (
-    <div className={styles["resume-upload-container"]}>
-      <label htmlFor={inputId} className={styles["upload-btn"]}>
-        <UploadIcon size={12} />
-        {label}
+    <div className={styles['resume-upload-container']}>
+      <label htmlFor={inputId} className={styles['upload-btn']}>
+        <span className={styles['upload-icon']} aria-hidden="true">
+          <UploadIcon size={14} />
+        </span>
+        <span className={styles['upload-label']}>{label}</span>
       </label>
 
       <input
         id={inputId}
         type="file"
-        className={styles["upload-input"]}
+        className={styles['upload-input']}
         accept=".pdf,.docx"
         onChange={handleFileUpload}
       />

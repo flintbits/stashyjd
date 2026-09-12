@@ -2,11 +2,11 @@ CREATE TABLE IF NOT EXISTS tasks (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     public_id TEXT NOT NULL UNIQUE,
 
-    application_id INTEGER NOT NULL,
+    application_id TEXT NOT NULL,
 
-    title TEXT NOT NULL,
+    text TEXT NOT NULL,
 
-    status TEXT NOT NULL DEFAULT 'pending',
+    completed INTEGER NOT NULL DEFAULT 0,
     priority TEXT NOT NULL DEFAULT 'low',
 
     due_at DATETIME,
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS tasks (
     updated_at DATETIME DEFAULT (datetime('now','localtime')),
 
     FOREIGN KEY (application_id)
-        REFERENCES applications(id)
+        REFERENCES applications(public_id)
         ON DELETE CASCADE
 );
 
@@ -26,8 +26,8 @@ ON tasks(public_id);
 CREATE INDEX IF NOT EXISTS idx_tasks_application_id
 ON tasks(application_id);
 
-CREATE INDEX IF NOT EXISTS idx_tasks_status
-ON tasks(status);
+CREATE INDEX IF NOT EXISTS idx_tasks_completed
+ON tasks(completed);
 
 CREATE INDEX IF NOT EXISTS idx_tasks_priority
 ON tasks(priority);

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import styles from "./TabsComponent.module.css";
+import React, { useState } from 'react';
+import styles from './TabsComponent.module.css';
 
 export default function TabsComponent({ tabs, defaultTab, onChange }) {
   const [activeTab, setActivetab] = useState(defaultTab);
@@ -9,7 +9,7 @@ export default function TabsComponent({ tabs, defaultTab, onChange }) {
   };
 
   return (
-    <section className={styles["document-tabs"]}>
+    <section className={styles['document-tabs']}>
       {tabs.map((tab) => {
         const Icon = tab.icon;
         const isActive = activeTab === tab.id;
@@ -17,12 +17,12 @@ export default function TabsComponent({ tabs, defaultTab, onChange }) {
         return (
           <button
             key={tab.id}
-            className={`${styles.tab} ${isActive ? styles.active : ""}`}
+            className={`${styles.tab} ${isActive ? styles.active : ''}`}
             onClick={() => handleTabClick(tab.id)}
           >
-            {Icon && <Icon className={styles["tab-icon"]} />}
+            {Icon && isActive && <Icon className={styles['tab-icon']} />}
 
-            <span className={styles["tab-label"]}>{tab.label}</span>
+            <span className={styles['tab-label']}>{tab.label}</span>
 
             {/* <span className={styles["tab-count"]}>{tab.count}</span> */}
           </button>

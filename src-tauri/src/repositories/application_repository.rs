@@ -114,13 +114,10 @@ pub async fn fetch_all_applications(
 pub async fn find_by_id(
     db: &sqlx::SqlitePool,
     public_id: &str,
-) -> Result<Option<ApplicationRecord>, sqlx::Error> {
-    sqlx::query_as::<_, ApplicationRecord>(
+) -> Result<Option<String>, sqlx::Error> {
+    sqlx::query_scalar(
         r#"
-        SELECT
-            id,
-            public_id,
-            title
+        SELECT public_id
         FROM applications
         WHERE public_id = ?
         "#,

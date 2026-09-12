@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
-import Modal from "../../../../components/Modal/Modal";
-import { CloseIcon, DocumentsIcon } from "../../../../assets/icons/icon";
-import styles from "./DocumentLibraryModal.module.css";
-import DocumentLibraryGrid from "./components/DocumentLibraryGrid/DocumentLibraryGrid";
-import { documentPageApi } from "../../../Documents/services/documentsService";
-import { useToast } from "../../../../app/context/ToastProvider";
+import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
+import Modal from '../../../../components/Modal/Modal';
+import { CloseIcon, DocumentsIcon } from '../../../../assets/icons/icon';
+import styles from './DocumentLibraryModal.module.css';
+import DocumentLibraryGrid from './components/DocumentLibraryGrid/DocumentLibraryGrid';
+import { documentService } from '../../../../services/documentService';
+import { useToast } from '../../../../app/context/ToastProvider';
 
 export default function DocumentLibraryModal({ isOpen, setIsOpen }) {
   const [documents, setDocuments] = useState([]);
@@ -16,19 +16,16 @@ export default function DocumentLibraryModal({ isOpen, setIsOpen }) {
     setDocuments([]);
 
     try {
-      const response = await documentPageApi.fetchAllDocumets({
-        docType: null,
-      });
+      const response = await documentService.fetchAllDocuments();
 
-      if (response.status === "success") {
+      if (response.status === 'success') {
         setDocuments(response.data);
         return;
       }
     } catch (e) {
       addToast({
-        title: "Error",
         message: String(e),
-        type: "error",
+        type: 'error',
       });
     }
   }
@@ -41,26 +38,24 @@ export default function DocumentLibraryModal({ isOpen, setIsOpen }) {
     };
   }, []);
 
-  const root = document.getElementById("modal-root");
+  const root = document.getElementById('modal-root');
   return createPortal(
     <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
       <Modal.Header>
-        <section className={styles["document-modal-header"]}>
-          <div className={styles["document-modal-header-content"]}>
+        <section className={styles['document-modal-header']}>
+          <div className={styles['document-modal-header-content']}>
             <DocumentsIcon size={16} />
-            <h1 className={styles["document-modal-header-title"]}>
-              Document Library
-            </h1>
+            <h1 className={styles['document-modal-header-title']}>Document Library</h1>
           </div>
 
-          <div className={styles["document-modal-header-actions"]}>
+          <div className={styles['document-modal-header-actions']}>
             <CloseIcon size={16} onClick={() => setIsOpen(false)} />
           </div>
         </section>
       </Modal.Header>
 
       <Modal.Body>
-        <section className={styles["document-library-grid-wrapper"]}>
+        <section className={styles['document-library-grid-wrapper']}>
           <DocumentLibraryGrid documents={documents} />
         </section>
       </Modal.Body>

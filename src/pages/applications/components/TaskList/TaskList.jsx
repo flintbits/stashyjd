@@ -66,33 +66,37 @@ export default function TaskList({
       </div>
 
       <div className={styles.list}>
-        {items.map((item) => (
-          <div className={`${styles.item} ${!showCheckbox ? styles.noCheckbox : ''}`} key={item.id}>
-            {showCheckbox && (
-              <button
-                type="button"
-                className={`${styles.checkbox} ${item.completed ? styles.checked : ''}`}
-                onClick={() => onToggle?.(item)}
-                aria-label={`Mark "${item.title}" as ${item.completed ? 'incomplete' : 'complete'}`}
-              >
-                {item.completed && '✓'}
-              </button>
-            )}
-
-            <div className={styles.content}>
-              <div className={`${styles.itemText} ${item.completed ? styles.completed : ''}`}>
-                {item.text}
-              </div>
-            </div>
-
-            <div className={styles.itemActions}>
-              {item.date && (
-                <span className={`${styles.date} ${item.overdue ? styles.overdue : ''}`}>
-                  {item.date}
-                </span>
+        {items &&
+          items?.map((item) => (
+            <div
+              className={`${styles.item} ${!showCheckbox ? styles.noCheckbox : ''}`}
+              key={item.id}
+            >
+              {showCheckbox && (
+                <button
+                  type="button"
+                  className={`${styles.checkbox} ${item.completed ? styles.checked : ''}`}
+                  onClick={() => onToggle?.(item)}
+                  aria-label={`Mark "${item.title}" as ${item.completed ? 'incomplete' : 'complete'}`}
+                >
+                  {item.completed && '✓'}
+                </button>
               )}
 
-              {/* <button
+              <div className={styles.content}>
+                <div className={`${styles.itemText} ${item.completed ? styles.completed : ''}`}>
+                  {item.text}
+                </div>
+              </div>
+
+              <div className={styles.itemActions}>
+                {item.date && (
+                  <span className={`${styles.date} ${item.overdue ? styles.overdue : ''}`}>
+                    {item.date}
+                  </span>
+                )}
+
+                {/* <button
                 type="button"
                 className={styles.deleteButton}
                 onClick={() => onDelete?.(item)}
@@ -101,16 +105,16 @@ export default function TaskList({
                 <FiTrash2 />
               </button> */}
 
-              <Button
-                // text="Delete Document"
-                variant="danger"
-                leftIcon={DeleteIcon}
-                onClick={() => onDelete?.(item)}
-                aria-label={`Delete "${item.title}"`}
-              />
+                <Button
+                  // text="Delete Document"
+                  variant="danger"
+                  leftIcon={DeleteIcon}
+                  onClick={() => onDelete?.(item)}
+                  aria-label={`Delete "${item.title}"`}
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </section>
   );
