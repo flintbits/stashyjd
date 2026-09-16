@@ -23,19 +23,6 @@ export default function Sidebar({ collapsed, setCollapsed }) {
       <section>
         <div className={styles['sidebar-brand']}>
           <h2 className={styles['sidebar-text']}>StashyJD</h2>
-          {/* <button
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              background: "transparent",
-              border: "none",
-              cursor: "pointer",
-              fontSize: "var(--text-lg)",
-              padding: 0,
-            }}
-            title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-          >
-            {collapsed ? "»" : "«"}
-          </button> */}
         </div>
 
         <section className={styles['create-section']}>

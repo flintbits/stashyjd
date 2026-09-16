@@ -1,39 +1,38 @@
-import styles from "./TitleBar.module.css";
-import React from "react";
-import { getCurrentWindow } from "@tauri-apps/api/window";
-import { FiMinus, FiSquare, FiX } from "react-icons/fi";
+import styles from './TitleBar.module.css';
+import { getCurrentWindow } from '@tauri-apps/api/window';
+import { FiMinus, FiSquare, FiX } from 'react-icons/fi';
 
 export default function WindowsControls() {
   const appWindow = getCurrentWindow();
-
-  const isMaximized = appWindow.isMaximized();
 
   const minimize = async () => {
     await appWindow.minimize();
   };
 
   const maximize = async () => {
-    if (isMaximized) {
-      await appWindow.unmaximize();
-    } else {
-      await appWindow.maximize();
-    }
+    await appWindow.toggleMaximize();
   };
 
   const close = async () => {
     await appWindow.close();
   };
   return (
-    <div className={styles["window-controls"]}>
-      <button onClick={minimize}>
+    <div className={styles['window-controls']} onMouseDown={(event) => event.stopPropagation()}>
+      <button type="button" onClick={minimize} aria-label="Minimize window" title="Minimize">
         <FiMinus size={16} />
       </button>
 
-      <button onClick={maximize}>
+      <button type="button" onClick={maximize} aria-label="Maximize window" title="Maximize">
         <FiSquare size={14} />
       </button>
 
-      <button className={styles["close-btn"]} onClick={close}>
+      <button
+        type="button"
+        className={styles['close-btn']}
+        onClick={close}
+        aria-label="Close window"
+        title="Close"
+      >
         <FiX size={18} />
       </button>
     </div>

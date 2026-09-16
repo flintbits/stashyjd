@@ -18,7 +18,7 @@ export default function TaskList({
   const [note, setNote] = useState('');
 
   const handleOpenAdd = () => {
-    setIsAdding(true);
+    setIsAdding((prev) => !prev);
   };
 
   const handleCancelAdd = () => {
@@ -39,28 +39,19 @@ export default function TaskList({
       <div className={styles.header}>
         <h3>{title}</h3>
 
-        {!isAdding && (
-          <Button text={buttonLabel} variant="neutral" onClick={handleOpenAdd} leftIcon={AddIcon} />
-        )}
+        <Button
+          text={`${!isAdding ? buttonLabel : 'Close'}`}
+          variant={`${!isAdding ? 'neutral' : 'danger'}`}
+          onClick={handleOpenAdd}
+          leftIcon={!isAdding ? AddIcon : FiX}
+        />
       </div>
 
       <div className={`${styles.addNote} ${isAdding ? styles.addNoteOpen : ''}`}>
         <div className={styles.addNoteInner}>
-          <TextArea
-            placeholder="Bla bla bla"
-            value={note}
-            onChange={(e) => setNote(e.target.value)}
-            rows={3}
-          />
+          <TextArea value={note} onChange={(e) => setNote(e.target.value)} rows={2} />
           <div className={styles.addNoteActions}>
-            <Button text="Add" onClick={handleAdd} />{' '}
-            <Button
-              // text="Delete Document"
-              variant="danger"
-              leftIcon={FiX}
-              onClick={handleCancelAdd}
-              aria-label="Cancel adding note"
-            />
+            <Button text={buttonLabel} variant="text" onClick={handleAdd} />
           </div>
         </div>
       </div>
@@ -96,17 +87,7 @@ export default function TaskList({
                   </span>
                 )}
 
-                {/* <button
-                type="button"
-                className={styles.deleteButton}
-                onClick={() => onDelete?.(item)}
-                aria-label={`Delete "${item.title}"`}
-              >
-                <FiTrash2 />
-              </button> */}
-
                 <Button
-                  // text="Delete Document"
                   variant="danger"
                   leftIcon={DeleteIcon}
                   onClick={() => onDelete?.(item)}

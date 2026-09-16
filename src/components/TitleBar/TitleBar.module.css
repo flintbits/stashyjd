@@ -1,11 +1,12 @@
 .titlebar {
-  height: 24px;
+  height: 32px;
+  min-height: 32px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #656464;
-  /* border-bottom: 1px solid #252525; */
-  /* padding: 0 12px; */
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
   user-select: none;
 }
 
@@ -17,8 +18,10 @@
 }
 
 .titlebar-left {
-  width: 300px;
-  gap: 12px;
+  min-width: 220px;
+  height: 100%;
+  gap: 14px;
+  padding: 0 12px;
 }
 
 .titlebar-center {
@@ -27,7 +30,7 @@
 }
 
 .titlebar-right {
-  width: 300px;
+  height: 100%;
   justify-content: flex-end;
 }
 
@@ -36,16 +39,17 @@
 .brand {
   display: flex;
   align-items: center;
-  gap: 8px;
+  color: var(--text-primary);
 }
 
-.logo {
-  width: 14px;
-  height: 14px;
-
-  border-radius: 4px;
-
-  background: #10b981;
+.brand h5 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  line-height: 1;
+  letter-spacing: 0;
+  white-space: nowrap;
 }
 
 /* SEARCH */
@@ -73,57 +77,97 @@
 
 .window-controls {
   display: flex;
+  height: 100%;
+  -webkit-app-region: no-drag;
 }
 
 .window-controls button {
-  width: 42px;
-  height: 42px;
+  width: 46px;
+  height: 32px;
 
   border: none;
 
   background: transparent;
 
-  /* color: white; */
+  color: var(--icon-default);
 
   cursor: pointer;
 
   -webkit-app-region: no-drag;
+  display: grid;
+  place-items: center;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
 }
 
 .window-controls button:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--bg-muted);
+  color: var(--text-primary);
+}
+
+.window-controls button:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: 2px solid var(--brand-accent);
+  outline-offset: -3px;
 }
 
 .close-btn:hover {
-  background: #e81123 !important;
+  background: #c42b3c !important;
+  color: #fff !important;
 }
 
 /* MAC */
 
 .mac-controls {
   display: flex;
-  gap: 8px;
-}
-
-.mac-btn {
-  width: 12px;
-  height: 12px;
-
-  border-radius: 50%;
-
-  cursor: pointer;
-
+  height: 100%;
   -webkit-app-region: no-drag;
 }
 
-.close {
+.mac-control {
+  width: 46px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+}
+
+.mac-control:hover {
+  background: var(--bg-muted);
+}
+
+.mac-control:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: 2px solid var(--brand-accent);
+  outline-offset: -3px;
+}
+
+.mac-btn {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+
+.mac-control.close,
+.mac-control.minimize,
+.mac-control.maximize {
+  background: transparent;
+}
+
+.mac-control.close .mac-btn {
   background: #ff5f57;
 }
 
-.minimize {
+.mac-control.minimize .mac-btn {
   background: #ffbd2f;
 }
 
-.maximize {
+.mac-control.maximize .mac-btn {
   background: #28c840;
 }

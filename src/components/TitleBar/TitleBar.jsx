@@ -1,48 +1,19 @@
-import useOS from "../../app/hooks/useOS";
-import styles from "./TitleBar.module.css";
-import { getCurrentWindow } from "@tauri-apps/api/window";
-import WindowsControls from "./WindowsControls";
+import useOS from '../../app/hooks/useOS';
+import styles from './TitleBar.module.css';
+import WindowsControls from './WindowsControls';
+import MacControls from './MacControls';
 
 export default function TitleBar() {
   const os = useOS();
 
-  const appWindow = getCurrentWindow();
-
-  const minimize = async () => {
-    await appWindow.minimize();
-  };
-
-  const maximize = async () => {
-    const maximized = await appWindow.isMaximized();
-
-    if (maximized) {
-      await appWindow.unmaximize();
-    } else {
-      await appWindow.maximize();
-    }
-  };
-
-  const close = async () => {
-    await appWindow.close();
-  };
-
   return (
     <header className={styles.titlebar} data-tauri-drag-region>
       {/* LEFT */}
-      <div className={styles["titlebar-left"]}>
-        {os === "mac" && (
-          <div className={styles["mac-controls"]}>
-            <div className={`${styles["mac-btn"]} ${styles.close}`} onClick={close} />
-
-            <div className={`${styles["mac-btn"]} ${styles.minimize}`} onClick={minimize} />
-
-            <div className={`${styles["mac-btn"]} ${styles.maximize}`} onClick={maximize} />
-          </div>
-        )}
+      <div className={styles['titlebar-left']}>
+        {os === 'mac' && <MacControls />}
 
         <div className={styles.brand}>
-          <div className={styles.logo} />
-          <span>stashy.jd</span>
+          <h5>StashyJD</h5>
         </div>
       </div>
 
@@ -52,9 +23,7 @@ export default function TitleBar() {
       </div> */}
 
       {/* RIGHT */}
-      <div className={styles["titlebar-right"]}>
-        {os === "windows" && <WindowsControls />}
-      </div>
+      <div className={styles['titlebar-right']}>{os === 'windows' && <WindowsControls />}</div>
     </header>
   );
 }

@@ -28,7 +28,7 @@ export default function DocumentsPage({ rightPanelWidth = 320 }) {
   const [selectedDoc, setSelectedDoc] = useState(null);
   const [activeTab, setActivetab] = useState('all');
   const context = useOutletContext() || {};
-  const { setRightPanelContent, setShowRight } = context;
+  const { showRight, setRightPanelContent, setShowRight } = context;
 
   useEffect(() => {
     context.setRightPanelWidth?.(rightPanelWidth);
@@ -53,6 +53,12 @@ export default function DocumentsPage({ rightPanelWidth = 320 }) {
       setRightPanelContent(null);
     };
   }, [selectedDoc, setRightPanelContent, setShowRight]);
+
+  useEffect(() => {
+    if (!showRight && selectedDoc) {
+      setSelectedDoc(null);
+    }
+  }, [showRight, selectedDoc]);
 
   async function fetchDocuments() {
     //reset when tab changes to avoid stale state
@@ -125,6 +131,7 @@ export default function DocumentsPage({ rightPanelWidth = 320 }) {
           <DataTable
             data={data}
             columns={columns}
+            highlightedRowId={selectedDoc?.public_id ?? null}
             onRowClick={(doc) => {
               setSelectedDoc(doc);
               setShowRight(true);

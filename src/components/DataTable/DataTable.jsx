@@ -1,28 +1,36 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   useReactTable,
   getCoreRowModel,
   getSortedRowModel,
   getFilteredRowModel,
   flexRender,
-} from "@tanstack/react-table";
+} from '@tanstack/react-table';
 
-import styles from "./DataTable.module.css";
+import styles from './DataTable.module.css';
 
-import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa6";
+import { FaSort, FaSortDown, FaSortUp } from 'react-icons/fa6';
 
-const DataTable = ({ data, columns, onRowClick, showFooter = true }) => {
+const DataTable = ({
+  data,
+  columns,
+  onRowClick,
+  showFooter = true,
+  highlightedRowId,
+  onHighlightChange,
+}) => {
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const [rowSelection, setRowSelection] = useState({});
+  const [internalHighlightedRowId, setInternalHighlightedRowId] = useState(null);
 
   const table = useReactTable({
     data,
     columns,
 
-    columnResizeMode: "onChange",
+    columnResizeMode: 'onChange',
 
-    getRowId: (row, index) => row.id ?? index.toString(),
+    getRowId: (row, index) => row.public_id ?? row.id ?? index.toString(),
 
     state: {
       sorting,
@@ -42,10 +50,10 @@ const DataTable = ({ data, columns, onRowClick, showFooter = true }) => {
   });
 
   return (
-    <div className={styles["data-table-layout"]}>
+    <div className={styles['data-table-layout']}>
       {/* SCROLLABLE AREA */}
-      <div className={styles["data-table-scroll"]}>
-        <table className={styles["data-table"]}>
+      <div className={styles['data-table-scroll']}>
+        <table className={styles['data-table']}>
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
@@ -60,31 +68,26 @@ const DataTable = ({ data, columns, onRowClick, showFooter = true }) => {
                           ? header.column.getToggleSortingHandler()
                           : undefined
                       }
-                      className={
-                        header.column.getCanSort() ? styles["sortable-header"] : ""
-                      }
+                      className={header.column.getCanSort() ? styles['sortable-header'] : ''}
                       style={{ width: header.getSize() }}
                     >
                       {header.isPlaceholder
                         ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
-                          )}
+                        : flexRender(header.column.columnDef.header, header.getContext())}
 
                       {header.column.getCanSort() && (
                         <span
-                          className={`${styles["sort-indicator"]} ${
-                            isSorted === "asc"
+                          className={`${styles['sort-indicator']} ${
+                            isSorted === 'asc'
                               ? styles.asc
-                              : isSorted === "desc"
+                              : isSorted === 'desc'
                                 ? styles.desc
                                 : styles.none
                           }`}
                         >
-                          {isSorted === "asc" ? (
+                          {isSorted === 'asc' ? (
                             <FaSortUp />
-                          ) : isSorted === "desc" ? (
+                          ) : isSorted === 'desc' ? (
                             <FaSortDown />
                           ) : (
                             <FaSort />
@@ -98,18 +101,16 @@ const DataTable = ({ data, columns, onRowClick, showFooter = true }) => {
             ))}
 
             {/* FILTER ROW */}
-            <tr className={styles["filter-row"]}>
+            <tr className={styles['filter-row']}>
               {table.getHeaderGroups()[0].headers.map((header) => (
                 <th key={header.id} style={{ width: header.getSize() }}>
                   {header.column.getCanFilter() ? (
                     <input
                       type="text"
-                      value={header.column.getFilterValue() ?? ""}
-                      onChange={(e) =>
-                        header.column.setFilterValue(e.target.value)
-                      }
+                      value={header.column.getFilterValue() ?? ''}
+                      onChange={(e) => header.column.setFilterValue(e.target.value)}
                       placeholder="Search..."
-                      className={styles["column-filter"]}
+                      className={styles['column-filter']}
                     />
                   ) : null}
                 </th>
@@ -119,20 +120,25 @@ const DataTable = ({ data, columns, onRowClick, showFooter = true }) => {
 
           <tbody>
             {table.getRowModel().rows.map((row) => {
-              const isSelected = row.getIsSelected();
+              const isHighlighted =
+                (highlightedRowId === undefined ? internalHighlightedRowId : highlightedRowId) ===
+                row.id;
 
               return (
                 <tr
                   key={row.id}
-                  className={isSelected ? styles["row-selected"] : ""}
-                  onClick={() => onRowClick?.(row.original)}
+                  className={isHighlighted ? styles['row-selected'] : ''}
+                  onClick={() => {
+                    if (highlightedRowId === undefined) {
+                      setInternalHighlightedRowId(row.id);
+                    }
+                    onHighlightChange?.(row.id);
+                    onRowClick?.(row.original);
+                  }}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <td key={cell.id} style={{ width: cell.column.getSize() }}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
-                      )}
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </td>
                   ))}
                 </tr>
@@ -144,8 +150,12 @@ const DataTable = ({ data, columns, onRowClick, showFooter = true }) => {
 
       {/* FIXED FOOTER */}
       {showFooter && (
-        <div className={styles["data-table-footer"]}>
-          Showing {table.getRowModel().rows.length} results
+        <div className={styles['data-table-footer']}>
+          {table.getRowModel().rows.length === 0
+            ? 'No results found'
+            : `Showing ${table.getRowModel().rows.length} ${
+                table.getRowModel().rows.length === 1 ? 'result' : 'results'
+              }`}
         </div>
       )}
     </div>

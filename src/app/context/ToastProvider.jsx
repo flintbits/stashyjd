@@ -1,5 +1,5 @@
-import { createContext, useContext, useState, useCallback } from "react";
-import ToastContainer from "../../components/Toast/ToastContainer";
+import { createContext, useContext, useState, useCallback } from 'react';
+import ToastContainer from '../../components/Toast/ToastContainer';
 
 const ToastContext = createContext();
 
@@ -34,23 +34,20 @@ export function ToastProvider({ children }) {
     }, toast.duration);
   };
 
-  const addToast = useCallback(
-    ({ title, message, type = "info", duration = 10000 }) => {
-      const id = crypto.randomUUID();
-      const newToast = { id, title, message, type, duration };
+  const addToast = useCallback(({ title, message, type = 'info', duration = 4000 }) => {
+    const id = crypto.randomUUID();
+    const newToast = { id, title, message, type, duration };
 
-      setToasts((prev) => {
-        if (prev.length < MAX_TOASTS) {
-          startTimer(newToast);
-          return [...prev, newToast];
-        } else {
-          setQueue((q) => [...q, newToast]);
-          return prev;
-        }
-      });
-    },
-    [],
-  );
+    setToasts((prev) => {
+      if (prev.length < MAX_TOASTS) {
+        startTimer(newToast);
+        return [...prev, newToast];
+      } else {
+        setQueue((q) => [...q, newToast]);
+        return prev;
+      }
+    });
+  }, []);
 
   return (
     <ToastContext.Provider value={{ addToast }}>

@@ -15,7 +15,7 @@ export default function ApplicationsPage({ rightPanelWidth = 820 }) {
   const [data, setData] = useState([]);
   const [selectedApplication, setSelectedApplication] = useState(null);
   const context = useOutletContext() || {};
-  const { setRightPanelContent, setShowRight } = context;
+  const { showRight, setRightPanelContent, setShowRight } = context;
   const { execute } = useRequest();
 
   useEffect(() => {
@@ -44,6 +44,12 @@ export default function ApplicationsPage({ rightPanelWidth = 820 }) {
     };
   }, [selectedApplication, setRightPanelContent, setShowRight]);
 
+  useEffect(() => {
+    if (!showRight && selectedApplication) {
+      setSelectedApplication(null);
+    }
+  }, [showRight, selectedApplication]);
+
   //Fetch all applications on initial load
   useEffect(() => {
     execute({
@@ -62,7 +68,7 @@ export default function ApplicationsPage({ rightPanelWidth = 820 }) {
           <DataTable
             data={data}
             columns={columns}
-            showFooter={false}
+            highlightedRowId={selectedApplication?.public_id ?? null}
             onRowClick={(application) => {
               setSelectedApplication(application);
               setShowRight(true);

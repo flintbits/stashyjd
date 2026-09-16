@@ -52,7 +52,6 @@
 
 .data-table tbody tr {
   transition: background-color 0.15s ease;
-
   font-size: var(--text-sm);
   color: var(--text-secondary);
   font-weight: var(--font-medium);
@@ -75,21 +74,13 @@
   user-select: none;
 }
 
-.sortable-header:hover {
-  background: #eef1f8;
-}
-
 .sort-indicator {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   width: 18px;
-
   margin-left: 6px;
-
   font-size: var(--text-sm);
-
   transition:
     opacity 0.15s ease,
     transform 0.15s ease;
@@ -104,54 +95,39 @@
   opacity: 1;
 }
 
-.data-table input[type="checkbox"] {
+.data-table input[type='checkbox'] {
   transform: scale(0.9);
-
   accent-color: var(--brand-primary);
-
   cursor: pointer;
 }
 
 .data-table td:first-child,
 .data-table th:first-child {
   width: 40px;
-
   text-align: center;
 }
 
 .column-filter {
   width: 100%;
-
   padding: 4px 6px;
-
   font-size: var(--text-sm);
-
   border: 1px solid var(--border-subtle);
   border-radius: 4px;
-
   outline: none;
 }
 
 .column-filter:focus {
   border-color: var(--brand-primary-hover);
-
   box-shadow: 0 0 0 1px var(--brand-primary-soft);
 }
 
 .data-table-footer {
   flex-shrink: 0;
-
   height: 48px;
-
   display: flex;
   align-items: center;
-
   padding: 0 16px;
-
-  border-top: 1px solid var(--border-subtle);
-
-  background: white;
-
+  background-color: var(--bg-elevated);
   font-size: var(--text-sm);
   color: var(--text-secondary);
 }
