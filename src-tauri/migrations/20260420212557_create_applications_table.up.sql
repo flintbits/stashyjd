@@ -1,6 +1,3 @@
--- Add up migration script here
--- migrations/20260420182358_create_applications_table.sql
-
 CREATE TABLE IF NOT EXISTS applications (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     public_id TEXT NOT NULL UNIQUE,

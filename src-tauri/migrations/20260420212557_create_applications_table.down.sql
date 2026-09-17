@@ -1,4 +1,3 @@
--- Add down migration script here
 DROP INDEX IF EXISTS idx_applications_created_at;
 DROP INDEX IF EXISTS idx_applications_archived;
 DROP INDEX IF EXISTS idx_applications_priority;

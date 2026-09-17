@@ -17,6 +17,25 @@ body,
   font-size: var(--text-base);
 }
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-secondary) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--text-secondary);
+  border-radius: 999px;
+}
+
 body {
   line-height: 1.5;
   background: none;
