@@ -7,12 +7,13 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies / build
 node_modules
 dist
 dist-ssr
 *.local
 
-# Editor directories and files
+# Editor
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -23,8 +24,11 @@ dist-ssr
 *.sln
 *.sw?
 
-#keys
+# Tauri
 .tauri/
 
-#env
-.env.local
+# Environment
+.env
+
+# Local development notes
+NOTES.md

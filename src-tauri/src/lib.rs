@@ -9,12 +9,12 @@ pub mod services;
 pub mod utils;
 
 use app_state::AppState;
-use db::connections::create_pool;
-use db::pragmas::apply;
 
 use tauri::Manager;
 
 use tauri_plugin_log::{RotationStrategy, Target, TargetKind};
+
+use crate::db::connections::initialize;
 
 #[tauri::command]
 fn greet(name: &str) -> String {
@@ -27,8 +27,7 @@ pub fn run() {
     tauri::Builder::default()
         .setup(|app| {
             tauri::async_runtime::block_on(async {
-                let pool = create_pool(app.handle()).await;
-                apply(&pool).await;
+                let pool = initialize(app.handle()).await;
 
                 let state = AppState { db: pool };
                 app.manage(state);
@@ -68,12 +67,3 @@ pub fn run() {
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
-
-//sqlx migrate add create_users
-//$env:DATABASE_URL="sqlite:///C:/Users/Victus/AppData/Roaming/StashyJD-crimson/app.db"
-//sqlx migrate run
-//sqlx migrate revert
-
-//sqlx migrate add create_application_tasks_table
-
-//cargo clippy
