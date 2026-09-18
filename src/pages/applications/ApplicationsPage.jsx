@@ -4,6 +4,7 @@ import DataTable from '../../components/DataTable/DataTable';
 import { TABLEHEADERS } from './configs';
 import { useEffect, useMemo, useState } from 'react';
 import PageHeader from '../../components/PageHeader/PageHeader';
+import PageShell from '../../layouts/PageShell/PageShell';
 import { useToast } from '../../app/context/ToastProvider';
 import { applicationService } from '../../services/applicationService';
 import { application_table_columns } from './applications-table-columns';
@@ -60,7 +61,7 @@ export default function ApplicationsPage({ rightPanelWidth = 820 }) {
   }, []);
 
   return (
-    <div className={styles['applications-page']}>
+    <PageShell>
       <PageHeader title="Applications" subtitle="Manage your applications"></PageHeader>
 
       <section className={styles['applications-page-main']}>
@@ -80,6 +81,6 @@ export default function ApplicationsPage({ rightPanelWidth = 820 }) {
           <BottomDetailPanel application={selectedApplication} />
         </section> */}
       </section>
-    </div>
+    </PageShell>
   );
 }

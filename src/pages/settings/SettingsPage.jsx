@@ -1,13 +1,14 @@
-import React, { useState } from "react";
-import styles from "./SettingsPage.module.css";
-import PageHeader from "../../components/PageHeader/PageHeader";
-import GeneralSettings from "./components/GeneralSettings/GeneralSettings";
+import React, { useState } from 'react';
+import styles from './SettingsPage.module.css';
+import PageHeader from '../../components/PageHeader/PageHeader';
+import GeneralSettings from './components/GeneralSettings/GeneralSettings';
+import PageShell from '../../layouts/PageShell/PageShell';
 
 const settingsConfig = [
   {
-    id: "general",
-    label: "General",
-    description: "Profile & preferences",
+    id: 'general',
+    label: 'General',
+    description: 'Profile & preferences',
     component: GeneralSettings,
   },
   // {
@@ -23,15 +24,15 @@ const settingsConfig = [
   //   // component: AppearanceSettings,
   // },
   {
-    id: "shortcuts",
-    label: "Shortcuts",
-    description: "Keyboard shortcuts",
+    id: 'shortcuts',
+    label: 'Shortcuts',
+    description: 'Keyboard shortcuts',
     // component: ShortcutSettings,
   },
   {
-    id: "about",
-    label: "About",
-    description: "System info",
+    id: 'about',
+    label: 'About',
+    description: 'System info',
     // component: AboutSettings,
   },
 ];
@@ -39,37 +40,33 @@ const settingsConfig = [
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState(settingsConfig[0].id);
 
-  const ActiveComponent = settingsConfig.find(
-    (item) => item.id === activeTab,
-  )?.component;
+  const ActiveComponent = settingsConfig.find((item) => item.id === activeTab)?.component;
 
   return (
-    <div className={styles["settings-page"]}>
+    <PageShell>
       <PageHeader title="Settings" subtitle="yaay settings"></PageHeader>
 
-      <div className={styles["settings-layout"]}>
-        <aside className={styles["settings-sidebar"]}>
-          <div className={styles["settings-menu"]}>
+      <div className={styles['settings-layout']}>
+        <aside className={styles['settings-sidebar']}>
+          <div className={styles['settings-menu']}>
             {settingsConfig.map((item) => (
               <button
                 key={item.id}
-                className={`${styles["settings-menu-item"]} ${
-                  activeTab === item.id ? styles.active : ""
+                className={`${styles['settings-menu-item']} ${
+                  activeTab === item.id ? styles.active : ''
                 }`}
                 onClick={() => setActiveTab(item.id)}
               >
                 <div>
-                  <span className={styles["settings-menu-title"]}>{item.label}</span>
-                  <span className={styles["settings-menu-desc"]}>{item.description}</span>
+                  <span className={styles['settings-menu-title']}>{item.label}</span>
+                  <span className={styles['settings-menu-desc']}>{item.description}</span>
                 </div>
               </button>
             ))}
           </div>
         </aside>
 
-        <main className={styles["settings-content"]}>
-          {ActiveComponent && <ActiveComponent />}
-        </main>
+        <main className={styles['settings-content']}>{ActiveComponent && <ActiveComponent />}</main>
       </div>
       {/* <label>
         <input
@@ -80,6 +77,6 @@ export default function SettingsPage() {
         Use custom titlebar
       </label> */}
       {/* {isOpen && <DocumentLibraryModal setIsOpen={setIsOpen} isOpen={isOpen} />} */}
-    </div>
+    </PageShell>
   );
 }

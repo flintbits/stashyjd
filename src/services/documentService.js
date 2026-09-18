@@ -1,12 +1,12 @@
-import { invoke } from '@tauri-apps/api/core';
+import { invokeSafe } from '../lib/invokeSafe';
 
 export const documentService = {
   fetchAllDocuments(docType = null) {
-    return invoke('fetch_documents', { docType });
+    return invokeSafe('fetch_documents', { docType });
   },
 
   uploadDocument({ filePath, documentType, originalFileName }) {
-    return invoke('create_document', {
+    return invokeSafe('create_document', {
       filePath,
       documentType,
       originalFileName,

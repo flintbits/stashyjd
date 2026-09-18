@@ -9,6 +9,7 @@ import { useWindowContext } from '../app/context/WindowContext';
 
 export default function AppLayout({ rightPanelWidth = 320 }) {
   const [showRight, setShowRight] = useState(true);
+  const [hideRightPanelOnOutsideClick, setHideRightPanelOnOutsideClick] = useState(true);
   const [activeRightPanelWidth, setActiveRightPanelWidth] = useState(rightPanelWidth);
   const [collapsed, setCollapsed] = useState(true);
   const [sidebarHovered, setSidebarHovered] = useState(false);
@@ -20,10 +21,15 @@ export default function AppLayout({ rightPanelWidth = 320 }) {
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
-      if (!showRight || rightPanelRef.current?.contains(event.target)) return;
+      if (
+        !hideRightPanelOnOutsideClick ||
+        !showRight ||
+        rightPanelRef.current?.contains(event.target)
+      ) {
+        return;
+      }
 
       setShowRight(false);
-      setRightPanelContent(null);
     };
 
     document.addEventListener('pointerdown', handleOutsideClick);
@@ -31,7 +37,7 @@ export default function AppLayout({ rightPanelWidth = 320 }) {
     return () => {
       document.removeEventListener('pointerdown', handleOutsideClick);
     };
-  }, [showRight]);
+  }, [hideRightPanelOnOutsideClick, showRight]);
 
   return (
     <>
@@ -63,6 +69,7 @@ export default function AppLayout({ rightPanelWidth = 320 }) {
               setCollapsed,
               setRightPanelContent,
               setRightPanelWidth: setActiveRightPanelWidth,
+              setHideRightPanelOnOutsideClick,
             }}
           />
         </main>

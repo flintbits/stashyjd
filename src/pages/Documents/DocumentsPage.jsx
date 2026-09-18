@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import PageHeader from '../../components/PageHeader/PageHeader';
+import PageShell from '../../layouts/PageShell/PageShell';
 import { AllCoverLetterIcon, AllDocumentsIcon, AllResumeIcon } from '../../assets/icons/icon';
 import styles from './DocumentsPage.module.css';
 import DataTable from '../../components/DataTable/DataTable';
@@ -101,7 +102,7 @@ export default function DocumentsPage({ rightPanelWidth = 320 }) {
   };
 
   return (
-    <div className={styles['documents-page']}>
+    <PageShell>
       <PageHeader
         title="Documents"
         subtitle="Manage resumes, cover letters, and other documents for your applications"
@@ -139,6 +140,6 @@ export default function DocumentsPage({ rightPanelWidth = 320 }) {
           />
         </section>
       </section>
-    </div>
+    </PageShell>
   );
 }

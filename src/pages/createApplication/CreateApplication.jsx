@@ -8,6 +8,7 @@ import { useToast } from '../../app/context/ToastProvider';
 import RightSidebar from './components/RightSidebar/RightSidebar';
 import styles from './CreateApplication.module.css';
 import PageHeader from '../../components/PageHeader/PageHeader';
+import PageShell from '../../layouts/PageShell/PageShell';
 import Button from '../../components/Button/Button';
 import { normalizeApplicationPayload } from '../../utils/normalization';
 import useFormValidation from '../../app/hooks/useFormValidation';
@@ -47,15 +48,17 @@ export default function CreateApplication({ rightPanelWidth = 320 }) {
   };
 
   const context = useOutletContext() || {};
-  const { setRightPanelContent, setShowRight } = context;
+  const { setRightPanelContent, setShowRight, setHideRightPanelOnOutsideClick } = context;
 
   useEffect(() => {
     context.setRightPanelWidth?.(rightPanelWidth);
+    setHideRightPanelOnOutsideClick?.(false);
 
     return () => {
       context.setRightPanelWidth?.(320);
+      setHideRightPanelOnOutsideClick?.(true);
     };
-  }, [context.setRightPanelWidth, rightPanelWidth]);
+  }, [context.setRightPanelWidth, rightPanelWidth, setHideRightPanelOnOutsideClick]);
 
   useEffect(() => {
     if (setRightPanelContent) {
@@ -110,7 +113,7 @@ export default function CreateApplication({ rightPanelWidth = 320 }) {
   };
 
   return (
-    <div className={styles['create-application-page']}>
+    <PageShell scrollable>
       <PageHeader
         title="New Application"
         subtitle=" Add job details manually or paste a job description to enrich your
@@ -125,7 +128,7 @@ export default function CreateApplication({ rightPanelWidth = 320 }) {
           <ApplicationForm onChange={onChange} fieldValues={fieldValues} />
         </section>
       </section>
-    </div>
+    </PageShell>
   );
 }
 
