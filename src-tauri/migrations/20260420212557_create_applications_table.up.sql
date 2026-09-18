@@ -5,24 +5,14 @@ CREATE TABLE IF NOT EXISTS applications (
     company_name TEXT NOT NULL,
     role_title TEXT NOT NULL,
 
-    department TEXT,
     location TEXT,
 
     work_type TEXT,
     employment_type TEXT,
 
     job_url TEXT,
-    source TEXT,
 
     status TEXT NOT NULL DEFAULT 'applied',
-    priority TEXT NOT NULL DEFAULT 'low',
-
-    salary_min INTEGER,
-    salary_max INTEGER,
-    bonus INTEGER,
-    equity INTEGER,
-
-    currency TEXT NOT NULL DEFAULT 'USD',
 
     applied_at TEXT,
     deadline_at TEXT,
@@ -51,9 +41,6 @@ ON applications(status);
 
 CREATE INDEX IF NOT EXISTS idx_applications_company_name
 ON applications(company_name);
-
-CREATE INDEX IF NOT EXISTS idx_applications_priority
-ON applications(priority);
 
 CREATE INDEX IF NOT EXISTS idx_applications_archived
 ON applications(archived);

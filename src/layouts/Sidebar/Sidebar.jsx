@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styles from './Sidebar.module.css';
 import {
   ApplicationIcon,
@@ -12,29 +12,12 @@ import {
 import SidebarFooter from './SidebarFooter/SidebarFooter';
 
 export default function Sidebar({ collapsed, setCollapsed }) {
-  const navigate = useNavigate();
-
-  const handleNewApplication = () => {
-    navigate('/create-application');
-  };
-
   return (
     <div className={`${styles['sidebar-content']} ${collapsed ? styles.collapsed : ''}`}>
       <section>
         <div className={styles['sidebar-brand']}>
           <h2 className={styles['sidebar-text']}>StashyJD</h2>
         </div>
-
-        <section className={styles['create-section']}>
-          <button
-            className={styles['sidebar-create-link']}
-            onClick={handleNewApplication}
-            title="New Application"
-          >
-            <CircleAddIcon size={20} />
-            <span className={styles['sidebar-text']}>New Application</span>
-          </button>
-        </section>
 
         <nav>
           <ul>
@@ -58,6 +41,17 @@ export default function Sidebar({ collapsed, setCollapsed }) {
               >
                 <ApplicationIcon size={18} />
                 <span className={styles['sidebar-text']}>Applications</span>
+              </NavLink>
+            </li>
+            <li title="Create Application">
+              <NavLink
+                to="/create-application"
+                className={({ isActive }) =>
+                  `${styles['sidebar-link']} ${isActive ? styles.active : ''}`
+                }
+              >
+                <CircleAddIcon size={18} />
+                <span className={styles['sidebar-text']}>Create Application</span>
               </NavLink>
             </li>
             <li title="Documents">

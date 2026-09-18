@@ -1,0 +1,44 @@
+.event {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  line-height: 1.25;
+}
+
+.event strong,
+.event span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.event strong {
+  font-weight: var(--weight-semibold);
+}
+
+.event span {
+  opacity: 0.8;
+}
+
+.purple {
+  color: var(--chip-purple-text);
+  background: var(--chip-purple-bg);
+}
+
+.blue {
+  color: var(--chip-blue-text);
+  background: var(--chip-blue-bg);
+}
+
+.green {
+  color: var(--chip-green-text);
+  background: var(--chip-green-bg);
+}
+
+.red {
+  color: var(--error);
+  background: var(--error-bg);
+}

@@ -1,8 +1,8 @@
-.calendar-page {
+.calendar-page-main {
   flex: 1;
-  min-height: 0;
   display: flex;
   flex-direction: column;
+  min-height: 0;
+  padding: 1px 32px;
   overflow: hidden;
-  padding: 8px;
 }

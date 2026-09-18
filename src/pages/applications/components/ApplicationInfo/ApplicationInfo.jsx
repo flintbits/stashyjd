@@ -1,6 +1,6 @@
-import { AddIcon } from "../../../../assets/icons/icon";
-import Button from "../../../../components/Button/Button";
-import styles from "./ApplicationInfo.module.css";
+import { AddIcon } from '../../../../assets/icons/icon';
+import Button from '../../../../components/Button/Button';
+import styles from './ApplicationInfo.module.css';
 
 export default function ApplicationInfo() {
   return (
@@ -25,11 +25,6 @@ export default function ApplicationInfo() {
         </div>
 
         <div className={styles.infoItem}>
-          <span className={styles.label}>Source</span>
-          <span className={styles.value}>LinkedIn</span>
-        </div>
-
-        <div className={styles.infoItem}>
           <span className={styles.label}>Job URL</span>
           <a
             className={styles.value}
@@ -39,11 +34,6 @@ export default function ApplicationInfo() {
           >
             https://linear.app/careers/123 ↗
           </a>
-        </div>
-
-        <div className={styles.infoItem}>
-          <span className={styles.label}>Department</span>
-          <span className={styles.value}>Engineering</span>
         </div>
       </div>
     </section>

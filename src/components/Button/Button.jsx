@@ -7,12 +7,16 @@ export default function Button({
   rightIcon: RightIcon,
   loading = false,
   variant = 'primary',
+  disabled = false,
+  type = 'button',
+  className = '',
 }) {
   return (
     <button
+      type={type}
       onClick={onClick}
-      className={`${styles.btn} ${styles[`btn-${variant}`]}`}
-      disabled={loading}
+      className={`${styles.btn} ${styles[`btn-${variant}`]} ${className}`}
+      disabled={loading || disabled}
     >
       <span className={`${styles['btn-content']} ${loading ? styles['is-hidden'] : ''}`}>
         {LeftIcon && (

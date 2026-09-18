@@ -46,4 +46,8 @@ export const DownloadIcon = ICONS.DownloadIcon;
 
 export const DrawerIcon = ICONS.DrawerIcon;
 
+export const PreviousIcon = ICONS.PreviousIcon;
+
+export const NextIcon = ICONS.NextIcon;
+
 export const SelectArrowIcon = ICONS.SelectArrowIcon;

@@ -15,19 +15,11 @@ pub async fn create_application(
             public_id,
             company_name,
             role_title,
-            department,
             location,
             work_type,
             employment_type,
             job_url,
-            source,
             status,
-            priority,
-            salary_max,
-            salary_min,
-            bonus,
-            equity,
-            currency,
             applied_at,
             deadline_at,
             job_description,
@@ -38,28 +30,18 @@ pub async fn create_application(
         (
             ?, ?, ?, ?, ?,
             ?, ?, ?, ?, ?,
-            ?, ?, ?, ?, ?,
-            ?, ?, ?, ?,
-            ?, ?
+            ?, ?, ?
         );
         "#,
     )
     .bind(public_id)
     .bind(application_data.company_name)
     .bind(application_data.role_title)
-    .bind(application_data.department)
     .bind(application_data.location)
     .bind(application_data.work_type)
     .bind(application_data.employment_type)
     .bind(application_data.job_url)
-    .bind(application_data.source)
     .bind(application_data.status)
-    .bind(application_data.priority)
-    .bind(application_data.salary_max)
-    .bind(application_data.salary_min)
-    .bind(application_data.bonus)
-    .bind(application_data.equity)
-    .bind(application_data.currency)
     .bind(application_data.applied_at)
     .bind(application_data.deadline_at)
     .bind(application_data.job_description)
@@ -80,19 +62,11 @@ pub async fn fetch_all_applications(
             public_id,
             company_name,
             role_title,
-            department,
             location,
             work_type,
             employment_type,
             job_url,
-            source,
             status,
-            priority,
-            salary_max,
-            salary_min,
-            bonus,
-            equity,
-            currency,
             applied_at,
             deadline_at,
             job_description,

@@ -1,11 +1,9 @@
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import styles from './ApplicationsPage.module.css';
 import DataTable from '../../components/DataTable/DataTable';
-import { TABLEHEADERS } from './configs';
 import { useEffect, useMemo, useState } from 'react';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import PageShell from '../../layouts/PageShell/PageShell';
-import { useToast } from '../../app/context/ToastProvider';
 import { applicationService } from '../../services/applicationService';
 import { application_table_columns } from './applications-table-columns';
 import OverviewPannel from './components/Overview Pannel/OverviewPannel';

@@ -1,5 +1,4 @@
 import { formatRelativeDate } from '../../utils/formatDate';
-import { formatSalaryRange } from '../../utils/formatPrice';
 import AvatarLetter from '../../components/AvatarLetter/AvatarLetter';
 import styles from './ApplicationsPage.module.css';
 

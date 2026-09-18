@@ -18,6 +18,8 @@ import {
   LuTrash2,
   LuEye,
   LuDownload,
+  LuChevronLeft,
+  LuChevronRight,
   LuChevronDown,
   LuChevronsLeft,
 } from 'react-icons/lu';
@@ -38,6 +40,8 @@ export const ICONS = {
   DeleteIcon: LuTrash2,
   PreviewIcon: LuEye,
   DrawerIcon: LuChevronsLeft,
+  PreviousIcon: LuChevronLeft,
+  NextIcon: LuChevronRight,
   SelectArrowIcon: LuChevronDown,
 
   SuccessIcon: LuCircleCheck,

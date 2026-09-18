@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import styles from './TabsComponent.module.css';
 
-export default function TabsComponent({ tabs, defaultTab, onChange }) {
+export default function TabsComponent({ tabs, defaultTab, activeTab: controlledTab, onChange }) {
   const [activeTab, setActivetab] = useState(defaultTab);
+  const selectedTab = controlledTab ?? activeTab;
   const handleTabClick = (tab_id) => {
-    setActivetab(tab_id);
-    onChange(tab_id);
+    if (controlledTab === undefined) {
+      setActivetab(tab_id);
+    }
+    onChange?.(tab_id);
   };
 
   return (
     <section className={styles['document-tabs']}>
       {tabs.map((tab) => {
         const Icon = tab.icon;
-        const isActive = activeTab === tab.id;
+        const isActive = selectedTab === tab.id;
 
         return (
           <button
