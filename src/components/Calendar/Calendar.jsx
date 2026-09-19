@@ -93,6 +93,11 @@ export default function Calendar({ children }) {
     nextMonth();
   };
 
+  const goToToday = () => {
+    setCurrentDate(new Date());
+    setView('month');
+  };
+
   function getCalendarDays(year, month) {
     const firstDay = new Date(year, month, 1);
     const lastDay = new Date(year, month + 1, 0);
@@ -194,9 +199,11 @@ export default function Calendar({ children }) {
       <section className={styles.toolbar}>
         <div className={styles.navigation}>
           <Button
-            text={view === 'year' ? 'Prev year' : 'Prev'}
+            // text={view === 'year' ? 'Prev year' : 'Prev'}
             onClick={previousPeriod}
             leftIcon={PreviousIcon}
+            className={styles['navigation-arrow']}
+            iconOnly
             variant="text"
             disabled={
               view === 'year'
@@ -213,15 +220,23 @@ export default function Calendar({ children }) {
           />
 
           <Button
-            text={view === 'year' ? 'Next year' : 'Next'}
+            // text={view === 'year' ? 'Next year' : 'Next'}
             onClick={nextPeriod}
             rightIcon={NextIcon}
+            className={styles['navigation-arrow']}
+            iconOnly
             variant="text"
             disabled={
               view === 'year'
                 ? currentDate.getFullYear() >= currentYear
                 : currentDate.getFullYear() >= currentYear && currentDate.getMonth() === 11
             }
+          />
+          <Button
+            text="Today"
+            className={styles['today-button']}
+            variant="text"
+            onClick={goToToday}
           />
         </div>
         <TabsComponent

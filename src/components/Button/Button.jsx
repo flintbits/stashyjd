@@ -8,6 +8,7 @@ export default function Button({
   loading = false,
   variant = 'primary',
   disabled = false,
+  iconOnly = false,
   type = 'button',
   className = '',
 }) {
@@ -15,7 +16,7 @@ export default function Button({
     <button
       type={type}
       onClick={onClick}
-      className={`${styles.btn} ${styles[`btn-${variant}`]} ${className}`}
+      className={`${styles.btn} ${styles[`btn-${variant}`]} ${iconOnly ? styles['icon-only'] : ''} ${className}`}
       disabled={loading || disabled}
     >
       <span className={`${styles['btn-content']} ${loading ? styles['is-hidden'] : ''}`}>
